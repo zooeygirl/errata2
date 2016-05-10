@@ -7,9 +7,11 @@ class EssaysController < ApplicationController
     @essays = Essay.all
   end
 
-  # GET /essays/1
-  # GET /essays/1.json
+
+
+
   def show
+    @sentences = Scalpel.cut(@essay.body)
   end
 
   # GET /essays/new
@@ -65,6 +67,10 @@ class EssaysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_essay
       @essay = Essay.find(params[:id])
+    end
+
+    def get_sentences
+      Scalpel.cut(@essay)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

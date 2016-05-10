@@ -10,10 +10,26 @@
   <%= @essay.body %>
 </p>
 
+	<%= render @essay.corrections %>
 
-<%= render @essay.corrections %>
+<% if @essay.corrections.blank? %>
 
+	<%= render "corrections/form" %>
+
+<% end %>
+
+<% for i in @sentences do %>
+
+
+<p>	<%= i %> </p>
 <%= render "corrections/form" %>
+	<% end %>
+    
 
+
+
+
+<p>
 <%= link_to 'Edit', edit_essay_path(@essay) %> |
 <%= link_to 'Back', essays_path %>
+</p>

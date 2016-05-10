@@ -1,6 +1,22 @@
 <h1>Editing Correction</h1>
 
-<%= render 'form' %>
+<%= @essay.body %>
 
-<%= link_to 'Show', @correction %> |
-<%= link_to 'Back', corrections_path %>
+
+
+
+<%= form_for([@essay, @correction]) do |f| %>
+ 
+    
+    
+
+ <%= f.collection_check_boxes :mistake_ids, Mistake.all, :id, :category %>
+
+     
+
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+ 
+ <% end %>

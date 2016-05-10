@@ -20,6 +20,7 @@ class CorrectionsController < ApplicationController
 
   # GET /corrections/1/edit
   def edit
+
   end
 
   # POST /corrections
@@ -40,7 +41,7 @@ class CorrectionsController < ApplicationController
   def update
     respond_to do |format|
       if @correction.update(correction_params)
-        format.html { redirect_to @correction, notice: 'Correction was successfully updated.' }
+        format.html { redirect_to @essay, notice: 'Correction was successfully updated.' }
         format.json { render :show, status: :ok, location: @correction }
       else
         format.html { render :edit }

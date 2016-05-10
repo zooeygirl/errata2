@@ -8,6 +8,9 @@
 
 <% end %>
 
+
+<%= link_to 'edit correction', edit_essay_correction_path(@essay, correction.id) %>
+
   <%= link_to 'delete correction', essay_correction_path(@essay, correction.id), method: :delete, data: {confirm: "Are you sure?"} %>
 
 

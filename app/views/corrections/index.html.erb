@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Corrections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Essay</th>
+      <th>Mistake</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @corrections.each do |correction| %>
+      <tr>
+        <td><%= correction.essay_id %></td>
+        <td><%= correction.mistake_ids %></td>
+
+       
+
+
+    <td><% correction.mistake_ids.each do |t| %>
+    <p><%= Mistake.find(t).category %></p></td>
+     <% end %>
+     
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Correction', new_essay_correction_path %>
+
+
+<%= link_to 'New Essay', new_essay_path %>
+<%= link_to 'New Mistake', new_mistake_path %>

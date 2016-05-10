@@ -1,0 +1,18 @@
+<%= form_for([@essay, @essay.corrections.build]) do |f| %>
+ 
+    
+    
+
+     
+     
+
+    
+      <%= f.collection_check_boxes :mistake_ids, Mistake.all, :id, :category %>
+
+     
+
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>

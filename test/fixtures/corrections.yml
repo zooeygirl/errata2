@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  essay_id: 1
+  mistake_id: 1
+
+two:
+  essay_id: 1
+  mistake_id: 1

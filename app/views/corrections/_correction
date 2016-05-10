@@ -1,0 +1,13 @@
+ <p><%= correction.id %></p>
+
+<p><%= correction.mistake_ids %></p>
+
+
+ <p><% correction.mistake_ids.each do |t| %>
+    <p><%= Mistake.find(t).category %></p></p>
+
+<% end %>
+
+  <%= link_to 'delete correction', essay_correction_path(@essay, correction.id), method: :delete, data: {confirm: "Are you sure?"} %>
+
+

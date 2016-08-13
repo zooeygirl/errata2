@@ -1,0 +1,9 @@
+<% current_user.practice_exercises.each do |pe| %>
+
+<%= pe.name %>
+<%= pe.description %>
+<%= link_to 'Destroy', tc, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+</br>
+
+<% end %>

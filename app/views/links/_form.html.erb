@@ -1,0 +1,20 @@
+<%= form_for([@mistake, @link]) do |t| %>
+
+
+  <div class="field">
+    <%= t.label "URL" %><br>
+    <%= t.text_field :url %>
+  </div>
+
+
+  <div class="field">
+    <%= t.label :media %><br>
+    <%= t.collection_select :media, Link.media_categories, :last, :first %>
+  </div>
+
+
+</br>
+  <div class="actions">
+    <%= t.submit %>
+  </div>
+<% end %>

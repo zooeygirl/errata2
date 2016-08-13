@@ -1,0 +1,18 @@
+
+<%= form_for([@practice_exercise, @pe_question, @pe_answer]) do |t| %>
+
+
+<%= @pe_answer.answer %>
+
+  <div class="field">
+    <%= t.label "Is this correct?" %><br>
+    <%= t.collection_select :correct, PeAnswer.appraisals, :last, :first %>
+  </div>
+
+
+
+
+  <div class="actions">
+    <%= t.submit "Save correction"%>
+  </div>
+<% end %>

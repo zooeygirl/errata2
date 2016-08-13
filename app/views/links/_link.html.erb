@@ -1,0 +1,5 @@
+<tr><td><%= link_to link.url, link.url, :target => '_blank' %></td>  
+<td><%= Link.media_categories.keys.at(link.media) %></td>
+<td><%= link_to 'Edit', edit_mistake_link_path(@mistake, link) %></td>
+<td><%= link_to 'Delete', mistake_link_path(@mistake, link), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

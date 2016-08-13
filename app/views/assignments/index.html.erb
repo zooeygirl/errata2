@@ -1,0 +1,30 @@
+<h1>Listing Assignments</h1>
+
+<table>
+
+<tr>
+<td>Title</td>
+<td>Due Date</td>
+<td>Word range</td>
+</tr> 
+
+<% @classroom.assignments.each do |assign| %>
+
+<tr>
+<td><%= link_to assign.title, edit_classroom_assignment_path(@classroom, assign) %></td>
+<td><%= assign.duedate.to_formatted_s(:long)  %></td>
+<td><%= "#{assign.wordcountmin} - #{assign.wordcountmax}" %></td>
+<td><%= assign.evaluation  %></td>
+<td><%= link_to "delete", classroom_assignment_path(@classroom, assign), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+</table>
+
+
+<%= link_to "New Assignment", new_classroom_assignment_path %>
+
+</br></br>
+
+
+<%= link_to "Back to Classroom", classroom_path(@classroom) %>

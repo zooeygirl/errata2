@@ -1,35 +1,183 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @essay.title %>
-</p>
+Essay Status: <%= @essay.essay_status %>
 
-<p>
-  <strong>Body:</strong>
-  <%= @essay.body %>
-</p>
+<% if current_user.role == 'Student' %>
 
-	<%= render @essay.corrections %>
+  <% if @essay.essay_status == 'In progress' || @essay.essay_status == 'Waiting for feedback'%>
 
-<% if @essay.corrections.blank? %>
 
-	<%= render "corrections/form" %>
+      <div id="essay_view">
+        <p>
+          <strong>Title:</strong>
+          <%= @essay.title %>
+        </p>
+
+        <p>
+          <%= simple_format(@essay.body) %>
+        </p>
+      </div>
 
 <% end %>
 
-<% for i in @sentences do %>
+<% end %>
 
 
-<p>	<%= i %> </p>
-<%= render "corrections/form" %>
-	<% end %>
-    
+<%-# __________________________________________________________________________ -%>
+
+<% if current_user.role == 'Student' %>
+
+  <% if @essay.essay_status == 'Feedback' %>
+
+          <div class="flip">Original Essay
+          <div class="panel">
+
+              <% @first_draft = Essay.find(@essay.trackernum) %>
+
+                  <p>
+                    <strong>Title:</strong>
+                    <%= @first_draft.title %>
+                  </p>
+
+                  <p>
+                    <%= simple_format(@first_draft.body) %>
+                  </p>
+          </div>
+          </div>
 
 
 
 
-<p>
-<%= link_to 'Edit', edit_essay_path(@essay) %> |
-<%= link_to 'Back', essays_path %>
-</p>
+          <div class="flip">Second draft
+          <div class="panel">
+            <p><%= @essay.title %></p>
+            <%= simple_format(@essay.body) %>
+          </div>
+          </div>
+
+    <%= render "grade_report" %></br></br>
+    <table class="table-bordered">
+    <tr><td>Paragraph</td><td>Content</td><td>Errors</td><td>Second Draft</td></tr>
+    <%= render @essay.paragraphs %>
+    <tr><td></td><td></td><td>Total Number of Language Problems:  <%= @num_mistakes %></td></tr>
+  </table>
+
+
+</br><br>
+<div class="graph">
+<%= column_chart @first_draft.mistakes.group(:name).count %>
+</div>
+
+
+
+<% elsif @essay.essay_status == 'In progress' %>
+  <%= link_to 'Edit', edit_essay_path(@essay) %>
+
+<% end %>
+
+<% end %>
+
+
+	<%-# __________________________________________________________________________ -%>
+  
+  <% if current_user.role == 'Teacher' %>
+
+
+<% assign = Assignment.find(@essay.assignment_id) %>
+ <h3>Assignment:<%= link_to assign.title, classroom_assignment_path(assign.classroom_id, assign) %></h3>
+ Rubric: <%= Evaluation.find(Assignment.find(@essay.assignment_id).evaluation).name %>
+
+ 
+
+ 
+          <div id="essay_view">
+         
+
+                  <p>
+                    <strong>Title:</strong>
+                    <%= @essay.title %>
+                  </p>
+
+                  <p>
+                    <%= simple_format(@essay.body) %>
+                  </p>
+        
+          </div>
+
+
+
+<% if @essay.essay_status == 'Waiting for feedback' %>
+
+
+<%= form_for @essay do |f| %>
+  
+
+<%= f.hidden_field :id %>
+
+
+<% @essay.grade_elements.each do |ge| %>
+
+
+    <% if ge.level == 'Essay' %>
+
+    <%= ge.name %>
+
+    <div id="rateYo"></div>
+    <%= f.fields_for :grade_elements, ge do |v| %>
+        <%= v.text_field :teachereval %>
+        <%= v.hidden_field :outof %>
+    <% end %>
+
+
+    <% end %>
+ 
+<% end %>
+
+ <% if @essay.grade_elements.where(level: 'Essay').count > 0 %>
+      <div class="actions">
+    <%= f.submit "Save Grades" %>
+  </div>
+<% end %>
+
+
+<% end %>
+
+<% elsif @essay.essay_status == 'Feedback' %>
+
+
+        <% @essay.grade_elements.each do |ge| %>
+
+
+            <% if ge.level == 'Essay' %>
+
+            <%= ge.name %>
+            <%= ge.teachereval %>/<%= ge.outof %>
+
+
+            <% end %>
+         
+        <% end %></br>
+
+
+
+
+
+
+<% end %>
+
+<%= render "grade_report" %>
+
+
+ <%= link_to 'Change rubric', essay_change_rubric_path(@essay), method: :patch %>
+
+ 
+ <% end %>
+
+
+
+
+<% end %>
+
+
+
+

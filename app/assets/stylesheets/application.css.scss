@@ -1,0 +1,125 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require_essay
+ *= require_sidenav
+
+ */
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #111;
+
+
+
+body {
+
+  font: 150% $font-stack;
+  color: $primary-color;
+  padding: 30px;
+  background-color: grey;
+  background-repeat: repeat-y repeat-x;
+  margin-bottom: 1000px;
+}
+
+
+
+ul, .nav navbar-nav navbar-right{
+  padding-right: 25px;
+}
+
+
+.container-fluid{
+  border: solid 1px black;
+  margin-top: 3px;
+  padding-bottom: 20px;
+}
+
+
+
+
+td {
+	padding: 10px;
+}
+
+ .mistake {
+  color: #FF0080;
+  font-size: 150%;
+  }
+
+
+
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: #FF0080;
+  }
+
+  #logo{
+    font-size: 40px;
+    color: #FF0080;
+  }
+
+.yield {
+  margin: 50px 0px 150px 0px;
+}
+
+
+.graph {
+  background-color: white;
+  padding: 10px;
+}
+
+.indextables {
+    background: white;
+    padding: 5px;
+    margin: 4px;
+}
+
+.title {
+  background-color: white;
+  font-family: 'Roboto', sans-serif; font-weight: 100;
+  font-size: 72px;
+  color: #939393;
+  width: 370px;
+}
+
+.pre_title {
+  color: #FF0080;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+background-color: white ;
+color: #FF0080;
+
+}
+
+.nav-pills>li{
+  border: solid 1px black;
+}
+
+.nav-justified {
+   border-collapse:separate;
+   border-spacing:70px 5px;
+}
+
+
+

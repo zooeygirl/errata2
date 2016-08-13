@@ -1,9 +1,17 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Category:</strong>
   <%= @mistake.category %>
 </p>
 
-<%= link_to 'Edit', edit_mistake_path(@mistake) %> |
-<%= link_to 'Back', mistakes_path %>
+<p>
+  <strong>Name:</strong>
+  <%= @mistake.name %>
+</p>
+
+
+<table>
+<%= render @mistake.links %>
+</table>
+
+
+<%= link_to 'Add link', new_mistake_link_path(@mistake) %>

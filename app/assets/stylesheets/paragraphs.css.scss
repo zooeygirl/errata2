@@ -1,0 +1,19 @@
+.mistake_categories, .mistake_names {
+	float: left;
+	border-style: solid;
+	border-width: 1px;
+	padding: 6px;
+	margin: 5px;
+	position: relative;
+	background-color: #FF0080;
+
+}
+
+.mistake_names {
+	position: absolute;
+	display: none;
+	background: blue;
+	background-color: #FF0080;	
+	width: 250px;
+	z-index: 1;
+}

@@ -1,0 +1,12 @@
+<% @evaluations.each do |eval| %>
+
+<%= link_to eval.id, evaluation_path(eval) %>
+<%= eval.id %>
+<%= eval.name %>
+
+<%= eval.assignment_id %>
+<%= link_to "edit", edit_evaluation_path(eval) %>
+<%= link_to 'Destroy', evaluation_path(eval), method: :delete, data: { confirm: 'Are you sure?' } %>
+</br>
+
+<% end %>

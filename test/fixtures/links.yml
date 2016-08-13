@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mistake_id: 1
+  media: 1
+  url: 
+
+two:
+  mistake_id: 1
+  media: 1
+  url: 

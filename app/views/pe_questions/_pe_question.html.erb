@@ -1,0 +1,78 @@
+<% originalsen = Sentence.find(pe_question.sentence) %>
+<% quesindex = @practice_exercise.pe_questions.index(pe_question) %>
+
+
+<% if quesindex == 0 %>
+
+
+<div id="sentence1" class="tab-pane fade in active">
+
+
+<% else %>
+
+
+<div id="sentence<%= quesindex + 1 %>" class="tab-pane fade">
+
+
+<% end %>
+
+
+<%= originalsen.content %>
+<div class="btn parabtn">See Paragraph</br></div>
+<div class="hiddenpara"><%= Paragraph.find(originalsen.paragraph_id).content %></div></br></br>
+
+<% if current_user.role == 'Student' %>
+<%= link_to "Correct Sentence", new_practice_exercise_pe_question_pe_answer_path(@practice_exercise, pe_question) %>
+
+<table>
+
+<%= render pe_question.pe_answers.where(user_id: current_user.id) %></br>
+
+</table>
+
+<% if (pe_question.pe_answers.where(user_id: current_user.id, correct: 0).count + pe_question.pe_answers.where(user_id: current_user.id, correct: 1).count) > 3 %>
+	<%= link_to "See correct answers", practice_exercise_pe_question_path(@practice_exercise, pe_question) %>
+<% end %>
+
+
+
+<% else %>
+	<%= link_to 'Delete Sentence from exercise', practice_exercise_pe_question_path(@practice_exercise, pe_question) , method: :delete, data: { confirm: 'Are you sure?' } %>
+	<%= link_to "Answer Index", practice_exercise_pe_question_path(@practice_exercise, pe_question)  %>
+	<%= render pe_question.pe_answers.where(correct: 3) %></br>
+
+
+
+		<%= form_for(@practice_exercise) do |f| %>
+					<%= f.hidden_field :id %>
+		            
+					<% pe_question.pe_answers.where(correct: 3).each do |ans| %>
+					
+		        	
+		        	<%= ans.answer %>
+		            	<%= f.fields_for :pe_answers, ans do |v| %>
+
+		           
+
+		            	<%= v.hidden_field :id %>
+		            	
+		            	<%= v.collection_select :correct, PeAnswer.appraisals, :last, :first %></br> 
+		                     
+		            	<% end %>
+
+		            <% end %>
+
+		 	<div class="actions">
+		    <%= f.submit %>
+		  	</div>
+
+		<% end %>
+
+<% end %>
+
+</div>
+
+
+
+ 
+

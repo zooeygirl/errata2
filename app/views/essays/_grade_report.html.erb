@@ -1,0 +1,99 @@
+
+
+ <% if @essay.essay_status == 'Feedback' && current_user.role == 'Student' %>
+<% essay_for_grade_breakdown = Essay.find(@essay.trackernum) %>
+<% else %>
+<% essay_for_grade_breakdown = @essay %>
+<% end %> 
+
+
+<h3>Grade breakdown</h3>
+
+<% if essay_for_grade_breakdown.grade_elements.where(level: 'Introduction').count > 0 %>
+<table>
+<th>Introduction</th>
+<% essay_for_grade_breakdown.grade_elements.where(level: 'Introduction').each do |q| %>
+  <tr><td><%= q.name %></td>
+  <td><%= "#{q.percentage}%" %></td>
+	  <% if q.teachereval == nil %>
+	  <td><%= "--/#{q.outof}" %></td>
+	  <% else %>
+	  <td><%= "#{q.teachereval}/#{q.outof}" %></td></tr></br>
+	  <% end %>
+<% end %>
+</table>
+<% end %>
+
+
+<% if essay_for_grade_breakdown.grade_elements.where(level: 'Body Paragraph').count > 0 %>
+<table>
+<th>Body Paragraphs</th>
+<% essay_for_grade_breakdown.grade_elements.where(level: 'Body Paragraph').each do |q| %>
+  <tr><td><%= q.name %></td>
+    <td><%= "#{q.percentage}%" %></td>
+	  <% if q.teachereval == nil %>
+	  <td><%= "--/#{q.outof}" %></td>
+	  <% else %>
+	  <td><%= "#{q.teachereval}/#{q.outof}" %></td></tr></br>
+	  <% end %>
+<% end %>
+</table>
+<% end %>
+
+<% if essay_for_grade_breakdown.grade_elements.where(level: 'Conclusion').count > 0 %>
+<table>
+<th>Conclusion</th>
+<% essay_for_grade_breakdown.grade_elements.where(level: 'Conclusion').each do |q| %>
+  <tr><td><%= q.name %></td>
+   <td><%= "#{q.percentage}%" %></td>
+	  <% if q.teachereval == nil %>
+	  <td><%= "--/#{q.outof}" %></td>
+	  <% else %>
+	  <td><%= "#{q.teachereval}/#{q.outof}" %></td></tr></br>
+	  <% end %>
+<% end %>
+</table>
+<% end %>
+
+<% if essay_for_grade_breakdown.grade_elements.where(level: 'All Paragraphs').count > 0 %>
+<table>
+<th>All Paragraphs</th>
+<% essay_for_grade_breakdown.grade_elements.where(level: 'All Paragraphs').each do |q| %>
+  <tr><td><%= q.name %></td>
+  <td><%= "#{q.percentage}%" %></td>
+	  <% if q.teachereval == nil %>
+	   <td><%= "--/#{q.outof}" %></td>
+	  <% else %>
+	  <td><%= "#{q.teachereval}/#{q.outof}" %></td></tr></br>
+	  <% end %>
+<% end %>
+</table>
+<% end %>
+
+<% if essay_for_grade_breakdown.grade_elements.where(level: 'Essay').count > 0 %>
+<table>
+<th>Essay</th>
+<% essay_for_grade_breakdown.grade_elements.where(level: 'Essay').each do |q| %>
+  <tr><td><%= q.name %></td>
+  <td><%= "#{q.percentage}%" %></td>
+	  <% if q.teachereval == nil %>
+	  <td><%= "--/#{q.outof}" %></td>
+	  <% else %>
+	  <td><%= "#{q.teachereval}/#{q.outof}" %></td></tr></br>
+	  <% end %>
+<% end %>
+</table>
+<% end %>
+
+
+
+
+</br>
+Grade: 
+<% if @essay.studentgrade != nil %>
+<%= @essay.studentgrade.round(2) %>%
+<% end %>
+
+
+
+

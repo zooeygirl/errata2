@@ -1,13 +1,70 @@
 Rails.application.routes.draw do
   
-  resources :mistakes
+
+
+  get 'links/new'
+
+  get 'links/edit'
+
+  get 'links/show'
+
+  devise_for :users
+
+resource :user 
+  
+  resources :teacher_comments
+  resources :practice_exercises do
+      resources :pe_questions do
+        resources :pe_answers
+      end
+    end
+
+
+  resources :classrooms do
+        patch :add_student_to_classroom
+        resources :assignments do
+          patch :calculate_class_average_on_assignment
+        end
+  end
+
+  
+  resources :assignments
+
+
+  resources :evaluations do
+    resources :criteria
+  end
+
+
+  resources :mistakes do
+    resources :links
+  end
+  
+ 
+
+
   resources :essays do
-  resources :corrections
-  end  
+      patch :submit_essay
+      patch :give_feedback
+      patch :change_rubric
+      patch :set_paragraphs_for_second_draft
+      get :create_grade_template
+      resource :grade do
+        resources :grade_elements
+      end
+    resources :paragraphs do
+      resources :sentences do
+        resources :words_in_mistakes 
+      end
+    end
+  end
 
 
+  get '/homepage'  => 'homepage#show'
 
-  root "corrections#index"
+
+  
+  root "homepage#show"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

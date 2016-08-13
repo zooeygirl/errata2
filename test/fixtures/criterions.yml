@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluation_id: 1
+  level: 1
+  name: MyString
+  percentage: 1.5
+  outof: 1.5
+
+two:
+  evaluation_id: 1
+  level: 1
+  name: MyString
+  percentage: 1.5
+  outof: 1.5

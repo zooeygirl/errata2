@@ -1,0 +1,32 @@
+<%= "There are #{@practice_exercise.pe_questions.count} sentences to practice." %></br></br>
+
+
+<ul class="nav nav-pills nav-justified">
+
+<% i = 1 %>
+<% @practice_exercise.pe_questions.each do |ques| %>
+		<% if ques.pe_answers.where(user_id: current_user.id, correct: 2).count>0 %>
+			<% colorcode = "green" %>
+		<% elsif ques.pe_answers.where(user_id: current_user.id, correct: 3).count > 0 %>
+			<% colorcode = "blue" %>
+		<% elsif (ques.pe_answers.where(user_id: current_user.id, correct: 2).count + ques.pe_answers.where(user_id: current_user.id, correct: 1).count) > 0 %>
+			<% colorcode = "red" %>
+		<% elsif ques.pe_answers.where(user_id: current_user.id).count == 0 %>
+			<% colorcode = "orange" %>
+		<% end %>
+
+	<% if ques == @practice_exercise.pe_questions.first %>
+		<li><a href="#sentence1" data-toggle="tab">Sentence 1 <div class="<%=colorcode%>"></div></a></li>
+	<% else %>
+	<li><a href="#sentence<%= i %>" data-toggle="tab">Sentence <%= i %><div class="<%=colorcode%>"></div></a></li>
+	<% end %>
+	<% i += 1 %>
+<% end %>
+
+
+<div class="tab-content">
+<%= render @practice_exercise.pe_questions %>
+</div>
+
+</ul>
+

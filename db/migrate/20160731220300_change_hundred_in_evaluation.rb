@@ -1,5 +1,13 @@
 class ChangeHundredInEvaluation < ActiveRecord::Migration
-  def change
-  	change_column :evaluations, :hundred, :float
-  end
+ 
+
+  def self.up 
+   change_column :evaluations, :hundred, :string 
+  end 
+
+
+def self.down 
+   change_column :evaluations, :hundred, 'float USING CAST(column AS integer)'
+  end  
+
 end

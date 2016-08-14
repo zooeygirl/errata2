@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160812182732) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "assignments", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160812182732) do
 
   create_table "classrooms", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "teacher"
+    t.string   "teacher"
     t.string   "school"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 20160812182732) do
     t.integer  "user_id"
     t.integer  "essay_status"
     t.text     "second_draft"
-    t.float    "studentgrade"
+    t.string   "studentgrade"
     t.integer  "assignment_id"
     t.integer  "draftnum"
     t.integer  "trackernum"
@@ -77,7 +80,7 @@ ActiveRecord::Schema.define(version: 20160812182732) do
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.float    "hundred"
+    t.string   "hundred"
   end
 
   create_table "grade_elements", force: :cascade do |t|
@@ -109,7 +112,7 @@ ActiveRecord::Schema.define(version: 20160812182732) do
   end
 
   create_table "mistakes", force: :cascade do |t|
-    t.integer  "category"
+    t.string   "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
@@ -193,8 +196,8 @@ ActiveRecord::Schema.define(version: 20160812182732) do
     t.integer  "classroom"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "words_in_mistakes", force: :cascade do |t|
     t.datetime "created_at",    null: false

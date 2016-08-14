@@ -14,8 +14,7 @@ gem 'scalpel', '~> 0.2.1'
 gem 'devise', '~> 3.5', '>= 3.5.6'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'chartkick', '~> 2.0', '>= 2.0.1'
-gem 'pg', '0.18.4'
-gem 'rails_12factor'
+
 
 
 
@@ -26,6 +25,16 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
  
+end
+
+group :development do
+	gem 'sqlite3'
+end
+
+group :production do
+	gem 'pg'
+	gem 'rails_12factor'
+
 end
 
 

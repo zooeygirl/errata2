@@ -38,7 +38,7 @@
 
  <div class="field">
     <%= f.label "Rubric" %><br>
-    <%= f.collection_select :evaluation, current_user.evaluations.all + [Evaluation.find(1)], :id, :name %>
+    <%= f.collection_select :evaluation, current_user.evaluations.all, :id, :name %>
   </div>
 
 

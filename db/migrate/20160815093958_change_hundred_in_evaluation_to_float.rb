@@ -1,6 +1,6 @@
-class ChangeHundredInEvaluation < ActiveRecord::Migration
- 
+class ChangeHundredInEvaluationToFloat < ActiveRecord::Migration
 
+  	
   def self.up 
    change_column :evaluations, :hundred, :string 
   end 
@@ -9,5 +9,9 @@ class ChangeHundredInEvaluation < ActiveRecord::Migration
 def self.down 
    change_column :evaluations, :hundred, 'float USING CAST(column AS float)'
   end  
+
+
+
+  	
 
 end

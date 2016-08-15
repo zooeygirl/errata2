@@ -14,7 +14,7 @@ def create
  
   
    if @teacher_comment.save
-        redirect_to :back
+        redirect_to classrooms_path
     end
 
 

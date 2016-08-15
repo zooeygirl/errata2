@@ -14,7 +14,6 @@ def create
 	@grade_element = @grade.grade_element.create(grade_params)
 	@grade_element.grade_id = @grade.id
   @grade_element.essay_id = @grade.essay_id
-	end
 end
 
 def index

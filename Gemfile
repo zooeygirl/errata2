@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.2'
 
 gem 'rails', '4.2.6'
 gem 'sass-rails', '~> 5.0'

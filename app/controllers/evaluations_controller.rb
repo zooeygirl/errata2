@@ -41,7 +41,11 @@ def check_percentage
 		i+=crit.percentage	
 	end
 	if i == 100
+<<<<<<< HEAD
 		@evaluation.update_attribute(:hundred, 100.00)
+=======
+		@evaluation.update_attribute(:hundred, 100)
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
 	else
 		@evaluation.update_attribute(:hundred, i)
 	end

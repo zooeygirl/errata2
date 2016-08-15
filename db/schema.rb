@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160815105136) do
+=======
+ActiveRecord::Schema.define(version: 20160812182732) do
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,8 +84,12 @@ ActiveRecord::Schema.define(version: 20160815105136) do
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+<<<<<<< HEAD
     t.float    "hundred"
     t.float    "total"
+=======
+    t.string   "hundred"
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
   end
 
   create_table "grade_elements", force: :cascade do |t|

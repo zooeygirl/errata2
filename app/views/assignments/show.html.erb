@@ -73,8 +73,12 @@
   	<div id="rubric" class="tab-pane fade">
 
 <div class="indextables">
+<<<<<<< HEAD
 
 <% if @assignment.evaluation != nil %>	
+=======
+	
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
 <h3>Rubric: <%= Evaluation.find(@assignment.evaluation).name %></h3>
 
 <table>
@@ -97,12 +101,16 @@
 <div class="graph">
 <%= pie_chart crithash %></div>
 
+<<<<<<< HEAD
 <% else %>
 
 <%= link_to "Create a rubric", new_evaluation_path %>
 
 <%= link_to "Choose an existing rubric", edit_classroom_assignment_path(@classroom, @assignment) %>
 <% end %>
+=======
+
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
 
 </div>
 
@@ -140,9 +148,13 @@
 
 <div class="indextables">
 </br>
+<<<<<<< HEAD
 <% if @assignment.classroom_average != nil %>
 <h3>Classroom Average:  <%= @assignment.classroom_average.round(2) %>%</h3>
 <% end %>
+=======
+<h3>Classroom Average:  <%= @assignment.classroom_average.round(2) %>%</h3>
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
 </br>
 
 <h4>Student Grades: </h4>

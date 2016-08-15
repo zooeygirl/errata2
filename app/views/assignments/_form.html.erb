@@ -38,7 +38,11 @@
 
  <div class="field">
     <%= f.label "Rubric" %><br>
+<<<<<<< HEAD
     <%= f.collection_select :evaluation, current_user.evaluations.all, :id, :name %>
+=======
+    <%= f.collection_select :evaluation, current_user.evaluations.all + [Evaluation.find(1)], :id, :name %>
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
   </div>
 
 

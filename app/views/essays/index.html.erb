@@ -123,7 +123,10 @@ To get started, find your classroom:
 
 <div id="practice" class="tab-pane fade">
 
+<<<<<<< HEAD
 <% if current_user.classroom != nil %>
+=======
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
 <table>
   <tr><td>Practice Exercises</td><td># of Questions</td><td>Attempts</td><td>Correct Answers</td></tr>
 <% Classroom.find(current_user.classroom).practice_exercises.each do |pe| %>
@@ -137,6 +140,7 @@ To get started, find your classroom:
 </table>
 
 
+<<<<<<< HEAD
 <% else %>
 
 To get started, find your classroom:
@@ -147,6 +151,9 @@ To get started, find your classroom:
 
 </div>
 
+=======
+</div>
+>>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
 </div>
 
 <% else %>

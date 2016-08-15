@@ -1,0 +1,39 @@
+<%= form_for([@evaluation, @criterium]) do |f| %>
+  <% if @criterium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@criterium.errors.count, "error") %> prohibited this criterion from being saved:</h2>
+
+      <ul>
+      <% @criterium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :level %><br>
+    <%= f.select :level, Criterium.levels.keys %>
+  </div>
+
+   <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Percentage of final grade" %><br>
+    <%= f.text_field :percentage %>
+  </div>
+
+   <div class="field">
+    <%= f.label "Points" %><br>
+    <%= f.text_field :outof %>
+  </div>
+
+
+</br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

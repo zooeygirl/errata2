@@ -1,0 +1,31 @@
+.word_choice {	
+	color: #FF0080;
+	display: inline-block;	
+}
+
+
+.hide_check {	
+	
+}
+
+
+.check_words:hover {	
+	color: black;
+}
+
+
+.mistake_words {
+	display: clear;
+	border-style: solid;
+	border-width: 1px;
+	padding: 4px 3px 3px 15px;
+	margin: 2px;
+}
+
+
+.cb:checked {
+  background: #fff;
+}
+
+
+

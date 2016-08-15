@@ -1,0 +1,20 @@
+
+
+<%= pe_answer.answer %></br>
+
+<% if current_user.id == pe_answer.user_id %>
+<%= PeAnswer.appraisals.keys.at(pe_answer.correct) %>
+<% end %>
+
+<% if current_user.role == 'Teacher' %>
+
+
+
+<%= link_to "Correct Answer", edit_practice_exercise_pe_question_pe_answer_path(@practice_exercise, pe_answer.pe_question_id, pe_answer) %>
+<% end %>
+
+
+
+<% if current_user.id == pe_answer.user_id %>
+<%= link_to 'Destroy', practice_exercise_pe_question_pe_answer_path(@practice_exercise, pe_answer.pe_question_id, pe_answer), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

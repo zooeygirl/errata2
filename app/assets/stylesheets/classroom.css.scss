@@ -1,0 +1,87 @@
+.assignment_flip, #create_new {
+    background-image: url("new_panel_bg.png");
+    height: 222px;
+    width: 358px;
+    text-align: center;
+    line-height: 25px;
+}
+
+.create_new_text{
+    margin-top: 90px;
+    padding: 5px;
+    font-family: 'Roboto'; 
+    font-size: 18px;
+}
+
+
+.assignment_flip {
+    text-align: left;
+    background-image: url("red_panel_bg.png");
+    height: 222px;
+    width: 358px;
+    position: relative;
+    margin: 10px;
+    float: left;
+    padding: 10px;
+    line-height: 25px;
+}
+
+.assignment_flip.hover {
+    background-image: url("grey_panel_bg.png");
+    height: 222px;
+    width: 358px;
+}
+
+.assignment_name {
+    background-color: white;
+    color: #FF0080;
+    margin-top: 90px;
+    padding: 5px;
+    font-family: 'Roboto';  
+}
+
+.assignment_links{
+    display: none;
+    color: gray;
+    padding: 7px;
+    
+}
+
+.assignment_edit{
+    background-color: white;
+    margin: 2px;
+    width: 70px;
+}
+
+.assignment_summary{
+    background-color: white;
+    margin: 2px;
+    width: 90px;
+}
+
+.assignment_waiting{
+    background-color: white;
+    margin: 2px;
+    width: 180px;
+}
+
+.assignment_feedback{
+    background-color: white;
+    margin: 2px;
+    width: 150px;
+}
+
+#add_practice_exercises {
+    display: none;
+}
+
+#add_pe_btn {
+    
+}
+
+
+.studentrows { 
+    
+    text-align: right;
+    background-color: #FF0080;
+}

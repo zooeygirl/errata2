@@ -1,0 +1,33 @@
+<h4>Perfect Sentence:</h4>
+
+
+<% @pe_question.pe_answers.where(correct: 2).each do |ans| %>
+	<%= ans.answer %></br>
+<% end %>
+
+
+<h4>Improvement, but there are still problems:</h4>
+
+
+<% @pe_question.pe_answers.where(correct: 1).each do |ans| %>
+	<%= ans.answer %></br>
+<% end %>
+
+
+
+<h4>Keep Trying:</h4>
+
+<% @pe_question.pe_answers.where(correct: 0).each do |ans| %>
+	<%= ans.answer %></br>
+<% end %>
+
+
+
+<h4>Waiting for feedback:</h4>
+
+
+<% @pe_question.pe_answers.where(correct: 0).each do |ans| %>
+	<%= ans.answer %></br>
+<% end %>
+
+<%= link_to "Practice Exercise", practice_exercise_path(@practice_exercise) %>

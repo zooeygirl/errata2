@@ -1,0 +1,74 @@
+
+
+.panel, .flip {
+    padding: 5px;
+    text-align: left;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 50%;
+    float: left;
+}
+
+.panel {
+    padding: 50px;
+    display: none;
+    width: 100%;
+    length: auto;
+    position: relative;
+}
+
+
+.panel, .flip, #teacher_view {
+    padding: 5px;
+    text-align: center;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 100%;
+    float: left;
+}
+
+
+.mistake_options, .sentence_mistake_options {
+    padding: 5px;
+    text-align: left;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 100%;
+    float: left;
+}
+
+.mistake_options {
+    padding: 10px;
+    display: none;
+    width: 100%;
+}
+
+
+#essay_view {
+    background-color: white;
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: solid 3px #FF0080;
+}
+
+
+p, #sentence_mistakes {
+	
+	clear: left;
+}
+
+
+.paragraphs_with_sentences {
+    clear: left;
+    margin-top: 40px;
+
+    padding: 5px;
+    text-align: left;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 100%;
+    float: left;
+}

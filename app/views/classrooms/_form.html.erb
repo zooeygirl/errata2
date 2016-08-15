@@ -1,0 +1,42 @@
+
+<%= form_for(@classroom) do |f| %>
+  <% if @classroom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mistake.errors.count, "error") %> prohibited this mistake from being saved:</h2>
+
+      <ul>
+      <% @classroom.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+   <div class="field">
+    <%= f.label "Class name" %><br>
+    <%= f.text_field :school %>
+  </div>
+
+  <div class="field">
+    <%= f.label :day %><br /> 
+    <%= f.select :day, Date::DAYNAMES.zip((0..6).to_a) %>
+  </div>
+
+<div class="field">
+  <%= f.label :start_time %><br /> 
+<%= f.time_select :start_time %>
+</div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+
+
+
+
+
+<% end %>

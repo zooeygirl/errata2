@@ -1,0 +1,26 @@
+
+<% @essay = @essay %>
+<% sentence = Sentence.find(words_in_mistake.sentence_id) %>
+
+
+<div class = "mistake_words">
+<%= Mistake.find(words_in_mistake.mistake_id).name %>
+
+<%= form_for ([@essay, @paragraph, sentence, words_in_mistake]) do |w| %>
+
+  <%= w.collection_check_boxes :mistake_words, sentence.word_list, :first.to_s, :last do |b| %>
+  		<div class="checkbox">
+       <div class="word_choice">
+        	<div class="cb"><%= b.check_box %></div>
+         	<%= b.label %> 	
+        </div> </div>
+ <% end %>
+
+ <div class="actions">
+        <%= w.submit "Select Words", :name => "select_words" %>
+ </div>
+
+ <%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sentence, words_in_mistake), method: :delete, data: { confirm: 'Are you sure?' } %> 
+
+<% end %>
+</div>

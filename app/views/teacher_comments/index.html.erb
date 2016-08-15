@@ -1,0 +1,10 @@
+
+<% current_user.teacher_comments.each do |tc| %>
+
+<%= tc.category %>
+<%= tc.content %>
+<%= link_to 'Destroy', tc, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+</br>
+
+<% end %>

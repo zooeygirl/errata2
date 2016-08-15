@@ -1,0 +1,18 @@
+<%= Sentence.find(@pe_question.sentence).content %></br>
+
+<%= form_for([@practice_exercise, @pe_question, @pe_answer]) do |t| %>
+
+
+  <div class="field">
+    <%= t.label :answer %><br>
+    <%= t.text_field :answer, size: "70%" %>
+  </div>
+
+
+
+
+</br>
+  <div class="actions">
+    <%= t.submit "Save correction"%>
+  </div>
+<% end %>

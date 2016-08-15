@@ -1,0 +1,16 @@
+<% if user_signed_in? %>
+
+
+<% for paragraph in @essay.paragraphs do %>
+
+<%= link_to paragraph.content, essay_paragraph_path(@essay, paragraph) %>
+</br></br>
+
+<% end %>
+
+
+<% else %>
+
+Please sign in.
+
+<% end %>

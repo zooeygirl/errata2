@@ -1,0 +1,43 @@
+
+<% if @practice_exercise == nil %>
+
+<% x = current_user.practice_exercises.build %>
+
+<% else %>
+
+<% x = @practice_exercise %>
+
+<% end %>
+
+<%= form_for(x) do |t| %>
+
+
+  <div class="field">
+    <%= t.label :name %><br>
+    <%= t.text_field :name %>
+  </div>
+
+   <div class="field">
+    <%= t.label :description %><br>
+    <%= t.text_field :description, size: "70%" %>
+  </div>
+
+<div class="field">
+  <%= t.label :assignment %><br>
+ <%= t.grouped_collection_select :assignment,
+    current_user.classrooms.all, :assignments, :school,
+    :id, :title %>
+</div>
+
+<div class="field">
+  <%= t.label :mistake_category %><br>
+<%= t.collection_select :mistake_category,
+    Mistake.categories,
+    :first , :first %>
+  </div>
+
+</br>
+  <div class="actions">
+    <%= t.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,34 @@
+
+<% if @teacher_comment == nil %>
+
+<% x = current_user.teacher_comments.build %>
+
+<% else %>
+
+<% x = @teacher_comment %>
+
+<% end %>
+
+<%= form_for(x) do |t| %>
+
+
+  <div class="field">
+    <%= t.label :category %><br>
+    <%= t.text_field :category %>
+  </div>
+
+   <div class="field">
+    <%= t.label :content %><br>
+    <%= t.text_field :content, size: "70%" %>
+  </div>
+
+
+
+</br>
+  <div class="actions">
+    <%= t.submit %>
+  </div>
+<% end %>
+
+
+

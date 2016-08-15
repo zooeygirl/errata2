@@ -1,0 +1,12 @@
+
+<% @evaluation.criteria.each do |crit| %>
+
+<%= crit.name %>
+<%= crit.level %>
+<%= crit.outof %>
+<%= crit.percentage %>
+<%= link_to 'Destroy', crit, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+</br>
+
+<% end %>

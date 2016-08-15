@@ -87,11 +87,8 @@ Classrooms</h2>
 
 
 <table class="table-hover">
-<<<<<<< HEAD
 
-=======
-<tr><td><%= link_to Evaluation.find(1).name, evaluation_path(1) %></td></tr>
->>>>>>> 5d58e31e9bf573fd135e293a38eea03b30f15d5d
+
 <% Evaluation.where(user_id: current_user.id).each do |eval| %>
   <tr><td><%= link_to eval.name, evaluation_path(eval) %></td>
   <td><%= link_to 'Destroy', evaluation_path(eval), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>

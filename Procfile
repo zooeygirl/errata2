@@ -1,3 +1,6 @@
 
 
-web: bundle exec rackup config.ru -p $PORT -E $RACK_ENV
+
+web: bin/rails server -p $PORT -e $RAILS_ENV
+
+worker: bundle exec rake jobs:work

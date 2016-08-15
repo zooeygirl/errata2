@@ -11,8 +11,6 @@ end
 def create
   @classroom = current_user.classrooms.build(classroom_params)
   @classroom.user_id = current_user.id
-   
-
     if @classroom.save
     redirect_to :action => :index
   else

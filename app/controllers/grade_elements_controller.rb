@@ -48,14 +48,6 @@ end
   	@grade = Grade.find(params[:grade_id])
   end
 
-
-
-
-
-
-
-
-
  
 
  def grade_element_params

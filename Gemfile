@@ -14,6 +14,8 @@ gem 'scalpel', '~> 0.2.1'
 gem 'devise', '~> 3.5', '>= 3.5.6'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'chartkick', '~> 2.0', '>= 2.0.1'
+gem 'puma'
+gem 'pg'
 
 
 
@@ -32,9 +34,8 @@ group :development do
 end
 
 group :production do
-	gem 'pg'
+
 	gem 'rails_12factor'
-	gem 'puma'
 
 end
 

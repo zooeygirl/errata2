@@ -157,7 +157,7 @@
 	<tr>
 
 	<td><%= stu.first_name + " " + stu.last_name %></td>
-			<% if Essay.where(user_id: stu.id, assignment_id: @assignment.id).first.studentgrade != nil %>
+			<% if Essay.where(user_id: stu.id, assignment_id: @assignment.id).first != nil  && Essay.where(user_id: stu.id, assignment_id: @assignment.id).first.studentgrade != nil %>
 			<td><%= Essay.where(user_id: stu.id, assignment_id: @assignment.id).first.studentgrade.round(2) %></td>
 			<% else %>
 			<td>-----</td>

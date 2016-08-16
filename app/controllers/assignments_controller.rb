@@ -59,7 +59,7 @@ def calculate_class_average_on_assignment
       end
     end
   end
-  if num_of_students > 0
+  if num_of_students > 0  && sum_of_grades > 0 
   @assignment.update_attribute(:classroom_average, sum_of_grades/num_of_students)
   end
   redirect_to classroom_assignment_path(@classroom, @assignment)

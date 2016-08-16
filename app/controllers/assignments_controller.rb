@@ -51,16 +51,18 @@ def calculate_class_average_on_assignment
   essays_for_assignment = Essay.where(assignment_id: @assignment.id)
   sum_of_grades = 0
   num_of_students = 0
-  essays_for_assignment.each do |ess|
-    if @class_list.include?(User.find(ess.user_id))
-      if ess.studentgrade != 0
-        sum_of_grades += ess.studentgrade
-        num_of_students += 1 
+  if essays_for_assignment.count > 0
+      essays_for_assignment.each do |ess|
+        if @class_list.include?(User.find(ess.user_id))
+          if ess.studentgrade != 0
+            sum_of_grades += ess.studentgrade
+            num_of_students += 1 
+          end
+        end
       end
-    end
-  end
-  if num_of_students > 0  && sum_of_grades > 0 
-  @assignment.update_attribute(:classroom_average, sum_of_grades/num_of_students)
+      if num_of_students > 0  && sum_of_grades > 0 
+      @assignment.update_attribute(:classroom_average, sum_of_grades/num_of_students)
+      end
   end
   redirect_to classroom_assignment_path(@classroom, @assignment)
 end

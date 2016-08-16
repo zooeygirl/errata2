@@ -1,6 +1,6 @@
 class RemoveParagraphDemarcationInEssay < ActiveRecord::Migration
   def change
-  	rename_column :essays, :paragraph_demarcation, :studentgrade
+  	add_column :essays, :studentgrade, :string
   	
 
   	def self.up 

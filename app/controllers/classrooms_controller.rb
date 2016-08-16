@@ -45,8 +45,7 @@ end
     respond_to do |format|
       if @classroom.update(classroom_params)
         format.html { redirect_to @classroom, notice: 'Classroom was successfully updated.' }
-        format.json { render :show, status: :ok, location: @classroom }
-        
+        format.json { render :show, status: :ok, location: @classroom }      
       else
         format.html { render :edit }
         format.json { render json: @essay.errors, status: :unprocessable_entity }
@@ -73,7 +72,7 @@ end
 
   def set_teacher
     if current_user.role == 'Teacher'
-      current_user.teacher = current_user.id
+      current_user.update_attribute(:teacher, current_user.id)
     end
   end
 

@@ -116,6 +116,7 @@ Classrooms</h2>
 
 
 <table class="table-hover">
+
 <% current_user.teacher_comments.each do |com| %>
   <tr><td><%= com.category %></td><td><%= com.content %></td>
     <td><%= link_to 'Edit', edit_teacher_comment_path(com) %></td>

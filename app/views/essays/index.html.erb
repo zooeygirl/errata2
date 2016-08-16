@@ -49,7 +49,7 @@ Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
 
 <% if user_signed_in? %>
   <tbody>
-    <% current_user.essays.where("draftnum == 1").each do |essay| %>
+    <% current_user.essays.where(draftnum: 1).each do |essay| %>
       <tr>
         <% if essay.essay_status == 'Feedback' %>
         <td><a><%= link_to essay.title, essay_set_paragraphs_for_second_draft_path(Essay.where(trackernum: essay.id).first), method: :patch %></a></td>
@@ -149,7 +149,6 @@ To get started, find your classroom:
 
 </div>
 
-=======
 </div>
 
 </div>

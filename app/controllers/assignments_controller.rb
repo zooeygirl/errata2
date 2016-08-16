@@ -54,7 +54,7 @@ def calculate_class_average_on_assignment
   if essays_for_assignment.count > 0
       essays_for_assignment.each do |ess|
         if @class_list.include?(User.find(ess.user_id))
-          if ess.studentgrade != 0
+          if ess.studentgrade != 0 && ess.studentgrade != nil
             sum_of_grades += ess.studentgrade
             num_of_students += 1 
           end

@@ -14,7 +14,7 @@
 <th>Introduction</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Introduction').each do |q| %>
   <tr><td><%= q.name %></td>
-  <td><%= "#{q.percentage}%" %></td>
+  <td><%= "#{q.percentage.round(2)}%" %></td>
 	  <% if q.teachereval == nil %>
 	  <td><%= "--/#{q.outof}" %></td>
 	  <% else %>
@@ -30,7 +30,7 @@
 <th>Body Paragraphs</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Body Paragraph').each do |q| %>
   <tr><td><%= q.name %></td>
-    <td><%= "#{q.percentage}%" %></td>
+    <td><%= "#{q.percentage.round(2)}%" %></td>
 	  <% if q.teachereval == nil %>
 	  <td><%= "--/#{q.outof}" %></td>
 	  <% else %>
@@ -45,7 +45,7 @@
 <th>Conclusion</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Conclusion').each do |q| %>
   <tr><td><%= q.name %></td>
-   <td><%= "#{q.percentage}%" %></td>
+   <td><%= "#{q.percentage.round(2)}%" %></td>
 	  <% if q.teachereval == nil %>
 	  <td><%= "--/#{q.outof}" %></td>
 	  <% else %>
@@ -58,9 +58,10 @@
 <% if essay_for_grade_breakdown.grade_elements.where(level: 'All Paragraphs').count > 0 %>
 <table>
 <th>All Paragraphs</th>
+
 <% essay_for_grade_breakdown.grade_elements.where(level: 'All Paragraphs').each do |q| %>
   <tr><td><%= q.name %></td>
-  <td><%= "#{q.percentage}%" %></td>
+  <td><%= "#{q.percentage.round(2)}%" %></td>
 	  <% if q.teachereval == nil %>
 	   <td><%= "--/#{q.outof}" %></td>
 	  <% else %>
@@ -75,7 +76,7 @@
 <th>Essay</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Essay').each do |q| %>
   <tr><td><%= q.name %></td>
-  <td><%= "#{q.percentage}%" %></td>
+  <td><%= "#{q.percentage.round(2)}%" %></td>
 	  <% if q.teachereval == nil %>
 	  <td><%= "--/#{q.outof}" %></td>
 	  <% else %>

@@ -1,11 +1,11 @@
 <% original_essay = Essay.find(@essay.trackernum) %>
-<% paragraphnum = @essay.paragraphs.index(paragraph) %>
+<% paragraphnum = @essay.paragraphs.order(:id).index(paragraph) %>
 
 <tr>
 
 <td><%= paragraphnum + 1 %></td>
-<td><%= original_essay.paragraphs[paragraphnum].content %></td>
-<td><% original_essay.paragraphs[paragraphnum].sentences.each do |sen| %>
+<td><%= original_essay.paragraphs.order(:id)[paragraphnum].content %></td>
+<td><% original_essay.paragraphs.order(:id)[paragraphnum].sentences.each do |sen| %>
 <% sen.mistakes.each do |mis| %>
 	<%= mis.category %></br>
 	<%= link_to mis.name, mistake_path(mis) %></br>

@@ -52,7 +52,7 @@ Classrooms</h2>
         <% clr.assignments.each do |ass| %>
         <% i += ass.essays.where(essay_status: 1).count %>
         <% end %>
-        <td><%="#{i} essays waiting for feedback"%></td>
+        <td><%="#{i} essay(s) waiting for feedback"%></td>
         <td><%= link_to 'Edit', edit_classroom_path(clr) %></td>
         <td><%= link_to 'Destroy', classroom_path(clr), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>

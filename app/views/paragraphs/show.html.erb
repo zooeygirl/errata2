@@ -29,6 +29,14 @@
     <div id="essay_view">
       <%= @paragraph.content %>
     </div>
+    
+    </br>
+      <%= f.fields_for :paragraphs, @paragraph do |p| %>
+        <%= p.hidden_field :id %>
+        <%= p.label :comment %>
+        <%= p.collection_select :comment, current_user.teacher_comments.order(:category), :content, :content , {:include_blank => ''}%>
+
+      <% end %>
 
         <% @essay.grade_elements.each do |ge| %>
 
@@ -36,11 +44,12 @@
             <% if ge.paragraph_id == @paragraph.id %>
 
             <%= ge.name %>
-            <div id="rateYo"></div>
-            <%= f.fields_for :grade_elements, ge do |v| %>
-                <%= v.text_field :teachereval %>
-                <%= v.hidden_field :outof %>
-            <% end %>
+          
+                <%= f.fields_for :grade_elements, ge do |v| %>
+                    <div class="rateYo"></div>
+                    <%= v.text_field :teachereval %>
+                    <%= v.hidden_field :outof %></br>
+                <% end %>
 
             <% end %>
          
@@ -98,20 +107,12 @@
 
                 <%= s.collection_select :comment, current_user.teacher_comments.order(:category), :content, :content , {:include_blank => ''}%>
 
-                 
-               <%= check_box_tag "new comment"%> New Comment</br>
-              
+          
                
               
              
 
-             </br>
-
-          
-              
-
-
-            
+             </br>   
               
 
 
@@ -152,6 +153,9 @@
   </div>
 
 <% end %>
+
+</br></br>
+<%= check_box_tag "new_comment" %>Write New Comment</br>
 
   <div id="sencomm"> 
 <%= render 'teacher_comments/form' %>
@@ -210,9 +214,15 @@
 <%-# __________________________________________________________________________ -%>
 <% elsif current_user.role == 'Student' %>
 
+<% original_essay = Essay.find(@essay.trackernum) %>
+<% paragraphnum = @essay.paragraphs.order(:id).index(@paragraph) %></br>
+
+Original Paragraph: </br>
+<%= original_essay.paragraphs.order(:id)[paragraphnum].content %> </br></br>
+Teacher comment:
+<%= original_essay.paragraphs.order(:id)[paragraphnum].comment %> </br
 
 <%= render @paragraph.sentences %>
-
 
 
 

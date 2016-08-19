@@ -28,37 +28,32 @@
  });
 
 
-$(function () {
- 
-  $("#rateYo").on("rateyo.init", function (e, data) {
- 
- 			var y = $(this).next("input").next("input").val();
- 			var x = $(this).next("input").val();
 
- 			if (x.length == 0){
- 				x=0
- 			}
+$(".rateYo").each(function (e) {
 
- 			$("#rateYo").rateYo("option", "numStars", y);
- 			$("#rateYo").rateYo("option", "maxValue", y);
- 			$("#rateYo").rateYo("option", "rating", x);
- 		
-          console.log("RateYo initialized! with " + data.rating);
-          });
+  var y = $(this).next("input").next("input").val();
+  var x = $(this).next("input").val();
 
- 
-	  	$("#rateYo").rateYo()
-	              .on("rateyo.change", function (e, data) {
-	 				
+  if (x.length == 0){
+        x=0
+      }
 
-	                var rating = data.rating;
-	                $(this).next("input").val(rating);
-
-                  
-	     });
-
-  	
+    $(this).rateYo({
+        onSet: function (rating, rateYoInstance) {
+            $(this).next().val(rating);
+        },
+        rating: x,
+        starWidth: "20px",
+        numStars: y,
+        maxValue: y,
+        normalFill: "#A0A0A0",
+        ratedFill: "#FF0080",
+        fullStar: true
+    });
 });
+
+
+
 
 
 $('#new_comment').click(function() {

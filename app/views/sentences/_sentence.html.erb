@@ -19,11 +19,12 @@
 <% if current_user.role == 'Student' && @essay.essay_status == 'Feedback' %>
 
           <div id='sentence_<%=sentence.id %>'><p>
-
+    
           <% sentenceindex = @paragraph.sentences.index(sentence) %>
+          <% paraindex = @essay.paragraphs.order(:id).index(@paragraph) %>
           <% originalessay = Essay.find(@essay.trackernum) %>
-          <% original_sentence = originalessay.sentences[sentenceindex] %>
-          
+          <% original_sentence = originalessay.paragraphs.order(:id)[paraindex].sentences[sentenceindex] %>
+
           <table>
           <tr><th>Category</th><th>Mistake</th><th>Problem Words</td></tr>
           <tr>
@@ -60,7 +61,11 @@
         </table>
 
         </br>
-          <div class="comment"><%= original_sentence.content %></div>
+          <div class="comment">
+            Original Sentence:  
+            <%= original_sentence.content %></div>
+            Teacher Comment:
+            <%= original_sentence.comment %>
           
           		
           		<%= form_for ([@essay, @paragraph, sentence]) do |f| %>

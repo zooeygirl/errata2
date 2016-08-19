@@ -6,15 +6,17 @@ class TeacherCommentsController < ApplicationController
 
 def new
 	@teacher_comment = current_user.teacher_comments.new
+  session[:return_to] ||= request.referer
 end
 
 def create
+  session[:return_to] ||= request.referer
   @teacher_comment = current_user.teacher_comments.create(teacher_comment_params) 
   @teacher_comment.user_id = current_user.id
  
   
    if @teacher_comment.save
-        redirect_to classrooms_path
+        redirect_to session.delete(:return_to)
     end
 
 
@@ -22,7 +24,7 @@ end
 
 
 def edit
- 
+  
 
 end
 
@@ -40,7 +42,8 @@ end
 def update
   @teacher_comment.update(teacher_comment_params)
    if @teacher_comment.update(teacher_comment_params)
-       redirect_to classrooms_path
+        redirect_to classrooms_path
+    
     end
 end
 

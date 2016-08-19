@@ -15,6 +15,11 @@ class EssaysController < ApplicationController
   def show
     find_classroom
     count_mistakes
+
+    if @essay.draftnum == 2 && @essay.paragraphs.count == 0
+      set_paragraphs
+    end
+
   end
 
 def set_paragraphs_for_second_draft
@@ -44,30 +49,27 @@ def set_paragraphs_for_second_draft
 end
 
 def set_paragraphs
-    @paragraphs = @essay.body.split(/\r\n\r\n/)
-    i=0
-    @sentences_in_paragraph = []
-    while i < @paragraphs.count do
-      if @essay.paragraphs[i] == nil
-      @essay.paragraphs.create(content: @paragraphs[i])
-      else
-      @essay.paragraphs[i].update(content: @paragraphs[i])
-      end
-    @sentences_in_paragraph[i] = Scalpel.cut(@paragraphs[i]).count
+    
+    @essay.paragraphs.each do |para|
+      para.sentences.delete_all
+    end
+    @essay.paragraphs.delete_all
+
+    @para_in_essay = @essay.body.split(/\r\n\r\n/)
+
+    i = 0
+    while i < @para_in_essay.count do
+      @essay.paragraphs.create(content: @para_in_essay[i])
     i+= 1
     end
-
-     if @essay.paragraphs.count > @paragraphs.count
-                for j in @paragraphs.count..@essay.paragraphs.count
-                  if @essay.paragraphs[j] != nil
-                  @essay.paragraphs.delete(Paragraph.find(@essay.paragraphs[j].id))
-                  end
-                end
-      end
+    
     set_sentences
+    
     if @essay.draftnum == 2
       redirect_to essay_path(Essay.find(@essay.trackernum))
-    end    
+    end   
+
+
 end
 
 
@@ -78,7 +80,7 @@ end
 
   # GET /essays/1/edit
   def edit
-    
+    session[:return_to] ||= request.referer
   end
 
   # POST /essays
@@ -110,15 +112,19 @@ end
   # PATCH/PUT /essays/1
   # PATCH/PUT /essays/1.json
   def update
+    session[:return_to] ||= request.referer
     respond_to do |format|
       if @essay.update(essay_params)
+        if @essay.essay_status == 'In progress'
         set_paragraphs
         turn_word_list_into_an_array
+        end
         calculate_student_grade
 
-        format.html { redirect_to :back, notice: 'Essay was successfully updated.' }
-        format.json { render :show, status: :ok, location: @essay }
         
+        format.html { redirect_to session.delete(:return_to), notice: 'Essay was successfully updated.' }
+        format.json { render :show, status: :ok, location: @essay }
+       
       else
         format.html { render :edit }
         format.json { render json: @essay.errors, status: :unprocessable_entity }
@@ -168,26 +174,28 @@ end
 
   def create_grade_template
     @essay = Essay.find(params[:essay_id])
-    if @essay.grade_elements.blank?
-    @assignment = Assignment.find(@essay.assignment_id)
-    @evaluation = Evaluation.find(@assignment.evaluation)
-    @evaluation.criteria.each do |crit|
-      if crit.level == 'All Paragraphs'
-        @essay.paragraphs.each do |para|
-          @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage/@essay.paragraphs.count, outof: crit.outof, essay_id: @essay.id, paragraph_id: para.id)
+        if @essay.grade_elements.blank?
+        @assignment = Assignment.find(@essay.assignment_id)
+         if @assignment.evaluation != nil
+        @evaluation = Evaluation.find(@assignment.evaluation)
+        @evaluation.criteria.each do |crit|
+          if crit.level == 'All Paragraphs'
+            @essay.paragraphs.each do |para|
+              @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage/@essay.paragraphs.count, outof: crit.outof, essay_id: @essay.id, paragraph_id: para.id)
+            end
+          elsif crit.level == 'Essay'
+            @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id)
+          elsif crit.level == 'Introduction'
+            @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.first.id)
+          elsif crit.level == 'Conclusion'
+            @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.last.id)
+          elsif crit.level == 'Body Paragraph'
+            @essay.paragraphs[1..@essay.paragraphs.count-2].each do |para|
+              @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage/(@essay.paragraphs.count-2), outof: crit.outof, essay_id: @essay.id, paragraph_id: para.id)
+            end
+          end          
         end
-      elsif crit.level == 'Essay'
-        @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id)
-      elsif crit.level == 'Introduction'
-        @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.first.id)
-      elsif crit.level == 'Conclusion'
-        @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.last.id)
-      elsif crit.level == 'Body Paragraph'
-        @essay.paragraphs[1..@essay.paragraphs.count-2].each do |para|
-          @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage/(@essay.paragraphs.count-2), outof: crit.outof, essay_id: @essay.id, paragraph_id: para.id)
-        end
-      end          
-    end
+      end
     redirect_to essay_path(@essay)
     else
     redirect_to essay_path(@essay)
@@ -256,6 +264,7 @@ end
 
   
   def set_sentences
+  
 
           @essay.paragraphs.each do |paragraph|
 
@@ -269,7 +278,7 @@ end
                 else
                     paragraph.sentences[i].update(content: @sentence_array.at(i), essay_id: @essay.id, word_list: @sentence_array.at(i).split(/\W+/))
                 end
-
+  
               i +=1
               end
 
@@ -282,6 +291,7 @@ end
               end
 
           end
+
     end
 
 
@@ -300,7 +310,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def essay_params
-      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, grade_elements_attributes: [:id, :teachereval, :_destroy], paragraphs_attributes: [:id, :sentences, :_destroy], sentences_attributes: [:id, :comment, :_destroy, mistake_ids:[]], words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
+      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, grade_elements_attributes: [:id, :teachereval, :_destroy], paragraphs_attributes: [:id, :sentences, :content, :comment, :_destroy], sentences_attributes: [:id, :comment, :content, :_destroy, mistake_ids:[]], words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
     end
 
 end

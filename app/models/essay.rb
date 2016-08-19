@@ -2,7 +2,7 @@ class Essay < ActiveRecord::Base
 
 belongs_to :user
 belongs_to :assignment
-has_many :sentences, dependent: :destroy
+has_many :sentences, :through => :paragraphs
 accepts_nested_attributes_for :sentences
 has_many :mistakes, :through => :sentences
 has_many :paragraphs, dependent: :destroy
@@ -14,7 +14,6 @@ has_many :grade_elements
 accepts_nested_attributes_for :grade_elements
 
 
-serialize :paragraph_demarcation, Array
 
 accepts_nested_attributes_for :mistakes
  

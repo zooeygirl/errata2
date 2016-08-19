@@ -101,27 +101,22 @@
                 <ul class="nav navbar-nav">
                   <li><%= link_to "Back", :back %></li>
 
-                          <% if @essay != nil && @essay.paragraphs.count > 0%>
+                          <% if @essay != nil && @essay.paragraphs.count > 0 %>
                               <li><%= link_to "Classroom", classroom_path(User.find(@essay.user_id).classroom) %></li>
 
                               <% if @paragraph != nil %>
                               <li><%= link_to "Essay", essay_path(@essay) %></li>
-                               <% if @paragraph != @essay.paragraphs.first && @essay.paragraphs.count > 1 %>
-                              <li><%= link_to "Previous Paragraph", essay_paragraph_path(@essay, @paragraph.id - 1 ) %></li>  
-                             <% end %>
+        
                              <% i = 1 %>
-                              <% @essay.paragraphs.each do |para| %>
+                              <% @essay.paragraphs.order(:id).each do |para| %>
                                 <li><%= link_to i, essay_paragraph_path(@essay, para.id ) %></li> 
                                 <% i += 1 %>
                               <% end %>
-                              <% if @paragraph != @essay.paragraphs.last && @essay.paragraphs.count > 1 %>
-                              <li><%= link_to "Next Paragraph", essay_paragraph_path(@essay, @paragraph.id + 1 ) %></li>  
-                             <% end %>
+                            
 
                           <% else %>
-                              <li><%= link_to "First Paragraph", essay_paragraph_path(@essay, @essay.paragraphs.first ) %></li>
                               <% i = 1 %>
-                              <% @essay.paragraphs.each do |para| %>
+                              <% @essay.paragraphs.order(:id).each do |para| %>
                                 <li><%= link_to i, essay_paragraph_path(@essay, para.id ) %></li> 
                                 <% i += 1 %>
                               <% end %>

@@ -18,6 +18,11 @@ Essay Status: <%= @essay.essay_status %>
         </p>
       </div>
 
+
+       <% if @essay.essay_status == 'In progress' %>
+      <td><%= link_to 'Submit Essay to your teacher', essay_submit_essay_path(@essay), method: :patch%></td>
+      <% end %>
+
 <% end %>
 
 <% end %>
@@ -56,9 +61,10 @@ Essay Status: <%= @essay.essay_status %>
           </div>
 
     <%= render "grade_report" %></br></br>
+
     <table class="table-bordered">
     <tr><td>Paragraph</td><td>Content</td><td>Errors</td><td>Second Draft</td></tr>
-    <%= render @essay.paragraphs %>
+    <%= render @essay.paragraphs.order(:id) %>
     <tr><td></td><td></td><td>Total Number of Language Problems:  <%= @num_mistakes %></td></tr>
   </table>
 
@@ -85,7 +91,13 @@ Essay Status: <%= @essay.essay_status %>
 
 <% assign = Assignment.find(@essay.assignment_id) %>
  <h3>Assignment:<%= link_to assign.title, classroom_assignment_path(assign.classroom_id, assign) %></h3>
+
+ <% if Assignment.find(@essay.assignment_id).evaluation != nil %>
  Rubric: <%= Evaluation.find(Assignment.find(@essay.assignment_id).evaluation).name %>
+ <% else %>
+ <%= link_to "Choose a Rubric for this assignment", edit_classroom_assignment_path(Classroom.find(User.find(@essay.user_id).classroom), Assignment.find(@essay.assignment_id)) %>
+ <%= link_to "Create a Rubric for this assignment", new_evaluation_path %>
+ <% end %>
 
  
 
@@ -115,29 +127,29 @@ Essay Status: <%= @essay.essay_status %>
 <%= f.hidden_field :id %>
 
 
-<% @essay.grade_elements.each do |ge| %>
+    <% @essay.grade_elements.each do |ge| %>
 
 
-    <% if ge.level == 'Essay' %>
+          <% if ge.level == 'Essay' %>
 
-    <%= ge.name %>
+          <%= ge.name %>
 
-    <div id="rateYo"></div>
-    <%= f.fields_for :grade_elements, ge do |v| %>
-        <%= v.text_field :teachereval %>
-        <%= v.hidden_field :outof %>
+                  <%= f.fields_for :grade_elements, ge do |v| %>
+                      <div class="rateYo"></div>
+                      <%= v.text_field :teachereval %>
+                      <%= v.hidden_field :outof %></br>
+                  <% end %>
+
+
+          <% end %>
+       
     <% end %>
 
-
-    <% end %>
- 
-<% end %>
-
- <% if @essay.grade_elements.where(level: 'Essay').count > 0 %>
-      <div class="actions">
-    <%= f.submit "Save Grades" %>
-  </div>
-<% end %>
+       <% if @essay.grade_elements.where(level: 'Essay').count > 0 %>
+            <div class="actions">
+          <%= f.submit "Save Grades" %>
+        </div>
+      <% end %>
 
 
 <% end %>
@@ -167,9 +179,9 @@ Essay Status: <%= @essay.essay_status %>
 
 <%= render "grade_report" %>
 
-
- <%= link_to 'Change rubric', essay_change_rubric_path(@essay), method: :patch %>
-
+</br></br>
+ <%= link_to 'Reset rubric', essay_change_rubric_path(@essay), method: :patch %>
+Warning: You will lose all the current grades for this student if you reset the rubric.
  
  <% end %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816095806) do
+ActiveRecord::Schema.define(version: 20160817221048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20160816095806) do
     t.integer  "essay_status"
     t.text     "second_draft"
     t.integer  "assignment_id"
-    t.string   "studentgrade"
+    t.float    "studentgrade"
     t.integer  "draftnum"
     t.integer  "trackernum"
     t.integer  "teacher"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20160816095806) do
   end
 
   create_table "mistakes", force: :cascade do |t|
-    t.string   "category"
+    t.integer  "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"

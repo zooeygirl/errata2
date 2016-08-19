@@ -10,6 +10,7 @@ end
 def create
 	@evaluation = current_user.evaluations.create(evaluation_params)
 	@evaluation.user_id = current_user.id
+	@evaluation.hundred = 0.00
 	redirect_to evaluation_path(@evaluation)
 end
 

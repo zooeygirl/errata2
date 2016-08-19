@@ -31,7 +31,7 @@
 <% else %>
 <%= "This rubric does not add up to 100%." %>
 	<% if @evaluation.hundred > 100 %>
-	<%= "Subtract #{@evaluation.hundred - 100}%" %>
+	<%= "Subtract #{@evaluation.hundred.round - 100}%" %>
 	<% else %>
 	<%= "Add #{100-@evaluation.hundred}%" %>
 	<% end %>

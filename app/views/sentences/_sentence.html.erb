@@ -25,6 +25,8 @@
           <% originalessay = Essay.find(@essay.trackernum) %>
           <% original_sentence = originalessay.paragraphs.order(:id)[paraindex].sentences.order(:id)[sentenceindex] %>
 
+          <% if original_sentence != nil %>
+
           <table>
           <tr><th>Category</th><th>Mistake</th><th>Problem Words</td></tr>
           <tr>
@@ -60,12 +62,14 @@
 
         </table>
 
+
         </br>
           <div class="comment">
             Original Sentence:  
             <%= original_sentence.content %></div>
             Teacher Comment:
             <%= original_sentence.comment %>
+        <% end %>
           
           		
           		<%= form_for ([@essay, @paragraph, sentence]) do |f| %>

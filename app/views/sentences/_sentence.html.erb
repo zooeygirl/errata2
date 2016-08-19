@@ -20,10 +20,10 @@
 
           <div id='sentence_<%=sentence.id %>'><p>
     
-          <% sentenceindex = @paragraph.sentences.index(sentence) %>
+          <% sentenceindex = @paragraph.sentences.order(:id).index(sentence) %>
           <% paraindex = @essay.paragraphs.order(:id).index(@paragraph) %>
           <% originalessay = Essay.find(@essay.trackernum) %>
-          <% original_sentence = originalessay.paragraphs.order(:id)[paraindex].sentences[sentenceindex] %>
+          <% original_sentence = originalessay.paragraphs.order(:id)[paraindex].sentences.order(:id)[sentenceindex] %>
 
           <table>
           <tr><th>Category</th><th>Mistake</th><th>Problem Words</td></tr>
@@ -163,7 +163,7 @@
           
           <% sentence.mistake_ids.each do |mis| %>
               <div class="mistake">
-              <%= link_to Mistake.find(mis).name, Mistake.find(mis).link, :target=> '_blank' %></div>
+              <%= link_to Mistake.find(mis).name, Mistake.find(mis), :target=> '_blank' %></div>
           <% end %>
           <div class="comment"><%= sentence.content %></div>
           <% sentence.words_in_mistakes.each do |wim| %>

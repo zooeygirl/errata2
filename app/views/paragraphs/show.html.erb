@@ -222,7 +222,7 @@ Original Paragraph: </br>
 Teacher comment:
 <%= original_essay.paragraphs.order(:id)[paragraphnum].comment %> </br
 
-<%= render @paragraph.sentences %>
+<%= render @paragraph.sentences.order(:id) %>
 
 
 

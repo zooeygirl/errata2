@@ -12,15 +12,23 @@ Assignments:
 <% @class_list.each do |s| %>
 	<td><%= "#{s.first_name} #{s.last_name}" %></td>
 	<% @classroom.assignments.each do |assign| %>
+		
+	<% if s.essays.where(assignment_id: assign.id, draftnum: 1).count > 0  %>
 	<td>Grade: 
-		<% if s.essays.where(assignment_id: assign.id, draftnum: 1).count > 0 %>
+
 		<% originalessay = s.essays.where(assignment_id: assign.id, draftnum: 1).first %>
-		<%= originalessay.studentgrade.round(2) %>%</br>
+
+		<% if originalessay.studentgrade != nil %>
+		<%= originalessay.studentgrade.round(2) %>%<% end %></br>
+
+		<% if Essay.where(trackernum: originalessay.id).count > 0 %>
 		<% seconddraft = Essay.where(trackernum: originalessay.id).last %>
 		Second Draft: <% if originalessay.body == seconddraft.body %>
 		No changes made.
 		<% elsif originalessay.body != seconddraft.body %>
 		<%= link_to "Worked on Second draft", essay_path(seconddraft) %>
+		<% end %>
+
 		<% end %>
 		<% end %>
 

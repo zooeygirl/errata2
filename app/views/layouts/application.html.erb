@@ -32,13 +32,13 @@
 			<li><%= link_to "Join Class", classroom_path(current_user.teacher) %></li>
 			<% else %>
 			<li><%= link_to "My Class", classroom_path(current_user.classroom) %></li>
-      <li> <%= link_to "My Essays", essays_path(current_user)%>  </li>
+      <li> <%= link_to "Home", essays_path(current_user)%>  </li>
 			<% end %>
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.first_name + " " + current_user.last_name %> <span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-          	<li> Role: <%= current_user.role %></li>
+          	<li><div class="dropdown_text"> Role: <%= current_user.role %></div></li>
           	<li>Teacher: <%= User.find(current_user.teacher).first_name + " " + User.find(current_user.teacher).last_name %></li>
 			<% if current_user.classroom != nil %>
 			<li>Classroom: <%= Classroom.find(current_user.classroom).school %> </li> 
@@ -51,7 +51,7 @@
 		
 		<% else %>
 
-      <li> <%= link_to "My Classes", classrooms_path(current_user.teacher)%>  </li>
+      <li> <%= link_to "Home", classrooms_path(current_user.teacher)%>  </li>
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.first_name + " " + current_user.last_name %> <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -76,19 +76,12 @@
 </nav>
 
 
-	
-</br>
-
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-
-
 <div class="yield">
 <%= yield %>
 </div>
 
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 <% if user_signed_in? %>
 

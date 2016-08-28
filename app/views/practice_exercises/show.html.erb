@@ -1,7 +1,7 @@
 <%= "There are #{@practice_exercise.pe_questions.count} sentences to practice." %></br></br>
 
-
-<ul class="nav nav-pills nav-justified">
+<div class="col-md-3">
+<ul class="nav nav-pills nav-stacked">
 
 <% i = 1 %>
 <% @practice_exercise.pe_questions.each do |ques| %>
@@ -28,5 +28,5 @@
 <%= render @practice_exercise.pe_questions %>
 </div>
 
-</ul>
+</ul></div>
 

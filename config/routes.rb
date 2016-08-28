@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-resource :user 
+resource :user
+ 
   
   resources :teacher_comments
   resources :practice_exercises do

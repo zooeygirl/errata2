@@ -16,30 +16,53 @@ def create
         add_pe_questions
         redirect_to @practice_exercise
     end
+end
 
-
+def check_work(student)
+  @attempts = 0
+  @correct_answers = 0
+@practice_exercise.pe_questions.each do |ques|
+    if ques.pe_answers.where(user_id: student.id, correct: 2).count>0 
+      @correct_answers += 1
+      @attempts += ques.pe_answers.where(user_id: student.id, correct: 2).count
+    elsif ques.pe_answers.where(user_id: student.id, correct: 3).count > 0
+      @attempts += ques.pe_answers.where(user_id: student.id, correct: 3).count 
+    elsif (ques.pe_answers.where(user_id: student.id, correct: 2).count + ques.pe_answers.where(user_id: current_user.id, correct: 1).count) > 0
+      @attempts += (ques.pe_answers.where(user_id: student.id, correct: 2).count + ques.pe_answers.where(user_id: current_user.id, correct: 1).count)
+    elsif ques.pe_answers.where(user_id: student.id).count == 0
+  
+    end
+end
 end
 
 
+
 def edit
- 
+
 
 end
 
 def add_pe_questions
-     if Sentence.includes(:mistakes).where(mistakes: { category: @practice_exercise.mistake_category}).where(essay_id: Essay.where(assignment_id: @practice_exercise.assignment)).count > 0 
-        Sentence.includes(:mistakes).where(mistakes: { category: @practice_exercise.mistake_category}).where(essay_id: Essay.where(assignment_id: @practice_exercise.assignment)).each do |sen|
-        if @practice_exercise.pe_questions.where(sentence: sen).count == 0       
+      
+      @practice_exercise.mistakes.each do |mis|
+          if Sentence.includes(:mistakes).where(mistakes: { name: mis.name}).where(essay_id: Essay.where(assignment_id: @practice_exercise.assignment)).count > 0 
+        Sentence.includes(:mistakes).where(mistakes: { name: mis.name}).where(essay_id: Essay.where(assignment_id: @practice_exercise.assignment)).each do |sen|
+          if @practice_exercise.pe_questions.where(sentence: sen).count == 0       
         @practice_exercise.pe_questions.create(practice_exercise_id: @practice_exercise.id, sentence: sen.id)
+        end
+        end
+        end
+
       end
-      end
-      end
+
+
+    
 end
 
 
 
 def show
-  add_pe_questions
+  
 end
 
 def index
@@ -77,7 +100,7 @@ private
    
 
    def practice_exercise_params
-      params.require(:practice_exercise).permit(:user_id, :name, :description, :assignment, :mistake_category, pe_questions_attributes: [:id, :pe_answers, :_destroy], pe_answers_attributes: [:id, :correct, :_destroy])
+      params.require(:practice_exercise).permit(:user_id, :name, :description, :assignment, mistake_ids:[], pe_questions_attributes: [:id, :pe_answers, :_destroy], pe_answers_attributes: [:id, :correct, :_destroy])
     end
 end
 

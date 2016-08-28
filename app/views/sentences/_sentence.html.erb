@@ -25,9 +25,11 @@
           <% originalessay = Essay.find(@essay.trackernum) %>
           <% original_sentence = originalessay.paragraphs.order(:id)[paraindex].sentences.order(:id)[sentenceindex] %>
 
+
           <% if original_sentence != nil %>
 
-          <table>
+          <% if original_sentence.mistakes.count > 0 %>
+          <table class="table-striped">
           <tr><th>Category</th><th>Mistake</th><th>Problem Words</td></tr>
           <tr>
 
@@ -61,16 +63,20 @@
           <% end %>
 
         </table>
-
+        <% else %>
+        No language problems.
+        <% end %>
 
         </br>
           <div class="comment">
             Original Sentence:  
             <%= original_sentence.content %></div>
             Teacher Comment:
-            <%= original_sentence.comment %>
+            <%= original_sentence.comment %></br>
+                <% original_sentence.teacher_comments.each do |tc| %>
+                <%= tc.content %>
+                <% end %>
         <% end %>
-          
           		
           		<%= form_for ([@essay, @paragraph, sentence]) do |f| %>
 
@@ -88,7 +94,6 @@
                 </div>
  		         <% end %>
 
-        
 </p>
 <% end %>
 

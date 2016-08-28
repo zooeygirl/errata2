@@ -4,6 +4,4 @@ class GradeElement < ActiveRecord::Base
 
 
 
-
-
 end

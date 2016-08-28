@@ -1,7 +1,7 @@
 .assignment_flip, #create_new {
     background-image: url("new_panel_bg.png");
-    height: 222px;
-    width: 358px;
+    height: 150px;
+    width: 250px;
     text-align: center;
     line-height: 25px;
 }
@@ -17,19 +17,19 @@
 .assignment_flip {
     text-align: left;
     background-image: url("red_panel_bg.png");
-    height: 222px;
-    width: 358px;
+    height: 150px;
+    width: 250px;
     position: relative;
     margin: 10px;
     float: left;
     padding: 10px;
-    line-height: 25px;
+    line-height: 15px;
 }
 
 .assignment_flip.hover {
     background-image: url("grey_panel_bg.png");
-    height: 222px;
-    width: 358px;
+    height: 150px;
+    width: 250px;
 }
 
 .assignment_name {

@@ -2,18 +2,57 @@
 	float: left;
 	border-style: solid;
 	border-width: 1px;
-	padding: 6px;
-	margin: 5px;
 	position: relative;
-	background-color: #FF0080;
+	background-color: white;
 
 }
 
 .mistake_names {
 	position: absolute;
-	display: none;
-	background: blue;
-	background-color: #FF0080;	
-	width: 250px;
+	display: none;	
+	width: auto;
+	padding: 20px;
 	z-index: 1;
+	color: black;
+	margin-top: 6px;
+	margin-left: -10px;
 }
+
+.mistake_categories {
+	margin: 5px;
+	padding: 6px;
+}
+
+.lang_errors {
+	right: 30px;
+	position: absolute;
+	color: #FF0080;
+}
+
+.lang_errors_panel {
+	border-style: solid;
+	border-width: 1px;
+	border-color: gray;
+	background-color: white;
+	padding: 5px;
+	color: gray;
+	min-height: 100px;
+}
+
+
+.table-striped{
+border-collapse:separate;
+border-spacing: 5px;
+}
+
+.btn-lg {
+	position: fixed;
+	bottom: 70px;
+	right: 20px;
+	background-color: #FF0080;
+}
+
+#recurrent {
+	clear: both;
+}
+

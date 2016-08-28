@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817221048) do
+ActiveRecord::Schema.define(version: 20160827202217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,11 @@ ActiveRecord::Schema.define(version: 20160817221048) do
     t.string   "name"
   end
 
+  create_table "mistakes_practice_exercises", id: false, force: :cascade do |t|
+    t.integer "practice_exercise_id", null: false
+    t.integer "mistake_id",           null: false
+  end
+
   create_table "mistakes_sentences", id: false, force: :cascade do |t|
     t.integer "mistake_id",  null: false
     t.integer "sentence_id", null: false
@@ -128,6 +133,11 @@ ActiveRecord::Schema.define(version: 20160817221048) do
     t.string  "content"
     t.string  "comment"
     t.integer "essay_id"
+  end
+
+  create_table "paragraphs_teacher_comments", id: false, force: :cascade do |t|
+    t.integer "paragraph_id",       null: false
+    t.integer "teacher_comment_id", null: false
   end
 
   create_table "pe_answers", force: :cascade do |t|
@@ -166,6 +176,11 @@ ActiveRecord::Schema.define(version: 20160817221048) do
     t.string   "vocabulary_errors"
     t.string   "word_list"
     t.integer  "paragraph_id"
+  end
+
+  create_table "sentences_teacher_comments", id: false, force: :cascade do |t|
+    t.integer "sentence_id",        null: false
+    t.integer "teacher_comment_id", null: false
   end
 
   create_table "teacher_comments", force: :cascade do |t|

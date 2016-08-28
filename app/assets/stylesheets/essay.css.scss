@@ -52,6 +52,7 @@
     padding-top: 25px;
     padding-bottom: 25px;
     border: solid 3px #FF0080;
+    clear: left;
 }
 
 
@@ -71,4 +72,59 @@ p, #sentence_mistakes {
     border: solid 1px #c3c3c3;
     width: 100%;
     float: left;
+}
+
+.submit_btn {
+    width: 250px;
+    text-align: center;
+    border: solid 1px black;
+    padding: 10px;
+}
+
+
+.grade_report {
+    position: absolute;
+    right: 30px;
+    background-color: white;
+    border: solid 3px #FF0080;
+    padding: 5px;
+    margin-top: 8px;
+    width: 30%;
+}
+
+
+.assignment_title{
+    display: inline;
+}
+
+
+.status_color{
+    color: #FF0080;
+}
+
+.stars {
+    margin-top: 9px;
+    position: relative;
+    float: left;
+}
+
+.star_eval{
+    width: 50%;
+}
+
+#reset_rubric {
+    padding-top: 20px;
+    clear: left;
+}
+
+.essay_and_second_draft {
+    background-color: white;
+    width: 400px;
+    min-height: 500px;
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: solid 3px #FF0080;
 }

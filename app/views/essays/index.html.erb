@@ -52,7 +52,7 @@ Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
     <% current_user.essays.where(draftnum: 1).each do |essay| %>
       <tr>
         <% if essay.essay_status == 'Feedback' %>
-        <td><a><%= link_to essay.title, essay_set_paragraphs_for_second_draft_path(Essay.where(trackernum: essay.id).first), method: :patch %></a></td>
+        <td><a><%= link_to essay.title, essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></a></td>
         <% else %>
          <td><a><%= link_to essay.title, essay %></a></td>
         <% end %>
@@ -87,7 +87,6 @@ To get started, find your classroom:
 </div>
 
 <div id="progress" class="tab-pane fade">
-
 
 <% afg = "" %>
 <% myarray =[] %>

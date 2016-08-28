@@ -31,6 +31,8 @@
 
 $(".rateYo").each(function (e) {
 
+
+
   var y = $(this).next("input").next("input").val();
   var x = $(this).next("input").val();
 
@@ -48,9 +50,12 @@ $(".rateYo").each(function (e) {
         maxValue: y,
         normalFill: "#A0A0A0",
         ratedFill: "#FF0080",
-        fullStar: true
+        fullStar: false
     });
 });
+
+
+
 
 
 

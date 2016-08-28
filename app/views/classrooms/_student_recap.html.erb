@@ -1,0 +1,73 @@
+Assignments:
+
+<table class="table-striped">
+
+<tr><th>Students</th>
+<% @classroom.assignments.each do |assign| %>
+	<th><%= assign.title %></th>
+<% end %>
+</tr>
+
+<tr>
+<% @class_list.each do |s| %>
+	<td><%= "#{s.first_name} #{s.last_name}" %></td>
+	<% @classroom.assignments.each do |assign| %>
+	<td>Grade: <% originalessay = s.essays.where(assignment_id: assign.id, draftnum: 1).first %><%= originalessay.studentgrade.round(2) %>%</br>
+		<% seconddraft = Essay.where(trackernum: originalessay.id).last %>
+		Second Draft: <% if originalessay.body == seconddraft.body %>
+		No changes made.
+		<% elsif originalessay.body != seconddraft.body %>
+		<%= link_to "Worked on Second draft", essay_path(seconddraft) %>
+		<% end %>
+
+	</td>
+	<% end %>
+
+
+<% end %>
+</tr>
+
+</table>
+
+
+</br>
+</br>
+Practice Exercises:
+
+<table class="table-striped">
+
+<tr><th>Students</th>
+<% @classroom.practice_exercises.each do |pe| %>
+	<th><%= pe.name %></th>
+<% end %>
+</tr>
+
+<tr>
+<% @class_list.each do |s| %>
+	<td><%= "#{s.first_name} #{s.last_name}" %></td>
+	<% @classroom.practice_exercises.each do |pe| %>
+
+	<% attempts = 0 %>
+  	<% correct_answers = 0 %>
+ 	<% pe.pe_questions.each do |ques| %>
+	    <% if ques.pe_answers.where(user_id: s.id, correct: 2).count>0 %>
+	     	<% correct_answers += 1 %>
+	     	<% attempts += ques.pe_answers.where(user_id: s.id, correct: 2).count %>
+	    <% elsif ques.pe_answers.where(user_id: s.id, correct: 3).count > 0 %>
+	      <% attempts += ques.pe_answers.where(user_id: s.id, correct: 3).count %> 
+	    <% elsif (ques.pe_answers.where(user_id: s.id, correct: 2).count + ques.pe_answers.where(user_id: current_user.id, correct: 1).count) > 0 %>
+	      <% attempts += (ques.pe_answers.where(user_id: s.id, correct: 2).count + ques.pe_answers.where(user_id: current_user.id, correct: 1).count) %>
+	      <% end %>
+    <% end %>
+
+    <td>Answers: <%= attempts %></br>Correct Answers:<%= "#{correct_answers}/#{pe.pe_questions.count}" %></td>
+
+
+
+	<% end %>
+
+
+<% end %>
+</tr>
+
+</table>

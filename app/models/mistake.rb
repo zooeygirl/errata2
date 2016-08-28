@@ -1,6 +1,7 @@
 class Mistake < ActiveRecord::Base
 
 has_and_belongs_to_many :sentences
+has_and_belongs_to_many :practice_exercises
 has_many :essays, :through => :sentences
 has_many :links
 

@@ -51,7 +51,7 @@ end
 
 def second_draft
     secdraftpara = ""
-    @paragraph.sentences.each do |sen|
+    @paragraph.sentences.order(:id).each do |sen|
     secdraftpara += sen.content + " "
     end
     @paragraph.update_attribute(:content, secdraftpara)
@@ -83,5 +83,5 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paragraph_params
-      params.require(:paragraph).permit(:content, :comment, :essay_id, :evaluation, sentences_attributes: [:comment, :content, :_destroy])
+      params.require(:paragraph).permit(:content, :comment, :essay_id, :evaluation, sentences_attributes: [:comment, :content, :_destroy], teacher_comment_ids:[])
     end

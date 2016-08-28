@@ -56,12 +56,17 @@ end
   def add_student_to_classroom
       @classroom = Classroom.find(params[:classroom_id])
       current_user.update_attribute(:classroom, @classroom.id)    
-    redirect_to classrooms_path, notice: "You have been added to the class"
+    redirect_to essays_path, notice: "You have been added to the class #{Classroom.find(current_user.classroom).school}"
   end
 
   def class_list
     @class_list = User.where(classroom: @classroom.id)
   end
+
+
+  
+
+  
 
 
   private

@@ -32,17 +32,29 @@
     
     </br>
       <%= f.fields_for :paragraphs, @paragraph do |p| %>
-        <%= p.hidden_field :id %>
-        <%= p.label :comment %>
-        <%= p.collection_select :comment, current_user.teacher_comments.order(:category), :content, :content , {:include_blank => ''}%>
+        
+ <div class="comment">
+                Recurrent Comments:
+                <%= p.hidden_field :id %>
+                <%= p.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
+              
+                <div class="field">
+                  <%= p.label :comment %><br>
+                  <%= p.text_field :comment, size: "70%" %>
+                </div>
+
+
+
+</div>
+ 
 
       <% end %>
-
-        <% @essay.grade_elements.each do |ge| %>
+        <div class="star_eval">
+        <% @essay.grade_elements.order(:id).each do |ge| %>
 
 
             <% if ge.paragraph_id == @paragraph.id %>
-
+            <div class="stars">
             <%= ge.name %>
           
                 <%= f.fields_for :grade_elements, ge do |v| %>
@@ -50,19 +62,24 @@
                     <%= v.text_field :teachereval %>
                     <%= v.hidden_field :outof %></br>
                 <% end %>
-
+              </div>
             <% end %>
          
         <% end %>
+      </div>
 
-        <h4>Language errors for Paragraph</h4></br>
+        <div class="lang_errors">
+        <h4>Language errors in Paragraph</h4>
+        <div class="lang_errors_panel">
           <% @paragraph.sentences.each do |sen| %>
             <% sen.mistakes.each do |mis| %>
             <td><%= mis.category %></td>:
             <td><%= mis.name %></td>
             </br>
             <% end %>
-          <% end %>   
+          <% end %> 
+          </div> 
+          </div> 
 
 </div>
         
@@ -104,19 +121,26 @@
                  <% end %>
                </br></br></br>
 
-
-                <%= s.collection_select :comment, current_user.teacher_comments.order(:category), :content, :content , {:include_blank => ''}%>
-
-          
-               
+               <div class="comment">
+                <%= s.label "Recurrent Comments:" %>
+                <%= s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
+            
               
+               <div class="field">
+                  <%= s.label :comment %><br>
+                  <%= s.text_field :comment, size: "70%" %>
+                </div>
+
+                </div>
              
 
              </br>   
               
-
-
-            <table class="table-bordered">
+             <% if sen.words_in_mistakes.count > 0 %>
+             <div class="pre_title">
+              Select Problem Words (optional)
+             </div>
+            <table class="table-striped">
               <% sen.words_in_mistakes.each do |wim| %>
 
                   <%= f.fields_for :words_in_mistakes, wim do |w| %>
@@ -139,7 +163,7 @@
               <% end %>
 
 
-                  <% end %></table>
+                  <% end %></table><% end %>
                 
               <% end %></div>
 
@@ -148,19 +172,23 @@
 
 </div>
 
+<div class="btn-lg">
   <div class="actions">
     <%= f.submit "Save Changes"%>
   </div>
+</div>
 
 <% end %>
 
 </br></br>
-<%= check_box_tag "new_comment" %>Write New Comment</br>
+
+<div id="recurrent">
+<%= check_box_tag "new_comment" %>New Recurrent Comment</br>
 
   <div id="sencomm"> 
 <%= render 'teacher_comments/form' %>
   </div>
-
+</div>
 
 
 <%-# __________________________________________________________________________ -%>
@@ -212,19 +240,39 @@
 
 
 <%-# __________________________________________________________________________ -%>
-<% elsif current_user.role == 'Student' %>
+<% elsif current_user.role == 'Student' && @essay.draftnum == 2 %>
 
 <% original_essay = Essay.find(@essay.trackernum) %>
-<% paragraphnum = @essay.paragraphs.order(:id).index(@paragraph) %></br>
+<% paragraphnum = @essay.paragraphs.order(:id).index(@paragraph) %>
+<% original_paragraph = Paragraph.find(original_essay.paragraphs.order(:id)[paragraphnum]) %>
 
-Original Paragraph: </br>
-<%= original_essay.paragraphs.order(:id)[paragraphnum].content %> </br></br>
+Original Paragraph:
+
+<div id="essay_view">
+ 
+  <% original_essay.grade_elements.where(paragraph_id: original_paragraph.id).each do |ge| %>
+   
+    <div class="rateYo"></div>
+    <%= ge.name %>
+    <%= ge.teachereval %>/<%= ge.outof %></br>
+  
+  <% end %></br>
+
+<%= original_essay.paragraphs.order(:id)[paragraphnum].content %></div>
+
 Teacher comment:
-<%= original_essay.paragraphs.order(:id)[paragraphnum].comment %> </br
+<%= original_essay.paragraphs.order(:id)[paragraphnum].comment %> </br>
+<% original_essay.paragraphs.order(:id)[paragraphnum].teacher_comments.each do |tc| %>
+<%= tc.id %>
+<% end %>
 
 <%= render @paragraph.sentences.order(:id) %>
 
+<% elsif current_user.role == 'Student' && @essay.draftnum == 1 %>
 
+<div id="essay_view">
+<%= @paragraph.content %>
+</div>
 
 <% end %>
 

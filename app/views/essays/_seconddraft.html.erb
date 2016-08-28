@@ -1,0 +1,31 @@
+ <table>
+        <tr>      
+          <td>Original Essay</td><td>Second Draft</td></tr>
+          <tr><td><div class="essay_and_second_draft">
+
+              <% @first_draft = Essay.find(@essay.trackernum) %>
+
+                  <p>
+                    <strong>Title:</strong>
+                    <%= @first_draft.title %>
+                  </p>
+
+                  <p>
+                    <%= simple_format(@first_draft.body) %>
+                  </p>
+          </div></td>
+
+
+          <td><div class="essay_and_second_draft">
+
+            <% if @first_draft.body == @essay.body && current_user.role == 'Student'%>
+                <%= link_to "Start working on your second draft.", essay_paragraph_path(@essay, @essay.paragraphs.order(:id).first) %>
+            <% else %>
+            <p><%= @essay.title %></p>
+            <%= simple_format(@essay.body) %>
+            <% end %>
+          </div></td>
+        </tr>
+  </table>   
+
+  <%= render "studentprogress" %>

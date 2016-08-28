@@ -30,11 +30,12 @@
 </div>
 
 <div class="field">
-  <%= t.label :mistake_category %><br>
-<%= t.collection_select :mistake_category,
-    Mistake.categories,
-    :first , :first %>
+  <%= t.label :mistake_ids %><br>
+<%= t.collection_select :mistake_ids,
+    Mistake.all,
+    :id , :name, {include_blank: false}, {:multiple => true } %>
   </div>
+
 
 </br>
   <div class="actions">

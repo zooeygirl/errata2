@@ -1,0 +1,27 @@
+<% student = User.find(@essay.user_id) %>
+
+
+
+<% afg = "" %>
+<% myarray =[] %>
+<% i=0 %>
+
+<% Mistake.categories.each do |cat| %>
+  <% afg += "{name: \"#{cat.first}\", data: {" %>
+  <% student.essays.where(draftnum: 1).each do |ess| %>
+  <% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
+  <% if ess != student.essays.where(draftnum: 1).last %>
+  <% afg += ", " %>
+  <% end %>
+<% end %></br>
+<% afg += "}}" %>
+<% myarray[i] = eval(afg) %>
+<% afg ="" %>
+<% i += 1 %>
+<% end %>
+
+
+<div class="graph">
+
+<%= line_chart myarray %>
+</div>

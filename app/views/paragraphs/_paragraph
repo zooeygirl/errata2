@@ -5,13 +5,16 @@
 
 <td><%= paragraphnum + 1 %></td>
 <td><%= original_essay.paragraphs.order(:id)[paragraphnum].content %></td>
-<td><% original_essay.paragraphs.order(:id)[paragraphnum].sentences.each do |sen| %>
+
+<td><% original_essay.paragraphs.order(:id)[paragraphnum].sentences.order(:id).each do |sen| %>
 <% sen.mistakes.each do |mis| %>
 	<%= mis.category %></br>
 	<%= link_to mis.name, mistake_path(mis) %></br>
 <% end %>
-<% end %></td>
-<td><%= link_to paragraph.content, essay_paragraph_path(@essay, paragraph) %></td>
+<% end %>
+</td>
+
+<td><%= paragraph.id %><%= link_to paragraph.content, essay_paragraph_path(@essay, paragraph) %></td>
 </tr>
 
 

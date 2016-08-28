@@ -54,7 +54,7 @@
 
 <h4>Class List</h4>
 
-<table>
+<table class="table-striped">
 
 
   <% @class_list.each do |s| %>
@@ -66,6 +66,11 @@
 
 </br>
 <%= "Number of Students: #{@class_list.count}" %>
+
+</br></br>
+<%= render "student_recap" %>
+
+
 
 </div>
 
@@ -81,7 +86,7 @@ Class's Practice Exercises:</br></br>
 
 </br>
 
-<% if current_user.id = @classroom.user_id %>
+<% if current_user.id == @classroom.user_id %>
 
 <div id="add_pe_btn">
 Assign Practice Exercises to this Classroom

@@ -34,7 +34,7 @@ body {
   font: 150% $font-stack;
   color: $primary-color;
   padding: 30px;
-  background-color: grey;
+  background-color: #DEDEDD;
   background-repeat: repeat-y repeat-x;
   margin-bottom: 1000px;
 }
@@ -97,13 +97,14 @@ td {
 .title {
   background-color: white;
   font-family: 'Roboto', sans-serif; font-weight: 100;
-  font-size: 72px;
+  font-size: 50px;
   color: #939393;
-  width: 370px;
+  width: 250px;
 }
 
 .pre_title {
   color: #FF0080;
+  font-size: 18px;
 }
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
@@ -121,5 +122,18 @@ color: #FF0080;
    border-spacing:70px 5px;
 }
 
+p>.notice {
+ height: 200px; 
+ color: blue;
+}
 
+p>.alert {
+ height: 200px;
+ color: blue;
+}
+
+ul .dropdown-menu>li{
+  text-align: center;
+  padding: 5px;
+}
 

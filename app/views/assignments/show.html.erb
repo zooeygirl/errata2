@@ -48,6 +48,7 @@
 			<h4> Feedback Given </h4>
 
 			<table>
+			<% if current_user.role == 'Teacher' %>
 			<% @class_list.each do |s|%>
 					<% s.essays.where(assignment_id: @assignment.id).where(draftnum: 1).each do |e| %>
 					<% if e.essay_status == 'Feedback' %>
@@ -55,6 +56,9 @@
 					<td><%= link_to "#{s.first_name} #{s.last_name}", essay_path(e) %></td></tr>
 					<% end %>
 				<% end %>
+			<% end %>
+			<% elsif current_user.essays.where(assignment_id: @assignment.id, draftnum: 2).count != 0 %>
+				<%= link_to "#{current_user.first_name} #{current_user.last_name}", current_user.essays.where(assignment_id: @assignment.id).where(draftnum: 2).first %>
 			<% end %>
 			</table>
 </div>

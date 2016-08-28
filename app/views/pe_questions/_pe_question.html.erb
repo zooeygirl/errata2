@@ -37,7 +37,7 @@
 
 
 <% else %>
-	<%= link_to 'Delete Sentence from exercise', practice_exercise_pe_question_path(@practice_exercise, pe_question) , method: :delete, data: { confirm: 'Are you sure?' } %>
+	<%= link_to 'Delete Sentence from exercise', practice_exercise_pe_question_path(@practice_exercise, pe_question) , method: :delete, data: { confirm: 'Are you sure?' } %></br>
 	<%= link_to "Answer Index", practice_exercise_pe_question_path(@practice_exercise, pe_question)  %>
 	<%= render pe_question.pe_answers.where(correct: 3) %></br>
 

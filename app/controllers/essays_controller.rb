@@ -23,33 +23,31 @@ class EssaysController < ApplicationController
   end
 
 def set_paragraphs_for_second_draft
+
   @essay = Essay.find(params[:essay_id])
-  @paragraphs = @essay.body.split(/\r\n\r\n/)
-    i=0
-    @sentences_in_paragraph = []
-    while i < @paragraphs.count do
-      if @essay.paragraphs[i] == nil
-      @essay.paragraphs.create(content: @paragraphs[i])
-      else
-      @essay.paragraphs[i].update(content: @paragraphs[i])
-      end
-    @sentences_in_paragraph[i] = Scalpel.cut(@paragraphs[i]).count
+
+  if @essay.body == Essay.find(@essay.trackernum).body
+
+    @essay.paragraphs.each do |para|
+      para.sentences.delete_all
+    end
+    @essay.paragraphs.delete_all
+
+    @para_in_essay = @essay.body.split(/\r\n\r\n/)
+
+    i = 0
+    while i < @para_in_essay.count do
+      @essay.paragraphs.create(content: @para_in_essay[i])
     i+= 1
     end
 
-     if @essay.paragraphs.count > @paragraphs.count
-                for j in @paragraphs.count..@essay.paragraphs.count
-                  if @essay.paragraphs[j] != nil
-                  @essay.paragraphs.delete(Paragraph.find(@essay.paragraphs[j].id))
-                  end
-                end
-      end
     set_sentences
+  end
     redirect_to essay_path(@essay)
 end
 
 def set_paragraphs
-    
+
     @essay.paragraphs.each do |para|
       para.sentences.delete_all
     end
@@ -65,9 +63,7 @@ def set_paragraphs
     
     set_sentences
     
-    if @essay.draftnum == 2
-      redirect_to essay_path(Essay.find(@essay.trackernum))
-    end   
+    
 
 
 end
@@ -97,6 +93,7 @@ end
       if @essay.save
         set_paragraphs
         turn_word_list_into_an_array
+        @essay.update_attribute(:trackernum, @essay.id)
         format.html { redirect_to @essay, notice: 'Essay was successfully created.' }
         format.json { render :show, status: :created, location: @essay }
       else
@@ -186,11 +183,11 @@ end
           elsif crit.level == 'Essay'
             @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id)
           elsif crit.level == 'Introduction'
-            @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.first.id)
+            @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.order(:id).first.id)
           elsif crit.level == 'Conclusion'
-            @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.last.id)
-          elsif crit.level == 'Body Paragraph'
-            @essay.paragraphs[1..@essay.paragraphs.count-2].each do |para|
+            @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage, outof: crit.outof, essay_id: @essay.id, paragraph_id: @essay.paragraphs.order(:id).last.id)
+          elsif crit.level == 'Body Paragraphs'
+            @essay.paragraphs.order(:id)[1..@essay.paragraphs.count-2].each do |para|
               @essay.grade_elements.create(level: crit.level, name: crit.name, percentage: crit.percentage/(@essay.paragraphs.count-2), outof: crit.outof, essay_id: @essay.id, paragraph_id: para.id)
             end
           end          
@@ -213,7 +210,7 @@ def calculate_student_grade
       if ge.teachereval != nil
       i += ge.teachereval/ge.outof * ge.percentage
       end
-    elsif ge.level == 'Body Paragraph'
+    elsif ge.level == 'Body Paragraphs'
       if ge.teachereval != nil
       i += ge.teachereval/ge.outof * ge.percentage
       end
@@ -310,7 +307,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def essay_params
-      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, grade_elements_attributes: [:id, :teachereval, :_destroy], paragraphs_attributes: [:id, :sentences, :content, :comment, :_destroy], sentences_attributes: [:id, :comment, :content, :_destroy, mistake_ids:[]], words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
+      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, grade_elements_attributes: [:id, :teachereval, :_destroy], paragraphs_attributes: [:id, :sentences, :content, :comment, :_destroy, teacher_comment_ids:[]], sentences_attributes: [:id, :comment, :content, :_destroy, teacher_comment_ids:[], mistake_ids:[]], words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
     end
 
 end

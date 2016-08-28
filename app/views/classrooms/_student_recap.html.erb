@@ -12,7 +12,9 @@ Assignments:
 <% @class_list.each do |s| %>
 	<td><%= "#{s.first_name} #{s.last_name}" %></td>
 	<% @classroom.assignments.each do |assign| %>
-	<td>Grade: <% originalessay = s.essays.where(assignment_id: assign.id, draftnum: 1).first %><%= originalessay.studentgrade.round(2) %>%</br>
+	<td>Grade: <% originalessay = s.essays.where(assignment_id: assign.id, draftnum: 1).first %>
+		<% if originalessay.studentgrade != nil %>
+		<%= originalessay.studentgrade.round(2) %><% end %>%</br>
 		<% seconddraft = Essay.where(trackernum: originalessay.id).last %>
 		Second Draft: <% if originalessay.body == seconddraft.body %>
 		No changes made.

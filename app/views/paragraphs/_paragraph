@@ -14,7 +14,7 @@
 <% end %>
 </td>
 
-<td><%= paragraph.id %><%= link_to paragraph.content, essay_paragraph_path(@essay, paragraph) %></td>
+<td><%= link_to paragraph.content, essay_paragraph_path(@essay, paragraph) %></td>
 </tr>
 
 

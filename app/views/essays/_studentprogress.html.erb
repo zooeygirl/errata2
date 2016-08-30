@@ -8,7 +8,7 @@
 
 <% Mistake.categories.each do |cat| %>
   <% afg += "{name: \"#{cat.first}\", data: {" %>
-  <% student.essays.where(draftnum: 1).each do |ess| %>
+  <% student.essays.where(draftnum: 1).order(:id).each do |ess| %>
   <% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
   <% if ess != student.essays.where(draftnum: 1).last %>
   <% afg += ", " %>

@@ -8,36 +8,41 @@ Assignments:
 <% end %>
 </tr>
 
-<tr>
+
 <% @class_list.each do |s| %>
+<tr>
+
 	<td><%= "#{s.first_name} #{s.last_name}" %></td>
 	<% @classroom.assignments.each do |assign| %>
 		
-	<% if s.essays.where(assignment_id: assign.id, draftnum: 1).count > 0  %>
-	<td>Grade: 
+			<% if s.essays.where(assignment_id: assign.id, draftnum: 1).count > 0  %>
+			<td>Grade: 
 
-		<% originalessay = s.essays.where(assignment_id: assign.id, draftnum: 1).first %>
+				<% originalessay = s.essays.where(assignment_id: assign.id, draftnum: 1).first %>
 
-		<% if originalessay.studentgrade != nil %>
-		<%= originalessay.studentgrade.round(2) %>%<% end %></br>
+						<% if originalessay.studentgrade != nil %>
+						<%= originalessay.studentgrade.round(2) %>%
+						<% end %></br>
 
-		<% if Essay.where(trackernum: originalessay.id).count > 0 %>
-		<% seconddraft = Essay.where(trackernum: originalessay.id).last %>
-		Second Draft: <% if originalessay.body == seconddraft.body %>
-		No changes made.
-		<% elsif originalessay.body != seconddraft.body %>
-		<%= link_to "Worked on Second draft", essay_path(seconddraft) %>
-		<% end %>
-
-		<% end %>
-		<% end %>
-
-	</td>
+						<% if Essay.where(trackernum: originalessay.id).count > 1 %>
+						<% seconddraft = Essay.where(trackernum: originalessay.id).last %>
+						Second Draft: 
+								<% if originalessay.body == seconddraft.body %>
+								No changes made.
+								<% elsif originalessay.body != seconddraft.body %>
+								<%= link_to "Worked on Second draft", essay_path(seconddraft) %>
+								<% end %>
+						<% end %>
+			</td>
+			<% else %>
+			<td>	</td>
+			<% end %>
+	
 	<% end %>
 
-
-<% end %>
 </tr>
+<% end %>
+
 
 </table>
 
@@ -54,8 +59,9 @@ Practice Exercises:
 <% end %>
 </tr>
 
-<tr>
+
 <% @class_list.each do |s| %>
+<tr>
 	<td><%= "#{s.first_name} #{s.last_name}" %></td>
 	<% @classroom.practice_exercises.each do |pe| %>
 
@@ -75,11 +81,10 @@ Practice Exercises:
     <td>Answers: <%= attempts %></br>Correct Answers:<%= "#{correct_answers}/#{pe.pe_questions.count}" %></td>
 
 
-
 	<% end %>
 
-
-<% end %>
 </tr>
+<% end %>
+
 
 </table>

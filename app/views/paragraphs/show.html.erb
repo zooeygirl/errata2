@@ -59,7 +59,7 @@
           
                 <%= f.fields_for :grade_elements, ge do |v| %>
                     <div class="rateYo"></div>
-                    <%= v.text_field :teachereval %>
+                    <div class = "teval"><%= v.text_field :teachereval %></div>
                     <%= v.hidden_field :outof %></br>
                 <% end %>
               </div>

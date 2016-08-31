@@ -33,19 +33,19 @@
     </br>
       <%= f.fields_for :paragraphs, @paragraph do |p| %>
         
- <div class="comment">
-                Recurrent Comments:
+
+                <h4>Recurrent Comments:</h4>
                 <%= p.hidden_field :id %>
                 <%= p.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
               
                 <div class="field">
-                  <%= p.label :comment %><br>
+                  <%= p.label "Specific Comment:" %><br>
                   <%= p.text_field :comment, size: "70%" %>
                 </div>
 
 
 
-</div>
+
  
 
       <% end %>
@@ -59,7 +59,7 @@
           
                 <%= f.fields_for :grade_elements, ge do |v| %>
                     <div class="rateYo"></div>
-                    <div class = "teval"><%= v.text_field :teachereval %></div>
+                    <%= v.text_field :teachereval %>
                     <%= v.hidden_field :outof %></br>
                 <% end %>
               </div>
@@ -121,17 +121,17 @@
                  <% end %>
                </br></br></br>
 
-               <div class="comment">
-                <%= s.label "Recurrent Comments:" %>
+
+                <h4>Recurrent Comments: </h4>
                 <%= s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
             
               
                <div class="field">
-                  <%= s.label :comment %><br>
+                  <%= s.label "Specific Comment:" %><br>
                   <%= s.text_field :comment, size: "70%" %>
                 </div>
 
-                </div>
+                
              
 
              </br>   
@@ -246,25 +246,36 @@
 <% paragraphnum = @essay.paragraphs.order(:id).index(@paragraph) %>
 <% original_paragraph = Paragraph.find(original_essay.paragraphs.order(:id)[paragraphnum]) %>
 
-Original Paragraph:
+<h4>Original Paragraph:</h4>
 
-<div id="essay_view">
- 
-  <% original_essay.grade_elements.where(paragraph_id: original_paragraph.id).each do |ge| %>
-   
-    <div class="rateYo"></div>
-    <%= ge.name %>
-    <%= ge.teachereval %>/<%= ge.outof %></br>
+      <div id="essay_view">
+      <%= original_essay.paragraphs.order(:id)[paragraphnum].content %>
+      </div>
   
-  <% end %></br>
-
-<%= original_essay.paragraphs.order(:id)[paragraphnum].content %></div>
-
-Teacher comment:
-<%= original_essay.paragraphs.order(:id)[paragraphnum].comment %> </br>
-<% original_essay.paragraphs.order(:id)[paragraphnum].teacher_comments.each do |tc| %>
-<%= tc.id %>
+<% if original_essay.grade_elements.where(paragraph_id: original_paragraph.id).count >0 %>
+      <table>
+       <tr> <th>Grades:</th></tr></tr><td></td></tr>
+      <tr><th>Criteria</th><th>Grade</th></tr>
+      <% original_essay.grade_elements.where(paragraph_id: original_paragraph.id).each do |ge| %>
+      <tr>     
+        
+        <td><%= ge.name %></td>
+        <td><%= ge.teachereval %>/<%= ge.outof %></td>
+      
+      </tr>
+      <% end %></br>
+      </table>
 <% end %>
+
+<h4>Teacher Comments:</h4>
+<table>
+<tr><%= original_essay.paragraphs.order(:id)[paragraphnum].comment %></br>
+<% original_essay.paragraphs.order(:id)[paragraphnum].teacher_comments.each do |tc| %>
+<%= tc.content %></br>
+<% end %>
+</tr>
+</table>
+
 
 <%= render @paragraph.sentences.order(:id) %>
 

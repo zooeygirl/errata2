@@ -1,4 +1,4 @@
-
+______________________________________________________________________________________
 
 <p id="sentence_mistakes">
 
@@ -28,6 +28,16 @@
 
           <% if original_sentence != nil %>
 
+          <div class="comment">
+            Original Sentence:  
+            <%= original_sentence.content %></div>
+            <h4>Teacher Comments: </h4>
+            <%= original_sentence.comment %></br>
+                <% original_sentence.teacher_comments.each do |tc| %>
+                <%= tc.content %></br>
+                <% end %>
+
+          </br>
           <% if original_sentence.mistakes.count > 0 %>
           <table class="table-striped">
           <tr><th>Category</th><th>Mistake</th><th>Problem Words</td></tr>
@@ -68,14 +78,7 @@
         <% end %>
 
         </br>
-          <div class="comment">
-            Original Sentence:  
-            <%= original_sentence.content %></div>
-            Teacher Comment:
-            <%= original_sentence.comment %></br>
-                <% original_sentence.teacher_comments.each do |tc| %>
-                <%= tc.content %>
-                <% end %>
+          
         <% end %>
           		
           		<%= form_for ([@essay, @paragraph, sentence]) do |f| %>

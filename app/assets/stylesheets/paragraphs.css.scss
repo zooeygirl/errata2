@@ -9,17 +9,17 @@
 
 .mistake_names {
 	position: absolute;
-	display: none;	
-	width: auto;
-	padding: 20px;
+	display: none;
+	min-width: 200px;	
+	padding: 2px;
+	padding-left: 10px;
 	z-index: 1;
 	color: black;
-	margin-top: 6px;
 	margin-left: -10px;
 }
 
 .mistake_categories {
-	margin: 5px;
+	margin: 2px;
 	padding: 6px;
 }
 

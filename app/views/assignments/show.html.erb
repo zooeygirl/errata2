@@ -1,7 +1,8 @@
 
+<% if @assignment.user_id == current_user.id %>
 <h2><%= @assignment.title %></h2><%= link_to "Edit Assignment", edit_classroom_assignment_path(@classroom, @assignment) %>
 
-
+<% end %>
 
 
 <%-# __________________________________________________________________________ -%>
@@ -10,7 +11,9 @@
   <li class="active"><a data-toggle="tab" href="#essays">Student Essays</a></li>
   <li><a data-toggle="tab" href="#rubric">Rubric</a></li>
   <li><a data-toggle="tab" href="#menu1">Language Errors</a></li>
+  <% if current_user.role == 'Teacher' %>
   <li><a data-toggle="tab" href="#studentgrades">Student Grades</a></li>
+  <% end %>
 </ul>
 
 

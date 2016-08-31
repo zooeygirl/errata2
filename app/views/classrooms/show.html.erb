@@ -67,10 +67,12 @@
 </br>
 <%= "Number of Students: #{@class_list.count}" %>
 
-</br></br>
-<%= render "student_recap" %>
+		<% if current_user.role == "Teacher" %>
 
+		</br></br>
+		<%= render "student_recap" %>
 
+		<% end %>
 
 </div>
 

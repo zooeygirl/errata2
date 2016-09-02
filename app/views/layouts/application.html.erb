@@ -29,6 +29,7 @@
     <ul class="nav navbar-nav navbar-right">
     	<% if current_user.role == 'Student' %>
 	    	<% if current_user.classroom == nil %>
+            
 			<li><%= link_to "Join Class", classroom_path(current_user.teacher) %></li>
 			<% else %>
 			<li><%= link_to "My Class", classroom_path(current_user.classroom) %></li>
@@ -42,9 +43,8 @@
           	<li>Teacher: <%= User.find(current_user.teacher).first_name + " " + User.find(current_user.teacher).last_name %></li>
 			<% if current_user.classroom != nil %>
 			<li>Classroom: <%= Classroom.find(current_user.classroom).school %> </li> 
-            <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-			
 			<% end %>
+      <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
           
           </ul>
      	</li>

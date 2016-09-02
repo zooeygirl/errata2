@@ -21,7 +21,6 @@ end
 
 def update
 	@criterium.update(criterium_params)
-	@evaluation
 	redirect_to evaluation_path(@evaluation)
 end
 

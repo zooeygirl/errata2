@@ -16,6 +16,11 @@
 </table>
 
 
-<%= link_to 'Add link', new_mistake_link_path(@mistake) %>
 
-<%= link_to 'Index', mistakes_path(@mistake) %>
+<% if current_user.role == 'Teacher' %>
+<%= link_to 'Add link', new_mistake_link_path(@mistake) %>
+<% end %>
+</br></br>
+
+
+<%= link_to 'Mistake Index', mistakes_path(@mistake) %>

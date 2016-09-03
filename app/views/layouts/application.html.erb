@@ -96,6 +96,7 @@
 
                           <% if @essay != nil && @essay.paragraphs.count > 0 %>
                               <li><%= link_to "Classroom", classroom_path(User.find(@essay.user_id).classroom) %></li>
+                              <li><%= link_to "Assignment", classroom_assignment_path(User.find(@essay.user_id).classroom, @essay.assignment_id) %></li>
 
                               <% if @paragraph != nil %>
                               <li><%= link_to "Essay", essay_path(@essay) %></li>
@@ -124,7 +125,6 @@
 
                         <% if @assignment != nil %>
                             <li><%= link_to "Classroom", classroom_path(Classroom.find(@assignment.classroom_id)) %></li>
-                            <li><%= link_to "Assignment", classroom_assignment_path(Classroom.find(@assignment.classroom_id), @assignment) %></li>
                         <% end %>
 
 

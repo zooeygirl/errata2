@@ -48,7 +48,7 @@ end
 def calculate_class_average_on_assignment
   @assignment = Assignment.find(params[:assignment_id])
   @class_list = User.where(classroom: @classroom.id)
-  essays_for_assignment = Essay.where(assignment_id: @assignment.id)
+  essays_for_assignment = Essay.where(assignment_id: @assignment.id, draftnum: 1)
   sum_of_grades = 0
   num_of_students = 0
   if essays_for_assignment.count > 0

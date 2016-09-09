@@ -10,7 +10,7 @@
   <ul class="nav nav-tabs" id="myTab">
   <li class="active"><a data-toggle="tab" href="#home">Paragraph Evaluation</a></li>
   <% i = 1 %>
-  <% @paragraph.sentences.each do |sen| %>
+  <% @paragraph.sentences.order(:id).each do |sen| %>
   <li><a data-toggle="tab" href=<%="#sen#{sen.id}"%>><%= "Sentence #{i}" %></a></li>
   <% i += 1 %>
   <% end %>
@@ -71,7 +71,7 @@
         <div class="lang_errors">
         <h4>Language errors in Paragraph</h4>
         <div class="lang_errors_panel">
-          <% @paragraph.sentences.each do |sen| %>
+          <% @paragraph.sentences.order(:id).each do |sen| %>
             <% sen.mistakes.each do |mis| %>
             <td><%= mis.category %></td>:
             <td><%= mis.name %></td>
@@ -85,7 +85,7 @@
         
         
            
-          <% @essay.sentences.where(paragraph_id: @paragraph.id).each do |sen| %>
+          <% @essay.sentences.where(paragraph_id: @paragraph.id).order(:id).each do |sen| %>
 
         
           <div id="<%="sen#{sen.id}" %>" class="tab-pane fade">
@@ -197,7 +197,7 @@
   <ul class="nav nav-tabs" id="myTab">
   <li class="active"><a data-toggle="tab" href="#home">Paragraph Evaluation</a></li>
   <% i = 1 %>
-  <% @paragraph.sentences.each do |sen| %>
+  <% @paragraph.sentences.order(:id).each do |sen| %>
   <li><a data-toggle="tab" href=<%="#sen#{sen.id}"%>><%= "Sentence #{i}" %></a></li>
   <% i += 1 %>
   <% end %>
@@ -232,7 +232,7 @@
 
 </div>
   
-<%= render @paragraph.sentences %>
+<%= render @paragraph.sentences.order(:id) %>
 
 
 </div>

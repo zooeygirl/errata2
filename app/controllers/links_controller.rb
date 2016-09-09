@@ -50,7 +50,7 @@ before_action :set_mistake
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:mistake_id, :media, :url, :rating)
+      params.require(:link).permit(:mistake_id, :media, :url, :rating, :language, :description)
     end
 
 

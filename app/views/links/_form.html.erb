@@ -1,5 +1,15 @@
 <%= form_for([@mistake, @link]) do |t| %>
 
+ <div class="field">
+    <%= t.label :description %><br>
+    <%= t.text_field :description %>
+  </div>
+
+   <div class="field">
+    <%= t.label :language %><br>
+    <%= t.text_field :language %>
+  </div>
+
 
   <div class="field">
     <%= t.label "URL" %><br>

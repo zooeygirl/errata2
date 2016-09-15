@@ -16,7 +16,7 @@ ________________________________________________________________________________
 <%-# __________________________________________________________________________ -%>
 
 
-<% if current_user.role == 'Student' && @essay.essay_status == 'Feedback' %>
+<% if @essay.essay_status == 'Feedback' %>
 
           <div id='sentence_<%=sentence.id %>'><p>
     
@@ -80,22 +80,26 @@ ________________________________________________________________________________
         </br>
           
         <% end %>
+
+ <% if current_user.role == 'Student' %>       
           		
           		<%= form_for ([@essay, @paragraph, sentence]) do |f| %>
 
 
-          		<div class="field">
-              		<%= f.text_area :content, size: "100x3" %>
-            		</div>
+              		<div class="field">
+                  		<%= f.text_area :content, size: "100x3" %>
+                		</div>
 
 
 
-          		<div class="actions">
-                  <%= f.submit "Edit Sentence"%>
-             		</div>
-           
-                </div>
- 		         <% end %>
+              		<div class="actions">
+                      <%= f.submit "Edit Sentence"%>
+                 		</div>
+               
+                    </div>
+     		         <% end %>
+
+              <% end %>
 
 </p>
 <% end %>

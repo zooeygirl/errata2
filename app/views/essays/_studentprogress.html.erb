@@ -10,7 +10,7 @@
 		  <% afg += "{name: \"#{cat.first}\", data: {" %>
 		  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
 
-		  <% if cat == 0 %>
+		  <% if cat.last == 0 %>
 		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
 		  <% else %>
 		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count - ess.mistakes.where(category: 0).count}" %>

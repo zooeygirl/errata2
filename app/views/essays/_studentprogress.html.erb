@@ -7,17 +7,18 @@
 <% i=0 %>
 
 <% Mistake.categories.each do |cat| %>
-  <% afg += "{name: \"#{cat.first}\", data: {" %>
-  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
-  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count - 5}" %>
-  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
-  <% afg += ", " %>
-  <% end %>
-<% end %></br>
-<% afg += "}}" %>
-<% myarray[i] = eval(afg) %>
-<% afg ="" %>
-<% i += 1 %>
+		  <% afg += "{name: \"#{cat.first}\", data: {" %>
+		  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
+		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
+		  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
+		  <% afg += ", " %>
+		  <% end %>
+		<% end %></br>
+		<% afg += "}}" %>
+		<% myarray[i] = eval(afg) %>
+		<% i += 1 %>
+		<% afg ="" %>
+		
 <% end %>
 
 

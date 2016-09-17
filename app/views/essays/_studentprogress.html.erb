@@ -6,13 +6,18 @@
 <% myarray =[] %>
 <% i=0 %>
 
-<% Mistake.categories.order(:first).each do |cat| %>
+<% Mistake.categories.each do |cat| %>
 		  <% afg += "{name: \"#{cat.first}\", data: {" %>
 		  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
+
+		  <% if ess == @student.essays.order(:id).where(draftnum: 1).first %>
 		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
-		  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
-		  <% afg += ", " %>
+		  <% else %>
+		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count - ess.mistakes.whre(category: 0).count}" %>
 		  <% end %>
+				  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
+				  <% afg += ", " %>
+				  <% end %>
 		<% end %></br>
 		<% afg += "}}" %>
 		<% myarray[i] = eval(afg) %>

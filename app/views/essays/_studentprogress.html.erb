@@ -6,7 +6,7 @@
 <% myarray =[] %>
 <% i=0 %>
 
-<% Mistake.categories.each do |cat| %>
+<% Mistake.categories.order(:first).each do |cat| %>
 		  <% afg += "{name: \"#{cat.first}\", data: {" %>
 		  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
 		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>

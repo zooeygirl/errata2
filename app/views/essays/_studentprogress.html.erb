@@ -13,7 +13,7 @@
 		  <% if ess == @student.essays.order(:id).where(draftnum: 1).first %>
 		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
 		  <% else %>
-		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count - ess.mistakes.whre(category: 0).count}" %>
+		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count - ess.mistakes.where(category: 0).count}" %>
 		  <% end %>
 				  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
 				  <% afg += ", " %>

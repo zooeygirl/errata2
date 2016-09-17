@@ -10,7 +10,7 @@
   <% afg += "{name: \"#{cat.first}\", data: {" %>
   <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
   <% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
-  <% if ess != @student.essays.where(draftnum: 1).last %>
+  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
   <% afg += ", " %>
   <% end %>
 <% end %></br>
@@ -25,3 +25,5 @@
 
 <%= line_chart myarray %>
 </div>
+
+<%= afg %>

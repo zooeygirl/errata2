@@ -122,7 +122,7 @@
                </br></br></br>
 
 
-                <h4>Recurrent Comments: </h4>
+                </br><h4>Recurrent Comments: </h4>
                 <%= s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
             
               

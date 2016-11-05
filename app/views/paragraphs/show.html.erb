@@ -124,6 +124,30 @@
 
                 </br><h4>Recurrent Comments: </h4>
                 <%= s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
+
+
+               <% Teacher_comment.where(user_id: current_user.id).categories.each do |cat| %>
+                  <div class="mistake_categories">
+                 <%= cat %>
+                
+                <div class="mistake_names">
+                 <%= s.collection_check_boxes :teacher_comment_ids, Teacher_comment.where(category: cat), :id, :name do |b| %>
+                
+                     </br>
+                      <%= b.check_box(class: "check_box")%>
+                      <%= b.label %>
+
+
+                 <% end %>
+                    <% i+=1 %>
+
+                    </div>
+                    </div>
+                 <% end %>
+
+
+
+
             
               
                <div class="field">

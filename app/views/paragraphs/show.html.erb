@@ -123,7 +123,7 @@
 
 
                 </br><h4>Recurrent Comments: </h4>
-                <%= s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
+                <% s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
 
 
                <% TeacherComment.where(user_id: current_user.id).group_by(&:category).each do |cat| %>
@@ -148,7 +148,7 @@
 
 
 
-            
+              </br>
               
                <div class="field">
                   <%= s.label "Specific Comment:" %><br>

@@ -80,6 +80,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'agile-beach-75794.herokuapp.com' }  
 
+  Rails.application.routes.default_url_options[:host] = 'agile-beach-75794.herokuapp.com'
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
@@ -88,7 +89,7 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
   address: "smtp.errata.one",
-  port: 587,
+  port: 2525,
   domain: ENV["GMAIL_DOMAIN"],
   authentication: "plain",
   enable_starttls_auto: true,

@@ -45,6 +45,27 @@
 
 
 
+                 <% TeacherComment.where(user_id: current_user.id).group_by(&:category).each do |cat| %>
+                  <div class="mistake_categories">
+                 <%= cat.first %>
+                
+                <div class="mistake_names">
+                 <%= p.collection_check_boxes :teacher_comment_ids, TeacherComment.where(category: cat.first), :id, :content do |b| %>
+                
+                     </br>
+                      <%= b.check_box(class: "check_box")%>
+                      <%= b.label %>
+
+
+                 <% end %>
+                    <% i+=1 %>
+
+                    </div>
+                    </div>
+                 <% end %>
+
+
+
 
  
 

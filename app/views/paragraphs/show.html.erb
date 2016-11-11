@@ -35,17 +35,12 @@
         
 
                 <h4>Recurrent Comments:</h4>
+
+
                 <%= p.hidden_field :id %>
-                <%= p.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
-              
-                <div class="field">
-                  <%= p.label "Specific Comment:" %><br>
-                  <%= p.text_field :comment, size: "70%" %>
-                </div>
 
 
-
-                 <% TeacherComment.where(user_id: current_user.id).group_by(&:category).each do |cat| %>
+                <% TeacherComment.where(user_id: current_user.id).group_by(&:category).each do |cat| %>
                   <div class="mistake_categories">
                  <%= cat.first %>
                 
@@ -63,6 +58,13 @@
                     </div>
                     </div>
                  <% end %>
+              
+                <div class="field">
+                  <%= p.label "Specific Comment:" %><br>
+                  <%= p.text_field :comment, size: "70%" %>
+                </div>
+
+
 
 
 

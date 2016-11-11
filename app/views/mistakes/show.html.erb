@@ -33,3 +33,10 @@
 <%= link_to 'Mistake Index', mistakes_path(@mistake) %>
 
 <% end %>
+
+</br>
+
+<% Sentence.where(mistakes: {id: @mistake.id}).each do |sen| %>
+
+<%= sen.content %></br>
+<% end %>

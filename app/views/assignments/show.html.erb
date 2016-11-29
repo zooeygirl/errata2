@@ -119,7 +119,7 @@
 <h3>Language Errors: </h3>
 
 <table>
-<% Mistake.all.each do |mis| %> 
+<% Mistake.all.order(:category).each do |mis| %> 
 	<% if Sentence.includes(:mistakes).where(mistakes: { id: mis.id }).where(essay_id: Essay.where(assignment_id: @assignment.id)).count > 0  %>
 
 	<tr><td><%= mis.category %></td>

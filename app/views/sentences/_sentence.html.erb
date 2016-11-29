@@ -124,7 +124,7 @@ ________________________________________________________________________________
                  <%= cat.first %>
                 
                 <div class="mistake_names">
-                 <%= f.collection_check_boxes :mistake_ids, Mistake.where(category: i), :id, :name do |b| %>
+                 <%= f.collection_check_boxes :mistake_ids, Mistake.where(category: i).order(:name), :id, :name do |b| %>
                 
                      </br>
                       <%= b.check_box(class: "check_box")%>

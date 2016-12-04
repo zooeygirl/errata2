@@ -55,7 +55,7 @@ ________________________________________________________________________________
                     <% i = 0 %>
                      <td><% sentence.word_list.each do |w| %>
                         <% if wim.mistake_words.include?("#{i}") %>
-                          <div class="highlight"><%= w %></div>
+                          <div class="highlight"><%= w.last %></div>
                           <% else %>
                           <%= w.last %>
                         <% end %>

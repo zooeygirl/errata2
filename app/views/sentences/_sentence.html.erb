@@ -170,3 +170,34 @@ ________________________________________________________________________________
  <%-# __________________________________________________________________________ -%>
 
 
+<% if current_user.role == 'Teacher' && @essay.essay_status == 'Feedback' %>
+
+
+
+ <div id="<%="sen#{sentence.id}" %>" class="tab-pane fade">
+
+          
+          <% sentence.mistake_ids.each do |mis| %>
+              <div class="mistake">
+              <%= link_to Mistake.find(mis).name, Mistake.find(mis), :target=> '_blank' %></div>
+          <% end %>
+          <div class="comment"><%= sentence.content %></div>
+          <% sentence.words_in_mistakes.each do |wim| %>
+
+          <% if wim.mistake_words != nil %>
+
+          <%  wim.mistake_words.each do |mw| %>
+          <% if mw != wim.mistake_words.last %>
+          <%= sentence.word_list[mw.to_i].last %>
+          <% end %>
+         <% end %>   <% end %></br>
+         <% end %>
+              
+            
+
+        
+
+</div>
+
+
+<% end %>

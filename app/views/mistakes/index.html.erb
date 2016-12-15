@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @mistakes.each do |mistake| %>
+    <% @mistakes.order(:category).each do |mistake| %>
       <tr>
         <td><%= mistake.category %></td>
         <td><%= mistake.name %></td>

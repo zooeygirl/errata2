@@ -15,12 +15,12 @@ def create
   @words_in_mistake.sentence_id = @sentence.id
   @words_in_mistake.paragraph_id = @paragraph.id
   @words_in_mistake.essay_id = @essay.id
-    respond_to do |format|
+    
       if @words_in_mistake.save
       format.html {redirect_to essay_paragraph_path(@essay, @paragraph)}
       format.js
       end
-    end
+    
 end
 
 
@@ -56,7 +56,7 @@ end
     respond_to do |format|
       format.html { redirect_to essay_paragraph_path(@essay, @paragraph), notice: 'WIM was successfully destroyed.' }
       format.json { head :no_content }
-      format.js
+   
     end
   end
 

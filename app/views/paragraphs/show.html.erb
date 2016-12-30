@@ -204,7 +204,7 @@
                             </div>
                           </div>
                    <% end %></td>
-                   <td><%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sen, wim), method: :delete,  remote: true %> </td>
+                   <td><%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sen, wim), method: :delete %> </td>
                   </tr>
 
               <% end %>
@@ -215,7 +215,7 @@
 
                   
 
-                  <%= link_to "New Words In Mistakes", new_essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sen), remote: true, id: "new_words_in_mistake_link" %>
+          
 
 
                 

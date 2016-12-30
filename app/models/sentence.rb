@@ -10,6 +10,7 @@ class Sentence < ActiveRecord::Base
 	serialize :vocabulary_errors
 	
 	accepts_nested_attributes_for :words_in_mistakes
+	validates_associated :words_in_mistakes
 
 	
 

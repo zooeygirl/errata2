@@ -68,7 +68,7 @@
 
 
 
-                <%= render "words_in_mistakes/form" %>
+
 
 
  
@@ -134,7 +134,7 @@
                  <%= s.collection_check_boxes :mistake_ids, Mistake.where(category: i), :id, :name do |b| %>
                 
                      </br>
-                      <%= b.check_box(class: "check_box")%>
+                      <%= b.check_box(class: "sentence_mistakes")%>
                       <%= b.label %>
 
 
@@ -170,9 +170,6 @@
                     </div>
                  <% end %>
 
-
-
-
               
               
                <div class="field">
@@ -181,8 +178,8 @@
                   <%= s.text_field :comment, size: "70%" %>
                 </div>
 
-                
-             
+              
+                 
 
              </br>   
               
@@ -190,12 +187,12 @@
              <div class="pre_title">
               Select Problem Words (optional)
              </div>
-            <table class="table-striped">
+            <table class="table-striped" id="wim_table">
               <% sen.words_in_mistakes.each do |wim| %>
 
                   <%= f.fields_for :words_in_mistakes, wim do |w| %>
                   
-                  <tr><td><%= Mistake.find(wim.mistake_id).name %></td>
+                  <tr id="wim_<%= wim.id %>"><td><%= Mistake.find(wim.mistake_id).name %></td>
 
                   
 
@@ -206,16 +203,26 @@
                             <div class="check_words"><%= b.label %></div>
                             </div>
                           </div>
-                   <% end %><td>
-                   <td><%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sen, wim), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                   <% end %></td>
+                   <td><%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sen, wim), method: :delete,  remote: true %> </td>
                   </tr>
 
               <% end %>
 
 
                   <% end %></table><% end %>
+
+
+                  
+
+                  <%= link_to "New Words In Mistakes", new_essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sen), remote: true, id: "new_words_in_mistake_link" %>
+
+
                 
               <% end %></div>
+
+            
+             
 
           <% end %>
         

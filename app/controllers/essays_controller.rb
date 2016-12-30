@@ -106,10 +106,12 @@ end
 
 
 
+
   # PATCH/PUT /essays/1
   # PATCH/PUT /essays/1.json
   def update
     session[:return_to] ||= request.referer
+
     respond_to do |format|
       if @essay.update(essay_params)
         if @essay.essay_status == 'In progress'
@@ -121,6 +123,7 @@ end
         
         format.html { redirect_to session.delete(:return_to), notice: 'Essay was successfully updated.' }
         format.json { render :show, status: :ok, location: @essay }
+        
        
       else
         format.html { render :edit }
@@ -259,6 +262,7 @@ end
       end
   end
 
+
   
   def set_sentences
   
@@ -307,7 +311,11 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def essay_params
-      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, grade_elements_attributes: [:id, :teachereval, :_destroy], paragraphs_attributes: [:id, :sentences, :content, :comment, :_destroy, teacher_comment_ids:[]], sentences_attributes: [:id, :comment, :content, :_destroy, teacher_comment_ids:[], mistake_ids:[]], words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
+      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, 
+        grade_elements_attributes: [:id, :teachereval, :_destroy], 
+        paragraphs_attributes: [:id, :sentences, :content, :comment, :_destroy, teacher_comment_ids:[], sentences_attributes: [:id, :comment, :content, :_destroy, teacher_comment_ids:[], mistake_ids:[], words_in_mistakes_attributes:[:id, :_destroy, :mistake_id, mistake_words:[]]]], 
+        sentences_attributes: [:id, :comment, :content, :_destroy, teacher_comment_ids:[], mistake_ids:[], words_in_mistakes_attributes:[:id, :_destroy, :mistake_id, mistake_words:[]]], 
+        words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
     end
 
 end

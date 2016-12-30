@@ -1,26 +1,26 @@
-
-<% @essay = @essay %>
-<% sentence = Sentence.find(words_in_mistake.sentence_id) %>
+<%= form_for [@essay, @paragraph, @sentence, @words_in_mistake], id: "new_words_in_mistake" do |z| %>
 
 
-<div class = "mistake_words">
-<%= Mistake.find(words_in_mistake.mistake_id).name %>
+<div class="field">
+    <%= z.label :mistake_id %><br>
+    <%= z.text_field :mistake_id %>
+</div>
 
-<%= form_for ([@essay, @paragraph, sentence, words_in_mistake]) do |w| %>
+ <td> <%= z.collection_check_boxes :mistake_words, @sentence.word_list, :first.to_s, :last do |b| %>
+                         <div class="word_choice">
+                            <div class="check_box">
+                            <div class="hide_check"><%= b.check_box %></div>
+                            <div class="check_words"><%= b.label %></div>
+                            </div>
+                          </div>
+       <% end %>
+ </td>
 
-  <%= w.collection_check_boxes :mistake_words, sentence.word_list, :first.to_s, :last do |b| %>
-  		<div class="checkbox">
-       <div class="word_choice">
-        	<div class="cb"><%= b.check_box %></div>
-         	<%= b.label %> 	
-        </div> </div>
- <% end %>
 
- <div class="actions">
-        <%= w.submit "Select Words", :name => "select_words" %>
- </div>
 
- <%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sentence, words_in_mistake), method: :delete, data: { confirm: 'Are you sure?' } %> 
+  <div class="actions">
+    <%= z.submit %>
+  </div>
+
 
 <% end %>
-</div>

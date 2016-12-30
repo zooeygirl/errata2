@@ -1,0 +1,2 @@
+$('#wim_<%= @words_in_mistake.id %>').remove();
+$('.sentence_mistakes[type=checkbox][value=<%= @words_in_mistake.mistake_id%>]').attr('checked', false);

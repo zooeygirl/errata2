@@ -11,7 +11,11 @@ before_action :set_mistake
   def create
   	@link = @mistake.links.create(link_params) 
     @link.mistake_id = @mistake.id
-    redirect_to @mistake
+    respond_to do |format|
+      format.html {redirect_to @mistake}
+      format.js
+    end
+    
   end
 
 
@@ -29,7 +33,10 @@ before_action :set_mistake
 
   def destroy
     @link.destroy
-    redirect_to @mistake
+     respond_to do |format|
+      format.html {redirect_to @mistake}
+      format.js
+    end
   end
 
  

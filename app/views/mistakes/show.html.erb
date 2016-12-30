@@ -11,21 +11,23 @@
 </p>
 
 
-<table>
+<table id = "existing_links">
 <tr>
 <td>Description</td>
 <td>Language</td>
 <td>Link</td>
 <td>Media</td>      
-
 </tr>
+
+
 <%= render @mistake.links %>
+
 </table>
 
 
 
 <% if current_user.role == 'Teacher' %>
-<%= link_to 'Add link', new_mistake_link_path(@mistake) %>
+<%= link_to 'Add link', new_mistake_link_path(@mistake), id: "new_weblink", remote: true %>
 
 </br></br>
 

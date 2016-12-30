@@ -1,4 +1,4 @@
-<%= form_for([@mistake, @link]) do |t| %>
+<%= form_for [@mistake, @link], remote: true do |t| %>
 
  <div class="field">
     <%= t.label :description %><br>

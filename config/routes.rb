@@ -41,7 +41,6 @@ resource :user
     resources :links
   end
   
- 
 
 
   resources :essays do
@@ -53,6 +52,7 @@ resource :user
       resource :grade do
         resources :grade_elements
       end
+    resources :words_in_mistakes
     resources :paragraphs do
       resources :sentences do
         resources :words_in_mistakes 

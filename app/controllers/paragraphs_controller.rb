@@ -17,7 +17,7 @@ end
 
 def update
     if @paragraph.update(paragraph_params)
-
+        redirect_to essay_paragraph_path(@essay, @paragraph) , notice: 'Paragraph was successfully updated.'
     end
 end
 
@@ -83,5 +83,5 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paragraph_params
-      params.require(:paragraph).permit(:content, :comment, :essay_id, :evaluation, sentences_attributes: [:comment, :content, :_destroy], teacher_comment_ids:[])
+      params.require(:paragraph).permit(:content, :comment, :essay_id, :evaluation, sentences_attributes: [:id, :comment, :content, :_destroy], teacher_comment_ids:[], words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
     end

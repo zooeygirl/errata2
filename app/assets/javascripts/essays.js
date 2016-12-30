@@ -15,6 +15,9 @@ $('.mistake_categories').mouseleave(function() {
 
 
 
+
+
+
 });
 
 

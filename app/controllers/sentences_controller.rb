@@ -42,6 +42,7 @@ def update
       @sentence.words_in_mistakes.create(mistake_id: mis, paragraph_id: @paragraph.id, essay_id: @essay.id)
       end
     end
+    end
    
       redirect_to essay_paragraph_path(@essay, @paragraph), notice: 'Sentence was successfully updated.'
       

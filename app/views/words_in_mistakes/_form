@@ -1,25 +1,31 @@
-<%= form_for [@essay, @paragraph, @sentence, @words_in_mistake], id: "new_words_in_mistake" do |z| %>
+
+
+
+<%= form_for @words_in_mistake, remote: true do |z| %>
 
 
 <div class="field">
-    <%= z.label :mistake_id %><br>
-    <%= z.text_field :mistake_id %>
+    <%= z.hidden_field :mistake_id %>
 </div>
 
- <td> <%= z.collection_check_boxes :mistake_words, @sentence.word_list, :first.to_s, :last do |b| %>
-                         <div class="word_choice">
-                            <div class="check_box">
-                            <div class="hide_check"><%= b.check_box %></div>
-                            <div class="check_words"><%= b.label %></div>
-                            </div>
-                          </div>
-       <% end %>
- </td>
+<div class="field">
+    <%= z.hidden_field :essay_id, class: "wimessay" %>
+</div>
+
+<div class="field">
+    <%= z.hidden_field :paragraph_id, class: "wimpara"  %>
+</div>
+
+<div class="field">
+    <%= z.hidden_field :sentence_id, class: "wimsen" %>
+</div>
+
+
 
 
 
   <div class="actions">
-    <%= z.submit %>
+    <% z.submit "New Wim" %>
   </div>
 
 

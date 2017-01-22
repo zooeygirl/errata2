@@ -1,8 +1,8 @@
 class WordsInMistakesController < ApplicationController
 
-  before_action :set_sentence
-  before_action :set_paragraph
-  before_action :set_essay
+  before_action :set_sentence, only: [:show, :edit, :destroy]
+  before_action :set_paragraph, only: [:show, :edit, :destroy]
+  before_action :set_essay, only: [:show, :edit, :destroy]
   before_action :set_words_in_mistake, only: [:show, :edit, :update, :destroy]
 
 def new
@@ -11,14 +11,15 @@ def new
 end
 
 def create
-  @words_in_mistake = @sentence.words_in_mistakes.create(words_in_mistake_params) 
-  @words_in_mistake.sentence_id = @sentence.id
-  @words_in_mistake.paragraph_id = @paragraph.id
-  @words_in_mistake.essay_id = @essay.id
+  @words_in_mistake = WordsInMistake.create(words_in_mistake_params) 
+ 
     
       if @words_in_mistake.save
-      format.html {redirect_to essay_paragraph_path(@essay, @paragraph)}
+      respond_to do |format|
+      format.html {redirect_to essay_paragraph_path(Essay.find(@words_in_mistake.essay_id), Paragraph.find(@words_in_mistake.paragraph.id))}
       format.js
+      end
+     
       end
     
 end
@@ -45,7 +46,10 @@ def update
   @words_in_mistake.update(words_in_mistake_params)
    
    if @words_in_mistake.update(words_in_mistake_params)
-       redirect_to essay_paragraph_path(@essay, @paragraph) , notice: 'WIM was successfully updated.'
+        respond_to do |format|
+          format.html {redirect_to essay_paragraph_path(Essay.find(@words_in_mistake.essay_id), Paragraph.find(@words_in_mistake.paragraph.id)) , notice: 'WIM was successfully updated.'}
+          format.js
+        end  
     end
 end
 
@@ -84,6 +88,6 @@ private
     
 
    def words_in_mistake_params
-      params.require(:words_in_mistake).permit(:sentence_id, :essay_id, :paragraph_id, :mistake_id, mistake_words:[])
+      params.require(:words_in_mistake).permit(:id, :sentence_id, :essay_id, :paragraph_id, :mistake_id, :_destroy, mistake_words:[])
     end
 end

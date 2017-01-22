@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
 resource :user
  
+resources :users
   
   resources :teacher_comments
   resources :practice_exercises do
@@ -41,7 +42,7 @@ resource :user
     resources :links
   end
   
-
+resources :words_in_mistakes
 
   resources :essays do
       patch :submit_essay

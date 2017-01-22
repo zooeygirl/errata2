@@ -11,7 +11,7 @@
   <li class="active"><a data-toggle="tab" href="#home">Paragraph Evaluation</a></li>
   <% i = 1 %>
   <% @paragraph.sentences.order(:id).each do |sen| %>
-  <li><a data-toggle="tab" href=<%="#sen#{sen.id}"%>><%= "Sentence #{i}" %></a></li>
+  <li class=<%="sen#{sen.id}"%> ><a data-toggle="tab" href=<%="#sen#{sen.id}"%>><%= "Sentence #{i}" %></a></li>
   <% i += 1 %>
   <% end %>
 </ul>
@@ -20,7 +20,7 @@
 <%= form_for @essay do |f| %>
   
 
-    <%= f.hidden_field :id %>
+    <%= f.hidden_field :id, class: "essaynum", value: @essay.id %>
 
 <div class="tab-content">
 
@@ -37,7 +37,7 @@
                 <h4>Recurrent Comments:</h4>
 
 
-                <%= p.hidden_field :id %>
+                <%= p.hidden_field :id, class: "paranum" %>
 
 
                 <% TeacherComment.where(user_id: current_user.id).group_by(&:category).each do |cat| %>
@@ -121,7 +121,7 @@
 
               
               <%= f.fields_for :sentences, sen do |s| %>
-
+                  <%= s.hidden_field :id, class: "sennum" %>
 
               <% i = 0 %>
                 
@@ -145,6 +145,7 @@
                     </div>
                  <% end %>
                </br></br></br>
+
 
 
                 </br><h4>Recurrent Comments: </h4>
@@ -187,12 +188,15 @@
              <div class="pre_title">
               Select Problem Words (optional)
              </div>
+
+           
             <table class="table-striped" id="wim_table">
               <% sen.words_in_mistakes.each do |wim| %>
 
                   <%= f.fields_for :words_in_mistakes, wim do |w| %>
                   
-                  <tr id="wim_<%= wim.id %>"><td><%= Mistake.find(wim.mistake_id).name %></td>
+                  
+                  <tr id="wim_<%= wim.id %>" class="wim"><td class= wim.><%= Mistake.find(wim.mistake_id).name %></td>
 
                   
 
@@ -204,7 +208,8 @@
                             </div>
                           </div>
                    <% end %></td>
-                   <td><%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sen, wim), method: :delete %> </td>
+
+                   <td><%= w.check_box :_destroy, class: "wimdelete" , id: wim.mistake_id %><%= "Delete"%></td>
                   </tr>
 
               <% end %>
@@ -212,7 +217,7 @@
 
                   <% end %></table><% end %>
 
-
+                    
 
                 
               <% end %></div>
@@ -231,7 +236,16 @@
   </div>
 </div>
 
+
+
+
 <% end %>
+
+<%= link_to 'Add Problem sentence', new_words_in_mistake_path, id: "new_problem_sentence", remote: true %>
+
+<table class="table-striped"id="unsaved_wim_table">
+
+</table>
 
 </br></br>
 

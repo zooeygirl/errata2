@@ -7,6 +7,6 @@ class Paragraph < ActiveRecord::Base
 	has_and_belongs_to_many :teacher_comments
 
 	accepts_nested_attributes_for :sentences
-	accepts_nested_attributes_for :words_in_mistakes, reject_if: :all_blank
+	accepts_nested_attributes_for :words_in_mistakes, allow_destroy: true
 
 end

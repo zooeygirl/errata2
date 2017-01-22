@@ -83,5 +83,5 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paragraph_params
-      params.require(:paragraph).permit(:content, :comment, :essay_id, :evaluation, sentences_attributes: [:id, :comment, :content, :_destroy], teacher_comment_ids:[], words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
+      params.require(:paragraph).permit(:content, :comment, :essay_id, :evaluation, sentences_attributes: [:id, :comment, :content, :_destroy], teacher_comment_ids:[], words_in_mistakes_attributes: [:id, :mistake_id, :sentence_id, :essay_id, :paragraph_id, :_destroy, mistake_words:[]])
     end

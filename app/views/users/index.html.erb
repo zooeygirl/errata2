@@ -1,0 +1,12 @@
+<% @users.order(:last_sign_in_at).each do |u| %>
+
+<%= u.first_name %>
+<%= u.last_name %>
+<%= u.email %>
+
+</br>
+<%= u.last_sign_in_at %>
+
+</br></br>
+
+<% end %>

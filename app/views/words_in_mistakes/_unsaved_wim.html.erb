@@ -1,0 +1,39 @@
+
+              <% WordsInMistake.where(sentence_id: 781).each do |wim| %>
+
+                  <tr id="wim_<%= wim.id %>">
+                  <%= form_for [@words_in_mistake, wim], method: :put do |w| %>
+                  
+                  
+                    <td class= wim.><%= Mistake.find(wim.mistake_id).name %></td>               
+
+                          <td> <%= w.collection_check_boxes :mistake_words, Sentence.find(wim.sentence_id).word_list, :first.to_s, :last do |b| %>
+                                 <div class="word_choice">
+                                    <div class="check_box">
+                                    <div class="hide_check"><%= b.check_box %></div>
+                                    <div class="check_words"><%= b.label %></div>
+                                    </div>
+                                  </div>
+                           <% end %></td>
+
+                   <td><%= "Delete"%>
+
+                      <div class="actions">
+                        <%= w.submit %>
+                        </div>
+                  
+                    </td>  
+                    
+                    <% end %>
+                  
+
+                  </tr>         
+
+  <% end %>
+
+
+
+
+ 
+
+

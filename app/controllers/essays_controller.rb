@@ -311,11 +311,11 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def essay_params
-      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, 
+      params.require(:essay).permit(:title, :body, :user_id, :essay_status, :studentgrade, :draftnum, :trackernum, :assignment_id, :teacher, :words_in_mistakes,
         grade_elements_attributes: [:id, :teachereval, :_destroy], 
         paragraphs_attributes: [:id, :sentences, :content, :comment, :_destroy, teacher_comment_ids:[], sentences_attributes: [:id, :comment, :content, :_destroy, teacher_comment_ids:[], mistake_ids:[], words_in_mistakes_attributes:[:id, :_destroy, :mistake_id, mistake_words:[]]]], 
-        sentences_attributes: [:id, :comment, :content, :_destroy, teacher_comment_ids:[], mistake_ids:[], words_in_mistakes_attributes:[:id, :_destroy, :mistake_id, mistake_words:[]]], 
-        words_in_mistakes_attributes: [:id, :_destroy, mistake_words:[]])
+        sentences_attributes: [:id, :comment, :words_in_mistakes, :content, :_destroy, teacher_comment_ids:[], mistake_ids:[], words_in_mistakes_attributes:[:id, :_destroy, :sentence_id, :mistake_id, mistake_words:[]]], 
+        words_in_mistakes_attributes: [:id, :essay_id, :sentence_id, :paragraph_id, :_destroy, mistake_words:[]])
     end
 
 end

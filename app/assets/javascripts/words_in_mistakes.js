@@ -58,7 +58,7 @@ $('body').on('click', '.word_choice', function() {
 
 	
 		var currentTab = $("ul#myTab li.active").attr('class').replace(" active", "");		
-  		$('#unsaved_wim_table > tr').each(function(){
+  		$('.unsaved_wim_table > tr').each(function(){
   			if ($(this).attr('class') == currentTab ){
   				$(this).show();
   			}

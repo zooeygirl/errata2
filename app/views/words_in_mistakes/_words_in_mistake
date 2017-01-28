@@ -6,7 +6,7 @@
 
 <%= form_for (@words_in_mistake), remote: true do |w| %>
 
-<table class="table-striped"id="unsaved_wim_table">
+<table class="table-striped unsaved_wim_table">
 
 <tr class=<%= "sen#{sentence.id}"%>>
 

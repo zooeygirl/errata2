@@ -40,5 +40,5 @@
 
 <% @sen = Sentence.includes(:mistakes).where(mistakes: {id:@mistake.id}).each do |sen| %>
 
-<%= sen.content %></br>
+<%= sen.content %><%= sen.id %></br>
 <% end %>

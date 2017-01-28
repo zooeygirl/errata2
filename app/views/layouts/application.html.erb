@@ -104,7 +104,12 @@
         
                              <% i = 1 %>
                               <% @essay.paragraphs.order(:id).each do |para| %>
-                                <li><%= link_to i, essay_paragraph_path(@essay, para.id ) %></li> 
+                              <% if para == @paragraph %>
+                                <li id="active_paragraph"><%= link_to i, essay_paragraph_path(@essay, para.id ) %></li> 
+                                <% else %>
+                                  <li ><%= link_to i, essay_paragraph_path(@essay, para.id ) %></li> 
+                              <% end %>
+
                                 <% i += 1 %>
                               <% end %>
                             
@@ -112,8 +117,12 @@
                           <% else %>
                               <% i = 1 %>
                               <% @essay.paragraphs.order(:id).each do |para| %>
-                                <li><%= link_to i, essay_paragraph_path(@essay, para.id ) %></li> 
-                                <% i += 1 %>
+                            
+                      
+                                        <li><%= link_to i, essay_paragraph_path(@essay, para.id ) %></li>
+                                
+                                 
+                                   <% i += 1 %>
                               <% end %>
                             <% end %>
                             </ul>

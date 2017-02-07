@@ -213,6 +213,7 @@
  <%= link_to 'Reset rubric', essay_change_rubric_path(@essay), method: :patch %>
 Warning: You will lose all the current grades for this student if you reset the rubric.
 </div> 
+<td><%= link_to 'Send essay back to student without feedback', essay_unsubmit_essay_path(@essay), method: :patch%></td>
 <% end %>
 
  <% end %>

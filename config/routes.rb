@@ -46,6 +46,7 @@ resources :words_in_mistakes
 
   resources :essays do
       patch :submit_essay
+      patch :unsubmit_essay
       patch :give_feedback
       patch :change_rubric
       patch :set_paragraphs_for_second_draft

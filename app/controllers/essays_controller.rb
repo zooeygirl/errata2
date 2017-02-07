@@ -153,6 +153,12 @@ end
     redirect_to essays_path, notice: "You have successfully submitted your essay"
   end
 
+  def unsubmit_essay
+    @essay = Essay.find(params[:essay_id])
+    @essay.update_attribute(:essay_status, 0)
+    redirect_to classroom_path(Classroom.find(Assignment.find(@essay.assignment_id).classroom_id))
+  end
+
   def give_feedback
     @essay = Essay.find(params[:essay_id])
     @ungraded_sections = []

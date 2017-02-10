@@ -53,21 +53,7 @@ $('body').on('click', '.word_choice', function() {
 		});
 
 	
-	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
-
-	
-		var currentTab = $("ul#myTab li.active").attr('class').replace(" active", "");		
-  		$('.unsaved_wim_table > tr').each(function(){
-  			if ($(this).attr('class') == currentTab ){
-  				$(this).show();
-  			}
-  			else {
-  				$(this).hide();
-  			}
-  		}); 
-   
-   	});	
 
 
 

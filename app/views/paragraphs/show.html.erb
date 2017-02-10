@@ -147,6 +147,10 @@
                </br></br></br>
 
 
+                <table class="table-striped"id="unsaved_wim_table_<%= sen.id %>">
+
+            </table> 
+
 
                 </br><h4>Recurrent Comments: </h4>
                 <% s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
@@ -184,13 +188,11 @@
 
              </br>  
 
-              <table class="table-striped"id="unsaved_wim_table_2">
 
-            </table> 
               
              <% if sen.words_in_mistakes.count > 0 %>
              <div class="pre_title">
-              Select Problem Words (optional)
+              Saved Language Errors
              </div>
 
           

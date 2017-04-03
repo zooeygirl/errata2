@@ -1,7 +1,7 @@
 class SentencesController < ApplicationController
 	before_action :set_sentence, only: [:show, :edit, :update, :destroy]
-  before_action :set_essay
-  before_action :set_paragraph
+  before_action :set_essay, except: [:edit, :update]
+  before_action :set_paragraph, except: [:edit, :update]
  
   
 
@@ -34,7 +34,8 @@ def index
 end
 
 def update 
-    
+    @essay = Essay.find(@sentence.essay_id)
+    @paragraph = Paragraph.find(@sentence.paragraph_id)
     @sentence.update(sentence_params)  
     if @sentence.update(sentence_params)
     @sentence.mistake_ids.each do |mis|
@@ -43,9 +44,13 @@ def update
       end
     end
     end
-   
+      @essay = Essay.find(@sentence.essay_id)
+      @paragraph = Paragraph.find(@sentence.paragraph_id)
+      if current_user.role == "Student"
       redirect_to essay_paragraph_path(@essay, @paragraph), notice: 'Sentence was successfully updated.'
-      
+      elsif current_user.role == "Teacher"
+      redirect_to edit_sentence_path(@sentence), notice: 'Sentence was successfully updated.'
+      end
     
 end
 
@@ -76,6 +81,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sentence_params
-      params.require(:sentence).permit(:id, :content, :comment, :essay_id, :paragraph_id, vocabulary_errors:[], word_list:[], mistake_ids:[], teacher_comment_ids:[], words_in_mistakes_attributes:[:id, :_destroy])
+      params.require(:sentence).permit(:id, :content, :comment, :essay_id, :paragraph_id, vocabulary_errors:[], word_list:[], mistake_ids:[], teacher_comment_ids:[], words_in_mistakes_attributes:[:id, :sentence_id, :mistake_id, :_destroy])
     end
 end

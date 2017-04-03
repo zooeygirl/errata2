@@ -58,7 +58,7 @@ end
     @words_in_mistake.destroy
 
     respond_to do |format|
-      format.html { redirect_to essay_paragraph_path(@essay, @paragraph), notice: 'WIM was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'WIM was successfully destroyed.' }
       format.json { head :no_content }
    
     end

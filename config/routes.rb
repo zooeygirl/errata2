@@ -32,6 +32,8 @@ resources :users
   
   resources :assignments
 
+  resources :sentences
+
 
   resources :evaluations do
     resources :criteria

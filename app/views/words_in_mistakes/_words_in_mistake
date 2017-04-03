@@ -4,7 +4,7 @@
 <% sentence = Sentence.find(words_in_mistake.sentence_id) %>
 
 
-<%= form_for (@words_in_mistake), remote: true do |w| %>
+<%= form_for (words_in_mistake), remote: true do |w| %>
 
 <table class="table-striped unsaved_wim_table">
 

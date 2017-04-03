@@ -4,10 +4,9 @@
 <tr id= "link_<%=link.id%>">
 
 
-<td><%= link.description %></td> 
+<td><%= link_to link.description, link.url, :target => '_blank' %></td>
 <td><%= link.language %></td> 
-
-<td><%= link_to link.url, link.url, :target => '_blank' %></td>  
+  
 <td><%= Link.media_categories.keys.at(link.media) %></td>
 
 

@@ -15,7 +15,6 @@
 <tr>
 <td>Description</td>
 <td>Language</td>
-<td>Link</td>
 <td>Media</td>      
 </tr>
 
@@ -38,7 +37,7 @@
 
 </br>
 
-Number of Sentences with this type of mistake: <%= Sentence.includes(:mistakes).where(mistakes: {id:@mistake.id}).count %></br>
+Number of Sentences with this type of mistake: <%= Sentence.includes(:mistakes).where(mistakes: {id:@mistake.id}).count %></br></br>
 <% @sen = Sentence.includes(:mistakes).where(mistakes: {id:@mistake.id}).each do |sen| %>
 
 <%= sen.content %><%= link_to "Edit sentence mistakes", edit_sentence_path(sen.id) %></br>

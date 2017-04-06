@@ -16,15 +16,7 @@ $('.mistake_categories').mouseleave(function() {
 
 
 
-$(".wimdelete").on("click", function(){
-    var x = $(this).attr('id');
-    if(this.checked) {
- 
-        $("input[type=checkbox][value=" + x + " ][class=sentence_mistakes]").prop('checked', false);
-    } else {
-        $("input[type=checkbox][value=" + x + " ][class=sentence_mistakes]").prop('checked', true);
-    }
-}); 
+
 
 
 $("input[type=checkbox][class=sentence_mistakes]").on("click", function(){
@@ -38,7 +30,30 @@ $("input[type=checkbox][class=sentence_mistakes]").on("click", function(){
 }); 
 
 
+$('#paragraph_view').on('change', function() {
+    if ($(event.target).hasClass('wimdelete')){
+        var x = $(event.target).attr('id');
+        if(event.target.checked) {
+        $("input[type=checkbox][value=" + x + " ][class=sentence_mistakes]").prop('checked', false);
+        } else {
+        $("input[type=checkbox][value=" + x + " ][class=sentence_mistakes]").prop('checked', true);
+        }
+        $(event.target).closest('form').submit();
+        $(event.target).closest('tr').next($("input[type=checkbox][type=hidden][class=wimdelete]")).remove();
+        $(event.target).closest('tr').remove();
+    }
+    else {
+    $(event.target).closest('form').submit();
+    }
+});
 
+$('#paragraph_view').children($("input[type=text]")).on('input', function() {
+    $(event.target).closest('form').submit();
+});
+
+$('#paragraph_view').children($(".stars")).on('click', function() {
+    $(event.target).closest('form').submit();
+});
 
 
 

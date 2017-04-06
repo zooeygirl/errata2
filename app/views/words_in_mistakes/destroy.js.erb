@@ -1,1 +1,6 @@
-$('#word_in_mistake_<%= @words_in_mistake.id %>').remove();
+
+
+$('#edit_words_in_mistake_<%= @words_in_mistake.id %>').remove();
+x = <%= @words_in_mistake.mistake_id %>;
+$("input[type=checkbox][value=" + x + " ][class=sentence_mistakes]").prop('checked', false);
+  

@@ -3,6 +3,10 @@ $(document).ready(function() {
 $('body').on('click', '.word_choice', function() {
     $(event.target).closest('form').submit();
 });
+
+$('body').on('click', '.correction_radio_buttons', function() {
+    $(event.target).closest('form').submit();
+});
   
 
 

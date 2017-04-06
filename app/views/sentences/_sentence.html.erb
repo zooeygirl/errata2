@@ -40,7 +40,7 @@ ________________________________________________________________________________
           </br>
           <% if original_sentence.mistakes.count > 0 %>
           <table class="table-striped">
-          <tr><th>Category</th><th>Mistake</th><th>Problem Words</td></tr>
+          <tr><th>Category</th><th>Mistake</th><th>Problem Words</th><th>Problem Corrected?</th></tr>
           <tr>
 
           <% original_sentence.mistake_ids.each do |mis| %>
@@ -60,8 +60,20 @@ ________________________________________________________________________________
                           <%= w %>
                         <% end %>
                         <% i += 1 %>
-                     <% end %></td></tr>
-                  
+                     <% end %></td><td>
+                     <% if current_user.role == "Student" %>
+                             <% if wim.correction_status == nil %>
+                             ?
+                             <% elsif wim.correction_status == 0 %>
+                             Good Job!
+                             <% elsif wim.correction_status == 1 %>
+                             Try Again!
+                              <% end %>
+                      <% elsif current_user.role == "Teacher" %>
+                        <%= render partial: "words_in_mistakes/correction_status_form", locals: { wim: wim} %>
+                      <% end %>
+
+                    </td></tr>
                   <% else %>
                   <td></td></tr>
   

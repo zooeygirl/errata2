@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 
-
+<div id="paragraph_view">
 
 <%-# __________________________________________________________________________ -%>
 
@@ -17,7 +17,7 @@
 </ul>
 
 
-<%= form_for @essay do |f| %>
+<%= form_for @essay, remote: true do |f| %>
   
 
     <%= f.hidden_field :id, class: "essaynum", value: @essay.id %>
@@ -33,7 +33,7 @@
     </br>
       <%= f.fields_for :paragraphs, @paragraph do |p| %>
         
-
+                <div class = "comments">
                 <h4>Recurrent Comments:</h4>
 
 
@@ -92,7 +92,7 @@
          
         <% end %>
       </div>
-
+      </div>
         <div class="lang_errors">
         <h4>Language errors in Paragraph</h4>
         <div class="lang_errors_panel">
@@ -202,6 +202,7 @@
             <table class="table-striped" id="wim_table">
               <% sen.words_in_mistakes.each do |wim| %>
 
+                  
                   <%= f.fields_for :words_in_mistakes, wim do |w| %>
                   
                   
@@ -239,11 +240,11 @@
 
 </div>
 
-<div class="btn-lg">
+
   <div class="actions">
-    <%= f.submit "Save Changes"%>
+    <% f.submit "Save Changes"%>
   </div>
-</div>
+
 
 
 
@@ -364,6 +365,6 @@
 <% end %>
 
 
-
+</div>
 
 <% end %>

@@ -123,7 +123,6 @@ end
         
         format.html { redirect_to session.delete(:return_to), notice: 'Essay was successfully updated.' }
         format.json { render :show, status: :ok, location: @essay }
-        
        
       else
         format.html { render :edit }

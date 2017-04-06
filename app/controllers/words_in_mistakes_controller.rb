@@ -47,7 +47,7 @@ def update
    
    if @words_in_mistake.update(words_in_mistake_params)
         respond_to do |format|
-          format.html {redirect_to essay_paragraph_path(Essay.find(@words_in_mistake.essay_id), Paragraph.find(@words_in_mistake.paragraph.id)) , notice: 'WIM was successfully updated.'}
+          format.html {redirect_to :back , notice: 'WIM was successfully updated.'}
           format.js
         end  
     end
@@ -60,6 +60,7 @@ end
     respond_to do |format|
       format.html { redirect_to :back, notice: 'WIM was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
    
     end
   end
@@ -88,6 +89,6 @@ private
     
 
    def words_in_mistake_params
-      params.require(:words_in_mistake).permit(:id, :sentence_id, :essay_id, :paragraph_id, :mistake_id, :_destroy, mistake_words:[])
+      params.require(:words_in_mistake).permit(:id, :sentence_id, :essay_id, :paragraph_id, :correction_status, :mistake_id, :_destroy, mistake_words:[])
     end
 end

@@ -103,7 +103,7 @@
 
 </br><br>
 <div class="graph">
-<%= column_chart @first_draft.mistakes.group(:name).count %>
+<%= bar_chart @first_draft.mistakes.group(:name).count %>
 </div>
 
 </div>

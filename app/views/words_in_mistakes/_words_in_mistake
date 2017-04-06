@@ -32,7 +32,7 @@
         <% w.submit "Select Words", :name => "select_words", :class => "wim_button" %>
  </div>
 
- <%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sentence, words_in_mistake), method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+ <%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sentence, words_in_mistake), method: :delete, remote: true %></td> 
  
 
 </tr>

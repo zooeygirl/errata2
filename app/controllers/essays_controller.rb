@@ -177,6 +177,23 @@ end
     end
   end
 
+  def give_trackernum_to_sentences
+        Essay.where(draftnum: 1).each do |ess|
+            y = 0
+            Essay.where(trackernum: ess.trackernum).first.sentences.order(:id).each do |sen|
+                sen.update_attribute(:trackernum, sen.id)
+                
+                if Essay.where(trackernum: ess.trackernum).last.sentences.order(:id)[y] != nil
+                Essay.where(trackernum: ess.trackernum).last.sentences.order(:id)[y].update_attribute(:trackernum, sen.id) 
+                y+=1
+                end
+            end
+        end
+        redirect_to :back
+  end
+
+
+
   def create_grade_template
     @essay = Essay.find(params[:essay_id])
         if @essay.grade_elements.blank?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405080055) do
+ActiveRecord::Schema.define(version: 20170406210449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 20170405080055) do
     t.string   "vocabulary_errors"
     t.string   "word_list"
     t.integer  "paragraph_id"
+    t.integer  "trackernum"
   end
 
   create_table "sentences_teacher_comments", id: false, force: :cascade do |t|

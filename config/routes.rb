@@ -46,7 +46,10 @@ resources :users
   
 resources :words_in_mistakes
 
+
+
   resources :essays do
+      patch :give_trackernum_to_sentences
       patch :submit_essay
       patch :unsubmit_essay
       patch :give_feedback

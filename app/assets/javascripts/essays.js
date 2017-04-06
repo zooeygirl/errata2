@@ -51,6 +51,10 @@ $('#paragraph_view').children($("input[type=text]")).on('input', function() {
     $(event.target).closest('form').submit();
 });
 
+$('#paragraph_view').children($("input[type=radio]")).on('input', function() {
+    $(event.target).closest('form').submit();
+});
+
 $('#paragraph_view').children($(".stars")).on('click', function() {
     $(event.target).closest('form').submit();
 });

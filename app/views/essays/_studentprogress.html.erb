@@ -33,11 +33,10 @@
 </div>
 
 <% Mistake.all.order(:category).each do |mis| %>
-<%= mis.category %>
-<%= mis.name %> </br>
+
 <% Essay.where(user_id: @student).each do |e| %>
 <% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
-<%= sen.content  %>
+<%= mis.category %>/<%= mis.name %>: <%= sen.content  %>
 <% end %>
 <% end %>
 </br></br>

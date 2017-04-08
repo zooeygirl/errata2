@@ -1,30 +1,52 @@
 
+<% if current_user.role == "Teacher" %>
+
+ 
+
+          
 
 <% Essay.where(assignment_id: @assignment.id).where(draftnum: 1).each do |e| %>
-<%= e.words_in_mistakes.count %></br>
+</br>
 
-
-<table class="table-striped">
-          <tr><th>Category</th><th>Mistake</th><th>Problem Words</th><th>Problem Corrected?</th></tr>
-          <tr>
+         
 
           <% e.words_in_mistakes.each do |wim| %>
-              <td><%= Mistake.find(wim.mistake_id).category %></td> 
-              <td><div class="mistake">
-              <%= link_to Mistake.find(wim.mistake_id).name, Mistake.find(wim.mistake_id), :target=> '_blank' %></div></td>
-              <td><%= Sentence.find(wim.sentence_id).content %><%= wim.mistake_words %></td>
-              <td><%= render partial: "words_in_mistakes/correction_status_form", locals: { wim: wim} %></td>
-             </tr>
-             <% end %>
-        </table>
+          		
+	          	<% if Sentence.where(trackernum: wim.sentence_id).count > 1 && Sentence.where(trackernum: wim.sentence_id).first.content != Sentence.where(trackernum: wim.sentence_id).last.content && wim.correction_status == nil  %>
+	          	
+	          	<table class="table-striped">
+ 		<tr>	<th>Category</th>
+          		<th>Mistake</th>
+          		<th>Problem Words</th>
+          		<th>Problem Corrected?</th></tr><tr><%= Sentence.where(trackernum: wim.sentence_id).last.content  %></tr><tr>
 
+	              <td><%= Mistake.find(wim.mistake_id).category %></td> 
+	              <td><div class="mistake">
+	              <%= link_to Mistake.find(wim.mistake_id).name, Mistake.find(wim.mistake_id), :target=> '_blank' %></div></td>
+	              <td>
+	              	<% if wim.mistake_words != nil %>
+	          
+	                    <% i = 0 %>
+	                     <% Sentence.find(wim.sentence_id).word_list.each do |w| %>
+	                        <% if wim.mistake_words.include?("#{i}") %>
+	                          <div class="highlight"><%= w.last %></div>
+	                          <% else %>
+	                          <%= w.last %>
+	                        <% end %>
+	                        <% i += 1 %>
+	                     <% end %><% end %>
+	              <td><%= render partial: "words_in_mistakes/correction_status_form", locals: { wim: wim} %></td></tr>
+	             
+          		<% end %>
+           <% end %>
 
+ </table>
 
 
 <% end %>
 
 
-<%= link_to 'Trackernum for sentences', essay_give_trackernum_to_sentences_path(Essay.first), method: :patch %>
+<% link_to 'Trackernum for sentences', essay_give_trackernum_to_sentences_path(Essay.first), method: :patch %>
 
-
+<% end %>
 

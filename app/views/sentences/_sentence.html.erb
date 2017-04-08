@@ -31,6 +31,7 @@ ________________________________________________________________________________
           <div class="comment">
             Original Sentence:  
             <%= original_sentence.content %></div>
+            
             <h4>Teacher Comments: </h4>
             <%= original_sentence.comment %></br>
                 <% original_sentence.teacher_comments.each do |tc| %>
@@ -95,7 +96,7 @@ ________________________________________________________________________________
 
  <% if current_user.role == 'Student' %>       
           		
-          		<%= form_for ([@essay, @paragraph, sentence]) do |f| %>
+          		<%= form_for [@essay, @paragraph, sentence], remote: true do |f| %>
 
 
               		<div class="field">
@@ -105,7 +106,7 @@ ________________________________________________________________________________
 
 
               		<div class="actions">
-                      <%= f.submit "Edit Sentence"%>
+                      <% f.submit "Edit Sentence"%>
                  		</div>
                
                     </div>

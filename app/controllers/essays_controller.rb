@@ -15,6 +15,7 @@ class EssaysController < ApplicationController
   def show
     find_classroom
     count_mistakes
+    
 
     if @essay.draftnum == 2 && @essay.paragraphs.count == 0
       set_paragraphs

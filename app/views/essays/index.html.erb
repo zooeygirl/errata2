@@ -113,6 +113,19 @@ To get started, find your classroom:
 </div>
 
 
+<% Mistake.all.order(:category).each do |mis| %>
+<%= mis.category %>
+<%= mis.name %> </br>
+<% Essay.where(user_id: current_user).each do |e| %>
+<% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
+<%= sen.content  %>
+<% end %>
+<% end %>
+</br></br>
+<% end %>
+
+
+
 
 </div>
 

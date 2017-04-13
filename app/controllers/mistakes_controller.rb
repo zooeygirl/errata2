@@ -5,6 +5,10 @@ class MistakesController < ApplicationController
   # GET /mistakes.json
   def index
     @mistakes = Mistake.all
+    respond_to do |format|
+    format.html
+    format.csv { send_data @mistakes.to_csv }
+  end
   end
 
   # GET /mistakes/1

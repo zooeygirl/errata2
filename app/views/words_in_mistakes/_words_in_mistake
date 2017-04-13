@@ -15,7 +15,6 @@
 <td><%= Mistake.find(words_in_mistake.mistake_id).name %></td>
 
 
-
  
  <td> <%= w.collection_check_boxes :mistake_words, sentence.word_list, :first.to_s, :last do |b| %>
   			 <div class="word_choice">

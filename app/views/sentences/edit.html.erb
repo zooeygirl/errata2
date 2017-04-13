@@ -1,18 +1,18 @@
  <%= @sentence.content %></br>
- Mistake Ids: <%= @sentence.mistake_ids.count %></br>
+ Mistake Ids Count: <%= @sentence.mistake_ids.count %></br>
  Words In Mistakes: <%= @sentence.words_in_mistakes.count %></br>
-<% @sentence.mistake_ids.each do |misid| %> 
-  <%= misid %></br>
+Mistake IDs:<% @sentence.mistake_ids.each do |misid| %> 
+  <%= misid %> </br>
 <% end %>
+<%= @sentence.word_list %>
+<%= link_to "Essay", essay_path(Essay.find(@sentence.essay_id)) %>
 
 </br>
-</br></br></br></br></br>
+</br></br>
 
 
 
   <%= form_for @sentence do |f| %>
-
-
 
  <% i = 0 %>
                 
@@ -38,7 +38,7 @@
 
 
 
-</br></br>
+</br></br></br></br></br></br></br>
 
  
 
@@ -52,4 +52,8 @@
 
   
 <%= render @sentence.words_in_mistakes %>
+
+<% @sentence.words_in_mistakes.each do |wim| %>
+<%= eval(wim.word_list) %>
+<% end %>
 

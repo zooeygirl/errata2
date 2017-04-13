@@ -29,6 +29,9 @@
 
 <br>
 
-<%= link_to 'New Mistake', new_mistake_path %>
+<%= link_to 'New Mistake', new_mistake_path %></br>
+
+Download:
+  <%= link_to "CSV", mistakes_path(format: "csv") %>
 
 <% end %>

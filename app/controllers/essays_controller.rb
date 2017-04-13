@@ -15,13 +15,51 @@ class EssaysController < ApplicationController
   def show
     find_classroom
     count_mistakes
-    
 
     if @essay.draftnum == 2 && @essay.paragraphs.count == 0
       set_paragraphs
     end
-
+    if @essay.sentences.count > 0 && @essay.sentences.first.trackernum == nil
+      give_trackernum_to_sentences
+    end 
+    second_draft
   end
+
+def second_draft
+  if @essay.draftnum == 2
+        @essay.paragraphs.order(:id).each do |para|
+              secdraftpara = ""
+              para.sentences.order(:id).each do |sen|
+              secdraftpara += sen.content + " "
+              end
+              para.update_attribute(:content, secdraftpara)
+        end
+      secdraftessay = ""  
+      @essay.paragraphs.order(:id).each do |para|
+      secdraftessay += para.content + "\r\n\r\n"
+      end 
+      @essay.update_attribute(:body, secdraftessay)  
+  end
+end
+
+
+
+
+
+def update_word_list
+  @essay.sentences.each do |sen|
+  if sen.id != sen.trackernum
+  word_list = sen.content.split(/\W+/)
+  i = 0
+      while i < word_list.count do
+      word_list[i] = [i.to_s, word_list[i]] 
+      i+=1
+      end
+  sen.update_attribute(:word_list, word_list)
+  end
+  end
+end 
+
 
 def set_paragraphs_for_second_draft
 
@@ -43,6 +81,7 @@ def set_paragraphs_for_second_draft
     end
 
     set_sentences
+    turn_word_list_into_an_array
   end
     redirect_to essay_path(@essay)
 end
@@ -63,9 +102,6 @@ def set_paragraphs
     end
     
     set_sentences
-    
-    
-
 
 end
 
@@ -119,6 +155,7 @@ end
         set_paragraphs
         turn_word_list_into_an_array
         end
+        
         calculate_student_grade
 
         
@@ -173,24 +210,23 @@ end
       @essay.update_attribute(:essay_status, 2)
       secondcopy = @essay.dup
       secondcopy.update_attribute(:trackernum, @essay.id)
-      secondcopy.update_attribute(:draftnum, 2)
-      redirect_to classroom_path(Assignment.find(@essay.assignment_id).classroom_id), notice: "Your feedback has been given to the student."
+      secondcopy.update_attribute(:draftnum, 2)  
+      redirect_to classroom_assignment_path(Assignment.find(@essay.assignment_id).classroom_id, Assignment.find(@essay.assignment_id)), notice: "Your feedback has been given to the student."
     end
   end
 
   def give_trackernum_to_sentences
-        Essay.where(draftnum: 1).each do |ess|
+        
             y = 0
-            Essay.where(trackernum: ess.trackernum).first.sentences.order(:id).each do |sen|
+            Essay.where(trackernum: @essay.trackernum).first.sentences.order(:id).each do |sen|
                 sen.update_attribute(:trackernum, sen.id)
-                
-                if Essay.where(trackernum: ess.trackernum).last.sentences.order(:id)[y] != nil
-                Essay.where(trackernum: ess.trackernum).last.sentences.order(:id)[y].update_attribute(:trackernum, sen.id) 
-                y+=1
+                if Essay.where(trackernum: @essay.trackernum).last.sentences.order(:id)[y] != nil
+                Essay.where(trackernum: @essay.trackernum).last.sentences.order(:id)[y].update_attribute(:trackernum, sen.id) 
                 end
+                y+=1
             end
-        end
-        redirect_to :back
+        
+        
   end
 
 
@@ -315,6 +351,7 @@ end
               end
 
           end
+
 
     end
 

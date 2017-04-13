@@ -40,52 +40,13 @@ ________________________________________________________________________________
 
           </br>
           <% if original_sentence.mistakes.count > 0 %>
-          <table class="table-striped">
-          <tr><th>Category</th><th>Mistake</th><th>Problem Words</th><th>Problem Corrected?</th></tr>
-          <tr>
+         <%= render partial: "sentences/mistakes_table", locals: {original_sentence: original_sentence} %>
+         Edited Sentence: <%= sentence.content %>
 
-          <% original_sentence.mistake_ids.each do |mis| %>
-              <td><%= Mistake.find(mis).category %></td> 
-              <td><div class="mistake">
-              <%= link_to Mistake.find(mis).name, Mistake.find(mis), :target=> '_blank' %></div></td>
-              <% if original_sentence.words_in_mistakes.where(mistake_id: mis).count > 0 %>
-                <% original_sentence.words_in_mistakes.where(mistake_id: mis).each do |wim| %>
+         <% if sentence.words_in_mistakes.count > 0 %>
+        <%= render partial: "sentences/new_wims", locals: {sentence: sentence} %>
+        <% end %>
 
-                 <% if wim.mistake_words != nil %>
-          
-                    <% i = 0 %>
-                     <td><% sentence.word_list.each do |w| %>
-                        <% if wim.mistake_words.include?("#{i}") %>
-                          <div class="highlight"><%= w %></div>
-                          <% else %>
-                          <%= w %>
-                        <% end %>
-                        <% i += 1 %>
-                     <% end %></td><td>
-                     <% if current_user.role == "Student" %>
-                             <% if wim.correction_status == nil %>
-                             ?
-                             <% elsif wim.correction_status == 0 %>
-                             Good Job!
-                             <% elsif wim.correction_status == 1 %>
-                             Try Again!
-                              <% end %>
-                      <% elsif current_user.role == "Teacher" %>
-                        <%= render partial: "words_in_mistakes/correction_status_form", locals: { wim: wim} %>
-                      <% end %>
-
-                    </td></tr>
-                  <% else %>
-                  <td></td></tr>
-  
-                  <% end %></br>
-
-
-                <% end %>
-              <% end %>
-          <% end %>
-
-        </table>
         <% else %>
         No language problems.
         <% end %>
@@ -178,34 +139,3 @@ ________________________________________________________________________________
  <% end %>
 
 
-
-
- <%-# __________________________________________________________________________ -%>
-
-
-<% if current_user.role == 'Teacher' && @essay.essay_status == 'Feedback' %>
-
-
-
-          
-          <% sentence.mistake_ids.each do |mis| %>
-              <div class="mistake">
-              <%= link_to Mistake.find(mis).name, Mistake.find(mis), :target=> '_blank' %></div>
-          <% end %>
-          <div class="comment"><%= sentence.content %></div>
-          <% sentence.words_in_mistakes.each do |wim| %>
-
-          <% if wim.mistake_words != nil %>
-
-          <%  wim.mistake_words.each do |mw| %>
-          <% if mw != wim.mistake_words.last %>
-          <%= sentence.word_list[mw.to_i].last %>
-          <% end %>
-         <% end %>   <% end %></br>
-         <% end %>
-              
-            
-
-
-
-<% end %>

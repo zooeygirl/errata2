@@ -12,7 +12,7 @@ Assignments:
 <% @class_list.each do |s| %>
 <tr>
 
-	<td><%= "#{s.first_name} #{s.last_name}" %></td>
+	<td><%= link_to "#{s.first_name} #{s.last_name}", classroom_user_path(@classroom, s) %></td>
 	<% @classroom.assignments.each do |assign| %>
 		
 			<% if s.essays.where(assignment_id: assign.id, draftnum: 1).count > 0  %>
@@ -28,7 +28,7 @@ Assignments:
 						<% seconddraft = Essay.where(trackernum: originalessay.id).last %>
 						Second Draft: 
 								<% if originalessay.body == seconddraft.body %>
-								No changes made.
+								<%= link_to "No changes made.", essay_path(seconddraft) %>
 								<% elsif originalessay.body != seconddraft.body %>
 								<%= link_to "Worked on Second draft", essay_path(seconddraft) %>
 								<% end %>

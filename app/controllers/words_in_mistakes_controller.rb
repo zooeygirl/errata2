@@ -89,6 +89,6 @@ private
     
 
    def words_in_mistake_params
-      params.require(:words_in_mistake).permit(:id, :sentence_id, :essay_id, :paragraph_id, :correction_status, :mistake_id, :_destroy, mistake_words:[])
+      params.require(:words_in_mistake).permit(:id, :sentence_id, :essay_id, :paragraph_id, :correction_status, :mistake_id, :_destroy, mistake_words:[], word_list:[])
     end
 end

@@ -1,6 +1,5 @@
-<% @student = User.find(@essay.user_id) %>
-
-
+<% @student = User.find(@user) %>
+<h1>Student Progress: <%= @user.first_name%>  <%= @user.last_name%></h1> 
 
 <% afg = "" %>
 <% myarray =[] %>
@@ -36,7 +35,7 @@
 
 <% Essay.where(user_id: @student).each do |e| %>
 <% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
-<%= mis.category %>/<%= mis.name %>: <%= sen.content  %></br>
+<%= mis.category %>/<%= mis.name %>: <%= sen.content  %>
 <% end %>
 <% end %>
 

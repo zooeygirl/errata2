@@ -23,7 +23,6 @@ end
 
 
 def show
-    second_draft
     update_words_in_mistakes
 end
 
@@ -49,18 +48,6 @@ def edit
 end
 
 
-def second_draft
-    secdraftpara = ""
-    @paragraph.sentences.order(:id).each do |sen|
-    secdraftpara += sen.content + " "
-    end
-    @paragraph.update_attribute(:content, secdraftpara)
-    secdraftessay = ""
-    @essay.paragraphs.order(:id).each do |para|
-      secdraftessay += para.content + "\r\n\r\n"
-    end
-    @essay.update_attribute(:body, secdraftessay)
-end
 
 
 

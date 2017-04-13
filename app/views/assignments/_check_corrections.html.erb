@@ -8,17 +8,17 @@
 <% Essay.where(assignment_id: @assignment.id).where(draftnum: 1).each do |e| %>
 </br>
 
-         
 
           <% e.words_in_mistakes.each do |wim| %>
           		
 	          	<% if Sentence.where(trackernum: wim.sentence_id).count > 1 && Sentence.where(trackernum: wim.sentence_id).first.content != Sentence.where(trackernum: wim.sentence_id).last.content && wim.correction_status == nil  %>
 	          	
 	          	<table class="table-striped">
+	          		<tr><%= link_to Sentence.where(trackernum: wim.sentence_id).last.content, edit_sentence_path(Sentence.where(trackernum: wim.sentence_id).last)  %></tr>
  		<tr>	<th>Category</th>
           		<th>Mistake</th>
           		<th>Problem Words</th>
-          		<th>Problem Corrected?</th></tr><tr><%= Sentence.where(trackernum: wim.sentence_id).last.content  %></tr><tr>
+          		<th>Problem Corrected?</th></tr><tr>
 
 	              <td><%= Mistake.find(wim.mistake_id).category %></td> 
 	              <td><div class="mistake">

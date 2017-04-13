@@ -23,6 +23,18 @@ def edit
   
 end
 
+def update_word_list
+  
+  word_list = @sentence.content.split(/\W+/)
+  i = 0
+      while i < word_list.count do
+      word_list[i] = [i.to_s, word_list[i]] 
+      i+=1
+      end
+  @sentence.update_attribute(:word_list, word_list)
+  
+end 
+
 
 def show
   redirect_to essay_paragraph_path(@essay, @paragraph)
@@ -33,14 +45,17 @@ def index
 	 @sentences = Sentence.all
 end
 
+
+
 def update 
+    update_word_list
     @essay = Essay.find(@sentence.essay_id)
     @paragraph = Paragraph.find(@sentence.paragraph_id)
     @sentence.update(sentence_params)  
     if @sentence.update(sentence_params)
     @sentence.mistake_ids.each do |mis|
       if @sentence.words_in_mistakes.where(mistake_id: mis).count == 0    
-      @sentence.words_in_mistakes.create(mistake_id: mis, paragraph_id: @paragraph.id, essay_id: @essay.id)
+      @sentence.words_in_mistakes.create(mistake_id: mis, paragraph_id: @paragraph.id, essay_id: @essay.id, word_list: @sentence.word_list)
       end
     end
     end

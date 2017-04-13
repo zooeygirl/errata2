@@ -54,6 +54,8 @@ Mistake IDs:<% @sentence.mistake_ids.each do |misid| %>
 <%= render @sentence.words_in_mistakes %>
 
 <% @sentence.words_in_mistakes.each do |wim| %>
+  <% if wim.word_list != nil %>
 <%= eval(wim.word_list) %>
+<% end %>
 <% end %>
 

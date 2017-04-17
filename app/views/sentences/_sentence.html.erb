@@ -43,7 +43,7 @@ ________________________________________________________________________________
          <%= render partial: "sentences/mistakes_table", locals: {original_sentence: original_sentence} %>
          Edited Sentence: <%= sentence.content %>
 
-         <% if sentence.words_in_mistakes.count > 0 %>
+         <% if sentence.words_in_mistakes.count > 0 && @essay.draftnum == 2 %>
         <%= render partial: "sentences/new_wims", locals: {sentence: sentence} %>
         <% end %>
 

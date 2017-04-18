@@ -8,7 +8,7 @@ class MistakesController < ApplicationController
     respond_to do |format|
     format.html
     format.csv { send_data @mistakes.to_csv }
-  end
+    end
   end
 
   # GET /mistakes/1

@@ -21,8 +21,9 @@
         <td><%= mistake.category %></td>
         <td><%= mistake.name %></td>
         <td><%= link_to 'Show', mistake %></td>
-        <% if current_user.id == 1 %>
         <td><%= Sentence.includes(:mistakes).where(mistakes: {id: mistake.id}).count %></td>
+        <% if current_user.id == 1 %>
+        
         <td><%= link_to 'Edit', edit_mistake_path(mistake) %></td>
         <td><%= link_to 'Destroy', mistake, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
       </tr>

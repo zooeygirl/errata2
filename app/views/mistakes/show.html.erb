@@ -31,12 +31,13 @@
 </br></br>
 
 
-<%= link_to 'Mistake Index', mistakes_path(@mistake) %>
+<%= link_to 'Mistake Index', mistakes_path %>
 
 <% end %>
 
 </br>
-
+------------------------------------------------------------------------------------------------
+</br>
 <% if current_user.role == "Teacher" %>
 
 Number of Sentences with this type of mistake: <%= Sentence.includes(:mistakes).where(mistakes: {id:@mistake.id}).count %></br></br>

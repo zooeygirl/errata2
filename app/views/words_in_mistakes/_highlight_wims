@@ -3,7 +3,7 @@
 <% if wim.mistake_words != nil %>
                     
                     <% i = 0 %>
-                     <td><% Sentence.find(wim.sentence_id).word_list.each do |w| %>
+                     <% Sentence.find(wim.sentence_id).word_list.each do |w| %>
                         <% if wim.mistake_words.include?("#{i}") %>
                           <div class="highlight"><%= w.last %></div>
                           <% else %>

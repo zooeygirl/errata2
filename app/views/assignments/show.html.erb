@@ -126,9 +126,10 @@
 	<td><%= mis.name %></td>
 	<td><%= Sentence.includes(:mistakes).where(mistakes: { id: mis.id }).where(essay_id: Essay.where(assignment_id: @assignment.id)).count %></td>
 	<td><% Sentence.includes(:mistakes).where(mistakes: { id: mis.id }).where(essay_id: Essay.where(assignment_id: @assignment.id)).each do |sen| %>
-	<%= sen.content %></br> 
-	<% end %></td></tr>
+	<%= sen.content %></br>
+	<%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: mis.id).first} %></br>
 	<% end %>
+	<% end %></td></tr>
 	
 <% end %>
 

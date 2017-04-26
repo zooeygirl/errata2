@@ -22,6 +22,10 @@ def show
 
 end
 
+def check_corrections
+  @assignment = Assignment.find(params[:assignment_id])
+end
+
 def index
 end
 

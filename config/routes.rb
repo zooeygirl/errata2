@@ -26,6 +26,7 @@ resources :users
         patch :add_student_to_classroom
         resources :users
         resources :assignments do
+          get :check_corrections
           patch :calculate_class_average_on_assignment
         end
   end

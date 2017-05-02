@@ -21,7 +21,8 @@ Assignments:
 				<% originalessay = s.essays.where(assignment_id: assign.id, draftnum: 1).first %>
 
 						<% if originalessay.studentgrade != nil %>
-						<%= originalessay.studentgrade.round(2) %>%
+						<%= originalessay.studentgrade.round(2) %>%</br>
+						<%= (originalessay.studentgrade/100 * 20).round(2) %>/20
 						<% end %></br>
 
 						<% if Essay.where(trackernum: originalessay.id).count > 1 %>

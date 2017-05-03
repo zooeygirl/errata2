@@ -1,6 +1,6 @@
 
 
-<% if wim.mistake_words != nil %>
+<% if wim != nil && wim.mistake_words != nil %>
                     
                     <% i = 0 %>
                      <% Sentence.find(wim.sentence_id).word_list.each do |w| %>

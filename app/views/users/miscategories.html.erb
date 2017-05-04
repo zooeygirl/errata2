@@ -17,7 +17,7 @@
 
 <% Essay.where(user_id: @user).each do |e| %>
 <% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
-<%= mis.category %>/<%= mis.name %>: <%= sen.content  %>
+<%= sen.content  %>
 <%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: mis.id).first} %>
 <% end %>
 <% end %></br>

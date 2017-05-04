@@ -37,7 +37,7 @@ end
 
 def index
 
-    @sentences = Sentence.where(essay_id: Essay.where(draftnum: 1))
+    @sentences = Sentence.where(essay_id: Essay.where(draftnum: 1))[100..1000]
     respond_to do |format|
     format.html
     format.csv { send_data @sentences.to_csv }

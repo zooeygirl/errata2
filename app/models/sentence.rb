@@ -16,7 +16,7 @@ class Sentence < ActiveRecord::Base
 
 def self.to_csv(options = {})
   CSV.generate(options) do |csv|
-    csv << ["sentence", "word_list", "mistake_ids", "mistake_words"]
+    csv << ["word_list", "mistake_ids", "mistake_words"]
     all.each do |sentence|
     	miswords = []
     	sentence.words_in_mistakes.each do |wim|
@@ -29,7 +29,7 @@ def self.to_csv(options = {})
     		end
     	end
 
-    	csv << [sentence.content, sentence.word_list, sentence.mistakes.ids, miswords]
+    	csv << [sentence.word_list, sentence.mistakes.ids, miswords]
        
     end
   end

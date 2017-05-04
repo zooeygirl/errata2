@@ -36,7 +36,8 @@ def update_word_list
 end 
 
 def index
-    @sentences = Sentence.all
+
+    @sentences = Sentence.where(essay_id: Essay.where(draftnum: 1))
     respond_to do |format|
     format.html
     format.csv { send_data @sentences.to_csv }

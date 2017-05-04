@@ -16,6 +16,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'chartkick', '~> 2.0', '>= 2.0.1'
 gem 'puma'
 gem 'pg'
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
 
 
 

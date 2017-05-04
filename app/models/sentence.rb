@@ -2,6 +2,7 @@ class Sentence < ActiveRecord::Base
 	
 	belongs_to :paragraph, dependent: :destroy
 	belongs_to :essay
+	belongs_to :user
 	has_and_belongs_to_many :mistakes
 	has_and_belongs_to_many :teacher_comments
 	has_many :words_in_mistakes, dependent: :destroy

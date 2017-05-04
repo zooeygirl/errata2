@@ -96,6 +96,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sentence_params
-      params.require(:sentence).permit(:id, :content, :comment, :trackernum, :essay_id, :paragraph_id, vocabulary_errors:[], word_list:[], mistake_ids:[], teacher_comment_ids:[], words_in_mistakes_attributes:[:id, :sentence_id, :mistake_id, :_destroy])
+      params.require(:sentence).permit(:id, :user_id, :content, :comment, :trackernum, :essay_id, :paragraph_id, vocabulary_errors:[], word_list:[], mistake_ids:[], teacher_comment_ids:[], words_in_mistakes_attributes:[:id, :sentence_id, :mistake_id, :_destroy])
     end
 end

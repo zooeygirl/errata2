@@ -334,9 +334,9 @@ end
 
               while i < @sentence_array.count  do
                 if paragraph.sentences[i].blank?
-                    paragraph.sentences.create(content: @sentence_array.at(i), essay_id: @essay.id, word_list: @sentence_array.at(i).split(/\W+/))
+                    paragraph.sentences.create(content: @sentence_array.at(i), essay_id: @essay.id, user_id: @essay.user_id, word_list: @sentence_array.at(i).split(/\W+/))
                 else
-                    paragraph.sentences[i].update(content: @sentence_array.at(i), essay_id: @essay.id, word_list: @sentence_array.at(i).split(/\W+/))
+                    paragraph.sentences[i].update(content: @sentence_array.at(i), essay_id: @essay.id, user_id: @essay.user_id, word_list: @sentence_array.at(i).split(/\W+/))
                 end
   
               i +=1

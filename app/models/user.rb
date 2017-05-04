@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :evaluations, dependent: :destroy
   has_many :teacher_comments, dependent: :destroy
   has_many :practice_exercises
+  has_many :sentences, dependent: :destroy
 
   enum role: {Teacher: 0, Student: 1}
 

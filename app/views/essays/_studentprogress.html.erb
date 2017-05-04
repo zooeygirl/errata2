@@ -5,6 +5,7 @@
 <% myarray =[] %>
 <% i=0 %>
 
+
 <% Mistake.categories.each do |cat| %>
 		  <% afg += "{name: \"#{cat.first}\", data: {" %>
 		  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
@@ -31,14 +32,35 @@
 <%= line_chart myarray %>
 </div>
 
-<% Mistake.all.order(:category).each do |mis| %>
 
-<% Essay.where(user_id: @student).each do |e| %>
-<% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
-<%= mis.category %>/<%= mis.name %>: <%= sen.content  %>
-<%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: mis.id).first} %>
+
+
+
+
+
+</br>
+
+
+<% Mistake.categories.each do |cat| %>
+	<%= link_to cat.first, classroom_user_miscategories_path(@classroom, @user, cat: cat.last)%>
+			</br>	
 <% end %>
-<% end %></br>
-___________________
-<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

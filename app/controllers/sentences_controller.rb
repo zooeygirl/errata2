@@ -1,7 +1,7 @@
 class SentencesController < ApplicationController
 	before_action :set_sentence, only: [:show, :edit, :update, :destroy]
-  before_action :set_essay, except: [:edit, :update]
-  before_action :set_paragraph, except: [:edit, :update]
+  before_action :set_essay, except: [:edit, :update, :index]
+  before_action :set_paragraph, except: [:edit, :update, :index]
  
   
 
@@ -35,15 +35,22 @@ def update_word_list
   
 end 
 
+def index
+    @sentences = Sentence.all
+    respond_to do |format|
+    format.html
+    format.csv { send_data @sentences.to_csv }
+    end
+  
+end
+
 
 def show
   redirect_to essay_paragraph_path(@essay, @paragraph)
 end
 
 
-def index
-	 @sentences = Sentence.all
-end
+
 
 
 

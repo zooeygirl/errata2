@@ -16,9 +16,6 @@ def self.to_csv(options = {})
     csv << column_names
     all.each do |mistake|
       csv << mistake.attributes.values_at(*column_names)
-      mistake.links do |link|
-      csv << link.attributes.values_at(*column_names)
-  		end
     end
   end
 end

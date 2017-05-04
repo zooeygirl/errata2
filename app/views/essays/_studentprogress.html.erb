@@ -40,10 +40,9 @@
 
 </br>
 
-
 <% Mistake.categories.each do |cat| %>
 	<%= link_to cat.first, classroom_user_miscategories_path(@classroom, @user, cat: cat.last)%>
-			</br>	
+		</br>	
 <% end %>
 
 

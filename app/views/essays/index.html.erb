@@ -114,14 +114,9 @@ To get started, find your classroom:
 
 
 
-<% Mistake.all.order(:category).each do |mis| %>
-
-<% Essay.where(user_id: current_user).each do |e| %>
-<% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
-<%= mis.category %>/<%= mis.name %>: <%= sen.content  %></br>
-<% end %>
-<% end %>
-
+<% Mistake.categories.each do |cat| %>
+  <%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
+      </br> 
 <% end %>
 
 

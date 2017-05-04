@@ -13,6 +13,31 @@ class Sentence < ActiveRecord::Base
 	accepts_nested_attributes_for :words_in_mistakes, allow_destroy: true
 	
 
+
+def self.to_csv(options = {})
+  CSV.generate(options) do |csv|
+    csv << ["sentence", "word_list", "mistake_ids", "mistake_words"]
+    all.each do |sentence|
+    	miswords = []
+    	sentence.words_in_mistakes.each do |wim|
+    		if wim.mistake_words != nil
+	  			wimmiswords = []
+	    		wim.mistake_words[0..wim.mistake_words.count-2].each do |mw|
+	    			wimmiswords += [sentence.word_list[mw.to_i]]
+	    		end
+    			miswords += [wim.mistake_id, wimmiswords]
+    		end
+    	end
+
+    	csv << [sentence.content, sentence.word_list, sentence.mistakes.ids, miswords]
+       
+    end
+  end
+end
+
+
+
+
 	
 
 end

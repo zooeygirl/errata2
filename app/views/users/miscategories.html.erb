@@ -1,7 +1,7 @@
 
 
 <h2><%= Mistake.categories.first(@cat.to_i+1).last.first %></h2>
-
+xxxxxx
 
 <% problem_sentences = Sentence.where(user_id: @user).includes(:mistakes).where(mistakes:{category: @cat}).group('mistakes.name').group_by_month('sentences.created_at').count %>
 

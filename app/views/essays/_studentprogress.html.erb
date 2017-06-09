@@ -18,7 +18,7 @@
 				  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
 				  <% afg += ", " %>
 				  <% end %>
-		<% end %></br>
+		<% end %>
 		<% afg += "}}" %>
 		<% myarray[i] = eval(afg) %>
 		<% i += 1 %>

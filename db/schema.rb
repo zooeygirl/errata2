@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20170504062208) do
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.float    "hundred"
+    t.string   "hundred"
   end
 
   create_table "grade_elements", force: :cascade do |t|

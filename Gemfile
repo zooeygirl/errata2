@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.3'
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.6'
 
 gem 'rails', '4.2.6'
 gem 'sass-rails', '~> 5.0'
@@ -17,6 +17,9 @@ gem 'chartkick', '~> 2.0', '>= 2.0.1'
 gem 'puma'
 gem 'pg'
 gem 'groupdate', '~> 2.5', '>= 2.5.2'
+gem 'tzinfo-data'
+
+
 
 
 
@@ -25,14 +28,15 @@ gem 'groupdate', '~> 2.5', '>= 2.5.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'foreman'
+  gem 'execjs'
  
 end
 
 group :development do
 	gem 'sqlite3'
+	gem 'web-console-rails3', platforms: :ruby
 end
 
 group :production do

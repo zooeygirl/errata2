@@ -28,9 +28,10 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
     	<% if current_user.role == 'Student' %>
-	    	<% if current_user.classroom == nil %>
-            
+	    	<% if current_user.classroom == nil %> 
+        <% if @classroom == nil && @classrooms == nil%>
 			<li><%= link_to "Join Class", classroom_path(current_user.teacher) %></li>
+        <% end %>
 			<% else %>
 			<li><%= link_to "My Class", classroom_path(current_user.classroom) %></li>
       <li> <%= link_to "Home", essays_path(current_user)%>  </li>

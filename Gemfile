@@ -36,7 +36,7 @@ end
 
 group :development do
 	gem 'sqlite3'
-	gem 'web-console-rails3', platforms: :ruby
+	
 end
 
 group :production do

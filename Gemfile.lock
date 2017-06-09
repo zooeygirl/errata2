@@ -200,7 +200,6 @@ DEPENDENCIES
   turbolinks
   tzinfo-data
   uglifier (>= 1.3.0)
-  web-console-rails3
 
 RUBY VERSION
    ruby 2.2.6p396

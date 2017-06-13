@@ -1,0 +1,25 @@
+<% if training.t_answers.where(user_id: current_user.id).first != nil %>
+	<% if training.t_answers.where(user_id: current_user).first.answer == training.answer %>
+
+	Correct!  Good job!
+
+	<% else %>
+
+	Try Again!
+
+	<% end %></br>
+<% end %>
+
+<% if training.t_answers.where(user_id: current_user.id).count > 0  %>
+
+<%= training.question %></br>
+
+<%= render training.t_answers.where(user_id: current_user.id).first %>
+
+<% else %>
+
+<%= render partial: "t_answers/form", locals: {training_id: training.id} %>
+
+<% end %>
+
+

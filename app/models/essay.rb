@@ -13,6 +13,7 @@ accepts_nested_attributes_for :words_in_mistakes, allow_destroy: true
 has_one :grade, dependent: :destroy
 has_many :grade_elements
 accepts_nested_attributes_for :grade_elements
+has_many :training_sets, dependent: :destroy
 
 
 

@@ -207,6 +207,7 @@ end
     if @ungraded_sections.count > 0 && @essay.paragraphs.count > 1
         redirect_to :back, notice: "Some sections of the essay have not yet been graded. #{@ungraded_sections}"
     else
+      @essay.training_sets.create(essay_id: @essay.id, user_id: User.find(@essay.user_id).id)
       @essay.update_attribute(:essay_status, 2)
       secondcopy = @essay.dup
       secondcopy.update_attribute(:trackernum, @essay.id)

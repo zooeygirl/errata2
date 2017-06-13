@@ -1,0 +1,12 @@
+
+<% @mistake.trainings.each do |train| %>
+
+<%= train.question %>
+<%= train.answer %>
+<%= train.explanation %></br>
+
+<% end %>
+<%= link_to 'New Exercise', new_mistake_training_path %>
+
+
+<%= link_to 'Mistake Index', mistakes_path %>

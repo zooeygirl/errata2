@@ -1,0 +1,26 @@
+<%= form_for [@mistake, @training] do |t| %>
+
+ <div class="field">
+    <%= t.label :question %><br>
+    <%= t.text_field :question %>
+  </div>
+
+   <div class="field">
+    <%= t.label :answer %><br>
+    <%= t.text_field :answer %>
+  </div>
+
+
+   <div class="field">
+    <%= t.label :explanation %><br>
+    <%= t.text_field :explanation %>
+  </div>
+
+
+
+
+</br>
+  <div class="actions">
+    <%= t.submit %>
+  </div>
+<% end %>

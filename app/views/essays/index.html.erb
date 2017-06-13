@@ -44,6 +44,7 @@ Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
       <td>Word Count</td>
       <td>Essay Status</td>
       <td>Due Date</td>
+      <td>Practice Exercises</td>
     </tr>
   </thead>
 
@@ -62,6 +63,8 @@ Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
         <% end %>
         <td><%= essay.essay_status %></td>
         <td><%= Assignment.find(essay.assignment_id).duedate.to_formatted_s(:long)  %></td>
+        <% if essay.training_sets.count > 0 %>
+        <td><%= link_to "Practice", essay_training_set_path(essay, essay.training_sets.first) %></td><% end %>
     
         <% if essay.essay_status == 'In progress' %>
         <td><%= link_to 'Destroy', essay, method: :delete, data: { confirm: 'Are you sure?' } %></td>

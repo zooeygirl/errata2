@@ -12,7 +12,13 @@ Rails.application.routes.draw do
 
 resource :user
  
-resources :users
+resources :users do
+  resources :training_sets do
+    resources :trainings do
+      resources :t_answers
+    end
+  end
+end
   
   resources :teacher_comments
   resources :practice_exercises do
@@ -37,7 +43,7 @@ resources :users
   resources :assignments
 
   resources :sentences
-
+  resources :t_answers
 
   resources :evaluations do
     resources :criteria
@@ -46,6 +52,7 @@ resources :users
 
   resources :mistakes do
     resources :links
+    resources :trainings
   end
   
 resources :words_in_mistakes
@@ -64,6 +71,7 @@ resources :words_in_mistakes
         resources :grade_elements
       end
     resources :words_in_mistakes
+    resources :training_sets
     resources :paragraphs do
       resources :sentences do
         resources :words_in_mistakes 

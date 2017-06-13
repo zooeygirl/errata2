@@ -4,6 +4,7 @@ has_and_belongs_to_many :sentences
 has_and_belongs_to_many :practice_exercises
 has_many :essays, :through => :sentences
 has_many :links
+has_many :trainings
 
 
 enum category: {'Vocabulary': 0, 'Verb': 1, 'Adjectives + Adverbs': 2, 

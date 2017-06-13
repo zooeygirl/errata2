@@ -1,0 +1,23 @@
+<%= form_for [current_user, @training_set, Training.find(training_id), Training.find(training_id).t_answers.new] do |t| %>
+
+ 
+
+
+<%= Training.find(training_id).question %>
+
+
+ <div class="field">
+    <%= t.label :answer %><br>
+    <%= t.text_field :answer %>
+  </div>
+
+ 
+
+
+
+
+</br>
+  <div class="actions">
+    <%= t.submit %>
+  </div>
+<% end %>

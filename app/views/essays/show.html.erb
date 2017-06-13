@@ -192,6 +192,8 @@
        
     <% end %>
 
+   
+
        <% if @essay.grade_elements.where(level: 'Essay').count > 0 %>
             <div class= "btn-lg">
             <div class="actions">
@@ -199,6 +201,7 @@
         </div></div>
       <% end %>
     </div>
+
 
 <% end %>
 
@@ -213,7 +216,11 @@
  <%= link_to 'Reset rubric', essay_change_rubric_path(@essay), method: :patch %>
 Warning: You will lose all the current grades for this student if you reset the rubric.
 </div> 
-<td><%= link_to 'Send essay back to student without feedback', essay_unsubmit_essay_path(@essay), method: :patch%></td>
+<%= link_to 'Send essay back to student without feedback', essay_unsubmit_essay_path(@essay), method: :patch%>
+
+  <div class="graph">
+    <%= bar_chart @essay.mistakes.group(:name).count %>
+  </div>
 <% end %>
 
  <% end %>

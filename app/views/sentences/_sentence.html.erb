@@ -32,12 +32,13 @@ ________________________________________________________________________________
             Original Sentence:  
             <%= original_sentence.content %></div>
             
+            <% if original_sentence.teacher_comments.count > 0 || original_sentence.comment != "" %>
             <h4>Teacher Comments: </h4>
-            <%= original_sentence.comment %></br>
+                <%= original_sentence.comment %></br>
                 <% original_sentence.teacher_comments.each do |tc| %>
                 <%= tc.content %></br>
                 <% end %>
-
+            <% end %>
           </br>
           <% if original_sentence.mistakes.count > 0 %>
          <%= render partial: "sentences/mistakes_table", locals: {original_sentence: original_sentence} %>

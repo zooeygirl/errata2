@@ -12,6 +12,7 @@
       <th>Links</th>
       <th>Practice Exercises</th>
       <th># of Errors</th>
+      <th># of Practice Exercises</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +25,7 @@
         <td><%= link_to 'Show', mistake %></td>
         <td><%= link_to 'Add Practice Exercise', mistake_trainings_path(mistake) %> </td>
         <td><%= Sentence.includes(:mistakes).where(mistakes: {id: mistake.id}).count %></td>
+        <td><%= mistake.trainings.count %></td>
         <% if current_user.id == 1 %>
         
         <td><%= link_to 'Edit', edit_mistake_path(mistake) %></td>

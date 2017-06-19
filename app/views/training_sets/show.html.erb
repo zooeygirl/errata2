@@ -1,8 +1,7 @@
 
-Correct Answers: <%= @training_set.correct %> </br>
-Incorrect Answers: <%= @training_set.incorrect %> </br>
+Correct Answers: <div id="correct_answers"><%= @training_set.correct %></div> </br>
 
-<%= @training_set.training_ids %>
+<% @training_set.training_ids %>
 
 </br>
 
@@ -11,6 +10,8 @@ Incorrect Answers: <%= @training_set.incorrect %> </br>
 
 
 _____________________</br>
-	<%= render @training_set.trainings %>
+	<%= render @training_set.trainings.order(:id) %>
 
+______________________</br>
 
+<%= link_to "Back to Essays", essays_path %>

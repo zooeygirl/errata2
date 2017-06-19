@@ -1,14 +1,21 @@
-<% if training.t_answers.where(user_id: current_user.id).first != nil %>
-	<% if training.t_answers.where(user_id: current_user).first.answer == training.answer %>
 
-	Correct!  Good job!
 
-	<% else %>
+	<% if training.t_answers.where(user_id: current_user.id).first != nil %>
+		<% if training.t_answers.where(user_id: current_user).first.answer == training.answer %>
+		<div id="t_answer_<%=training.t_answers.where(user_id: current_user.id).first.id %>" class="correct">
+		Correct!  Good job!
+		</div>
 
-	Try Again!
+		<% else %>
 
-	<% end %></br>
-<% end %>
+		<div id="t_answer_<%=training.t_answers.where(user_id: current_user.id).first.id %>">
+		Try Again!
+		</div>
+
+		<% end %></br>
+	<% end %>
+
+
 
 <% if training.t_answers.where(user_id: current_user.id).count > 0  %>
 

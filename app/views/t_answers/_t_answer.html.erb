@@ -1,27 +1,15 @@
-
-
-<%= t_answer.answer %>
-
-
-<%= form_for t_answer do |t| %>
+<%= form_for t_answer, remote: true do |t| %>
 
  
-
-
 
  <div class="field">
-    <%= t.label :answer %><br>
     <%= t.text_field :answer %>
   </div>
-
- 
-
-
 
 
 </br>
   <div class="actions">
-    <%= t.submit %>
+    <%= t.submit "Answer" %>
   </div>
 <% end %>
 

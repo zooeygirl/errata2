@@ -18,6 +18,10 @@ def create
 	redirect_to mistake_trainings_path(@mistake)
 end
 
+def destroy
+    @training.destroy
+    redirect_to :back
+end
 
 
 def index

@@ -18,16 +18,23 @@ def create
 	@t_answer.training_id = @training.id
   @t_answer.user_id = @user.id
 	@t_answer.save
-	redirect_to :back
+   respond_to do |format|
+      format.html {redirect_to :back}
+      format.js
+    end
 end
 
 def edit 
+ 
 end
 
 def update
   @t_answer.update(t_answer_params)
    if @t_answer.update(t_answer_params)
-        redirect_to :back
+        respond_to do |format|
+        format.html {redirect_to :back}
+        format.js
+        end
       end
 end
 

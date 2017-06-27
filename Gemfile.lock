@@ -115,6 +115,9 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
+    rails-dev-tweaks (1.2.0)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
     rails-dom-testing (1.0.7)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
@@ -190,6 +193,7 @@ DEPENDENCIES
   pg
   puma
   rails (= 4.2.6)
+  rails-dev-tweaks (~> 1.2)
   rails_12factor
   sass-rails (~> 5.0)
   scalpel (~> 0.2.1)

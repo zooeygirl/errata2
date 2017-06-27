@@ -1,4 +1,4 @@
-______________________________________________________________________________________
+
 
 <p id="sentence_mistakes">
 
@@ -18,6 +18,11 @@ ________________________________________________________________________________
 
 <% if @essay.essay_status == 'Feedback' %>
 
+<div class="title-block">
+   <div class="line"></div>
+   <div class="titles sentitle">Sentence <%=@paragraph.sentences.order(:id).index(sentence) + 1%></div>
+</div>
+
           <div id='sentence_<%=sentence.id %>'><p>
     
           <% sentenceindex = @paragraph.sentences.order(:id).index(sentence) %>
@@ -28,28 +33,42 @@ ________________________________________________________________________________
 
           <% if original_sentence != nil %>
 
-          <div class="comment">
-            Original Sentence:  
+          <div class="rectangle"><div class="originalbox">ORIGINAL SENTENCE</div></div>
+          <div class="essay_view">  
             <%= original_sentence.content %></div>
-            
-            <% if original_sentence.teacher_comments.count > 0 || original_sentence.comment != "" %>
-            <h4>Teacher Comments: </h4>
-                <%= original_sentence.comment %></br>
-                <% original_sentence.teacher_comments.each do |tc| %>
-                <%= tc.content %></br>
+
+            <div class="rectangle-tc">
+            <div class="arrow-right"><img src="/assets/errata_arrow_right.png" alt="arrow-right">
+            <img src="/assets/errata_arrow_down.png"  class="img-swap" style="display:none">
+            </div>
+            <div class="tc-text">TEACHER COMMENTS</div>
+            </div>
+
+            <div class="tcomments">
+                <% if original_sentence.teacher_comments.count > 0 || original_sentence.comment != "" %>
+                    <%= original_sentence.comment %></br>
+                    <% original_sentence.teacher_comments.each do |tc| %>
+                    <%= tc.content %></br>
+                    <% end %>
                 <% end %>
-            <% end %>
-          </br>
+            </div>
+
+          
           <% if original_sentence.mistakes.count > 0 %>
          <%= render partial: "sentences/mistakes_table", locals: {original_sentence: original_sentence} %>
+
+         <% if current_user.role == "Teacher" %>
          Edited Sentence: <%= sentence.content %>
+         <% end %>
 
          <% if sentence.words_in_mistakes.count > 0 && @essay.draftnum == 2 %>
         <%= render partial: "sentences/new_wims", locals: {sentence: sentence} %>
         <% end %>
 
         <% else %>
+        </br>
         No language problems.
+        </br>
         <% end %>
 
         </br>
@@ -58,13 +77,14 @@ ________________________________________________________________________________
 
  <% if current_user.role == 'Student' %>       
           		
-          		<%= form_for [@essay, @paragraph, sentence], remote: true do |f| %>
+          		<%= form_for [@essay, @paragraph, sentence], remote: true, width: "100%" do |f| %>
 
-
-              		<div class="field">
-                  		<%= f.text_area :content, size: "100x3" %>
+                  <div class="pinktext edit">EDIT THIS SENTENCE</div>
+                  
+              		<div class="field editsen">
+                  		<%= f.text_area :content, :class => "editbox" %>
                 		</div>
-
+                    
 
 
               		<div class="actions">

@@ -20,6 +20,17 @@ $(function() {
 
 
 
+ $(".rectangle-tc").click(function(){
+        var imgs = $(this).children().children('img');
+
+        $(this).next(".tcomments").slideToggle("slow");
+        $(imgs[0]).toggle();
+        $(imgs[1]).toggle();
+
+ });
+
+
+
 
 
 });

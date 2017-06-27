@@ -40,10 +40,7 @@
 }
 
 
-.table-striped{
-border-collapse:separate;
-border-spacing: 5px;
-}
+
 
 .btn-lg {
 	position: fixed;
@@ -64,3 +61,30 @@ border-spacing: 5px;
 	clear: both;
 }
 
+
+#paragraph_view{
+	width: 100%; 
+}
+
+.table-rectangle {
+	background: #FFFFFF;
+}
+
+.table-striped{
+border-collapse:separate;
+border-spacing: 5px;
+width: 100%;
+border: 1px solid #D5D5D5;
+}
+
+.tcomments{
+	display: none;
+}
+
+.tc-text{
+	display: inline-block;
+}
+
+.arrow-right{
+	display: inline-block;
+}

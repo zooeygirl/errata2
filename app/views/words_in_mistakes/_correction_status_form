@@ -6,7 +6,7 @@
  <div class="field">
  <div class="correction_radio_buttons">
 <%= m.radio_button :correction_status, 0 %>
-<%= label_tag(:correction_status, "Good job!") %></br>
+<%= label_tag(:correction_status, "Good Job") %></br>
 <%= m.radio_button :correction_status, 1 %>
 <%= label_tag(:correction_status, "Try again!") %>
   </div>

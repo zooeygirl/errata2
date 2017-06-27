@@ -1,3 +1,8 @@
+ <div class="table-rectangle">
+
+<div class="errors">  ERRORS  </div>
+
+
  <table class="table-striped">
           <tr><th>Category</th>
             <th>Mistake</th>
@@ -26,11 +31,11 @@
                      <% end %></td><td>
                      <% if current_user.role == "Student" %>
                              <% if wim.correction_status == nil %>
-                             ?
+                             <img src="/assets/errata_symbol_question_mark.png" alt="question">
                              <% elsif wim.correction_status == 0 %>
-                             Good Job!
+                             <img src="/assets/errata_symbol_tick.png" alt="tick">
                              <% elsif wim.correction_status == 1 %>
-                             Try Again!
+                             <img src="/assets/errata_symbol_cross.png" alt="cross">
                               <% end %>
                       <% elsif current_user.role == "Teacher" %>
                         <%= render partial: "words_in_mistakes/correction_status_form", locals: { wim: wim} %>
@@ -48,3 +53,4 @@
           <% end %>
 
         </table>
+  </div>

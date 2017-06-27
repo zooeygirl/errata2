@@ -159,4 +159,90 @@ ul .dropdown-menu>li{
 }
 
 
+.line{
+  height: 3.05px; 
+  width: 100%;
+  background-color: #E9E9E9;
+  position: absolute;
+  top: 40%;
+  z-index: -1;
+}
+
+.titles{
+  height: 42px; 
+  width: 253px; 
+  color: #F2236A; 
+  font-family: Roboto;  
+  font-size: 36px;  
+  font-weight: 500; 
+  line-height: 42px;  
+  text-align: center;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+}
+
+.sentitle{
+  font-weight: 300;
+}
+
+.title-block { 
+height: 52px; 
+width: 100%;
+position: relative;
+z-index: 1;
+}
+
+.rectangle {
+  height: 36px;
+  width: 170px;
+  border-radius: 5px 0 0 0;
+  background-color: #F2236A;
+  
+}
+
+.originalbox {
+  height: 16px;
+  width: 170px;
+  color: #FFFFFF;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  text-align: center;
+  padding: 10px 3px 10px;
+}
+
+.rectangle-tc {
+  height: auto;
+  width: auto;
+  border: 15px solid #E9E9E9;
+  background-color: #E9E9E9;
+}
+
+.pinktext {
+  height: 16px;
+  width: 184px;
+  color: #F2236A;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+}
+
+.edit {
+  padding-bottom: 25px;
+}
+
+.errors{
+  height: 16px;
+  width: 184px;
+  color: #F2236A;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
 

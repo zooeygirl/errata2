@@ -31,6 +31,7 @@ group :development, :test do
   gem 'spring'
   gem 'foreman'
   gem 'execjs'
+  gem 'rails-dev-tweaks', '~> 1.2'
  
 end
 

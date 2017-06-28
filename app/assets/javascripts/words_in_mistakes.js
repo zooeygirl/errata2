@@ -31,10 +31,16 @@ $('body').on('click', '.correction_radio_buttons', function() {
  		$("input[type=hidden][class=wimessay]").val(v);
  		$("input[type=hidden][class=wimpara]").val(p);
  		$("input[type=hidden][class=wimsen]").val(s);
- 	
+ 	      
+        $(document).ajaxStop(function () {
+        $("#new_words_in_mistake").submit();
+        $('#new_words_in_mistake').remove();
+        });
 
  
 		});
+
+        
 
 
     } else {
@@ -42,19 +48,14 @@ $('body').on('click', '.correction_radio_buttons', function() {
 
     }
 
+   
 
 	}); 	
 	
 	
+  
 
-
-	var showWim = $(".sentence_mistakes").mouseleave(function() {
-
-    			$("#new_words_in_mistake").submit();
-    			$('#new_words_in_mistake').remove();
-
-    			
-		});
+	
 
 	
 

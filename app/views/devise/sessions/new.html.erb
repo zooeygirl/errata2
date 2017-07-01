@@ -1,15 +1,27 @@
-<h2>Log in</h2>
+<div id="sign_up_box">
+
+<div class="sign_in_title">Log in</div>
+
+</br>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    </div>
+    <%= f.email_field :email, autofocus: true, :class => "sign_in_up" %>
   </div>
 
+  </br>
+
   <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+    <%= f.password_field :password, autocomplete: "off", :class => "sign_in_up" %>
   </div>
+
+  </br>
 
   <% if devise_mapping.rememberable? -%>
     <div class="field">
@@ -19,8 +31,12 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", :class => 'submit_class_button' %>
   </div>
 <% end %>
 
+</br>
+
 <%= render "devise/shared/links" %>
+
+</div>

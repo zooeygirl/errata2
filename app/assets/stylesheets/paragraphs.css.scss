@@ -75,7 +75,58 @@ border-collapse:separate;
 border-spacing: 5px;
 width: 100%;
 border: 1px solid #D5D5D5;
+background-color: white;
 }
+
+.table-striped > thead{
+	height: 13px;
+	width: 86px;
+	color: #9B9B9B;
+	font-family: Roboto;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 14px;
+	text-align: center;
+}
+
+.table-striped > tbody{
+	height: 18px;
+	width: 281px;
+	color: #9B9B9B;
+	font-family: Roboto;
+	font-size: 15px;
+	line-height: 21px;
+}
+
+td.pinkbox{
+	background-color: #FF0080;
+	width: 8px;
+	height: 100%;
+}
+
+td.table_button_dark{
+	background-color: #FF0080;
+	border-radius: 5px;
+}
+
+td.table_button_dark > a{
+	color: white;
+	text-align: center;
+}
+
+td.table_button_light{
+	border: 1px solid #FF0080;
+	border-radius: 5px;
+	width: 30px;
+}
+
+td.table_button_light > a {
+	color: #FF0080;
+	text-align: center;
+}
+
+
+
 
 .tcomments{
 	display: none;

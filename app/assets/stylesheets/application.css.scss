@@ -47,8 +47,10 @@ ul, .nav navbar-nav navbar-right{
 
 
 .container-fluid{
-  border: solid 1px black;
-  margin-top: 3px;
+ 
+  border-top: solid 2px #F2236A;
+  border-bottom: solid 2px #F2236A;
+  margin-top: 1px;
   padding-bottom: 20px;
 }
 
@@ -61,7 +63,6 @@ td {
 
  .mistake {
   color: #FF0080;
-  font-size: 150%;
   }
 
 
@@ -109,19 +110,13 @@ td {
   font-size: 18px;
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
-background-color: white ;
-color: #FF0080;
 
-}
 
-.nav-pills>li{
-  border: solid 1px black;
-}
 
 .nav-justified {
    border-collapse:separate;
-   border-spacing:70px 5px;
+   border-spacing:30px 1px;
+   border-bottom: 2px solid #E9E9E9 ;
 }
 
 p>.notice {
@@ -150,14 +145,88 @@ ul .dropdown-menu>li{
   position: absolute;
   top: 0;
   left: 0;
-  display: inline-block;
+  width: 100%;
   height: 100%;
 }
 
 #homepage>img{
   position: relative;
-  top: -75px;
-  left: -50px;
+  width: 100%;
+  height: 55%;
+
+}
+
+
+
+#sign_in_box{
+  position: relative;
+  height: 30%;  
+  width: 30%;
+  margin: 0 auto;
+  top: 2%;
+  
+}
+
+#sign_in_form{
+  height: 100%
+}
+
+.sign_in_title{
+ 
+  color: #797064;
+  font-family: Roboto;
+  font-size: 37px;
+  font-weight: 300;
+  line-height: 43px;
+}
+
+.sign_in_form_label{
+  font-size: 80%;
+  height: 14px;
+  width: 184px;
+  color: #F2236A;
+  font-family: Roboto;
+  font-weight: bold;
+  line-height: 14px;
+  text-transform: uppercase;
+
+}
+
+
+input.sign_in_up:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+
+input.sign_in_up, textarea{
+  font-size: 95%;
+  width: 100%;
+  border: 3px solid #E9E9E9;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  box-shadow: inset 0 1px 9px 4px rgba(0,0,0,0.07);
+
+}
+
+input.form_field {
+  border: 3px solid #E9E9E9;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  box-shadow: inset 0 1px 9px 4px rgba(0,0,0,0.07);
+}
+
+
+
+.submit_class_button{
+  background: #F2236A;
+  color: white;
+  text-align: center;
+  font-family: Roboto;
+  border: none;
+}
+
+.center_box{
+  margin-left: 38%;
 }
 
 
@@ -169,6 +238,15 @@ ul .dropdown-menu>li{
   top: 40%;
   z-index: -1;
 }
+
+
+#sign_up_box{
+  height: 500px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+
 
 .titles{
   height: 42px; 
@@ -247,4 +325,5 @@ z-index: 1;
   padding-bottom: 10px;
   padding-left: 10px;
 }
+
 

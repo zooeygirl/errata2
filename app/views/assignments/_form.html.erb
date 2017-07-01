@@ -1,15 +1,21 @@
+<div id="sign_up_box">
+
 <%= form_for([@classroom, @assignment]) do |f| %>
 
 
    <div class="field">
+   <div class="sign_in_form_label">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    </div>
+    <%= f.text_field :title, :class => "sign_in_up" %>
   </div>
 
 </br>
 
   <div class="field">
-    <%= f.label :description %><br>
+    <div class="sign_in_form_label">
+    <%= f.label :description %><br> </div>
+    </br>
     <%= f.text_area :description, size: "50%" %>
   </div>
 
@@ -17,25 +23,35 @@
 
 
  <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label "Minimum Words" %><br>
-    <%= f.text_field :wordcountmin %>
+    </div>
+    <%= f.text_field :wordcountmin, :class => "sign_in_up" %>
   </div>
 
   <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label "Maximum Words" %><br>
-    <%= f.text_field :wordcountmax %>
+    </div>
+    <%= f.text_field :wordcountmax, :class => "sign_in_up" %>
   </div>
 
+  </br>
+
   <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label "Due Date" %><br>
+    </div>
     <%= f.datetime_select :duedate %>
   </div>
 
-
+  </br>
 
 
  <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label "Rubric" %><br>
+    </div>
     <%= f.collection_select :evaluation, current_user.evaluations.all, :id, :name %>
   </div>
 
@@ -43,12 +59,10 @@
 </br>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "New Assignment", :class => 'submit_class_button' %>
   </div>
 
 
-
-
-
-
 <% end %>
+
+</div>

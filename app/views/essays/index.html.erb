@@ -1,8 +1,9 @@
 <% if user_signed_in? %>
 
+
 Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
 
-<ul class="nav nav-pills nav-justified">
+<ul class="nav nav-tabs nav-justified">
     <li><a href="#essays" data-toggle="tab">ESSAYS</a></li>
     <li><a href="#progress" data-toggle="tab">PROGRESS</a></li>
     <li><a href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
@@ -15,67 +16,104 @@ Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
 
 <% if current_user.classroom != nil %>
 
-<h1>New Assignments</h1>
+</br>
+<div class="title-block">
+   <div class="line"></div>
+   <div class="titles sentitle">Due</div>
+</div>
 
-<table>
-    <tr><td>Title</td><td>Due Date</td><td>Days Left</td><td>Word Range</td></tr>
+
+<table class="table-striped">
+        <thead>
+        <tr>
+        <td></td>
+        <td style="text-align: left;">TITLE</td>
+        <td>WORD RANGE</td>
+        <td>WORD COUNT</td>
+        <td>DUE DATE</td>
+        <td>DAYS LEFT</td>
+        <td>ACTION</td>
+        </tr>
+        </thead>
     <% Classroom.find(current_user.classroom).assignments.each do |assign| %>
         <% if current_user.essays.where(assignment_id: assign.id).count == 0 %>
-          <tr><td><%= assign.title %></td>
+          <tr>
+          <td class="pinkbox"></td>
+          <td style="width: 40%;"><%= assign.title %></td>
+          <td><%= "#{assign.wordcountmin}-#{assign.wordcountmax}" %></td>
+          <td>-</td>
           <td><%= assign.duedate.to_formatted_s(:long) %></td>
           <td><%= (assign.duedate.to_date - DateTime.now.to_date).to_i %></td>
-          <td><%= "#{assign.wordcountmin}-#{assign.wordcountmax}" %></td>
-          <td><%= link_to 'Start Assignment', new_essay_path(:essay => { title: assign.title, assignment_id: assign.id }) %></td>
+          <td class="table_button_dark"><%= link_to 'Start', new_essay_path(:essay => { title: assign.title, assignment_id: assign.id }) %></td>
         </tr>
         <% end %>
+        <% end %>
 
-    <% end %>
+          <% current_user.essays.where(draftnum: 1).where(essay_status: "In progress").each do |ess| %>
+          <% assign = Assignment.find(ess.assignment_id) %>
+        <tr>
+          <td></td>
+          <td style="width: 40%;"><%= ess.title %></td>
+          <td><%= "#{assign.wordcountmin}-#{assign.wordcountmax}" %></td>
+          <td><%= ess.body.scan(/\w+/).size %></td>
+          <td><%= assign.duedate.to_formatted_s(:long) %></td>
+          <td><%= (assign.duedate.to_date - DateTime.now.to_date).to_i %></td>
+          <td class="table_button_dark"> <%= link_to "Edit", edit_essay_path(ess) %></br><%= link_to 'Submit', essay_submit_essay_path(ess), method: :patch%></td>
+          
+        </tr>
+        <% end %>
+    
 </table>
 
 
+</br></br>
 
-<h1>My Essays</h1>
+<div class="title-block">
+   <div class="line"></div>
+   <div class="titles sentitle">Submitted</div>
+</div>
 
-<table>
+
+
+
+<table class="table-striped">
   <thead>
     <tr>
-      <td>Title</td>
-      <td>Word Range</td>
-      <td>Word Count</td>
-      <td>Essay Status</td>
-      <td>Due Date</td>
-      <td>Practice Exercises</td>
+      <td></td>
+      <td style="text-align: left;">TITLE</td>
+      <td>ESSAY STATUS</td>
+      <td>ACTION</td>
+      <td style="color: #F2236A;">Practice Exercises</td>
     </tr>
   </thead>
 
 <% if user_signed_in? %>
+  
   <tbody>
-    <% current_user.essays.where(draftnum: 1).each do |essay| %>
+   
+    <% current_user.essays.where(draftnum: 1).where("essay_status = 1 or essay_status = 2").each do |essay| %>
       <tr>
-        <% if essay.essay_status == 'Feedback' %>
-        <td><a><%= link_to essay.title, essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></a></td>
+        <% if essay.essay_status == "Feedback" %>
+        <td class="pinkbox"></td>
         <% else %>
-         <td><a><%= link_to essay.title, essay %></a></td>
+        <td></td>
         <% end %>
-        <% if essay.body != nil %>
-         <td><%="#{Assignment.find(essay.assignment_id).wordcountmin}-#{Assignment.find(essay.assignment_id).wordcountmax}"%></td>
-        <td><%= essay.body.scan(/\w+/).size %></td>
-        <% end %>
+        <td style="width: 40%;"><%= essay.title %></td>
         <td><%= essay.essay_status %></td>
-        <td><%= Assignment.find(essay.assignment_id).duedate.to_formatted_s(:long)  %></td>
-        <% if essay.training_sets.count > 0 %>
-        <td><%= link_to "Practice", essay_training_set_path(essay, essay.training_sets.first) %></td><% end %>
-    
-        <% if essay.essay_status == 'In progress' %>
-        <td><%= link_to 'Destroy', essay, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Edit', edit_essay_path(essay) %></td>
-        <td><%= link_to 'Submit Essay to your teacher', essay_submit_essay_path(essay), method: :patch%></td>
+        <% if essay.essay_status == 'Feedback' %>
+        <td class="table_button_dark"><%= link_to "Edit", essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></td>
+        <% else %>
+         <td class="table_button_dark"><%= link_to "View", essay %></td>
         <% end %>
+        <% if essay.training_sets.count > 0 %>
+        <td class="table_button_light"><%= link_to "Start", essay_training_set_path(essay, essay.training_sets.first) %></td><% end %>    
       </tr>
       <% end %>
     <% end %>
   </tbody>
+
 </table>
+
 
 
 <% else %>
@@ -134,7 +172,7 @@ To get started, find your classroom:
 
 <% if current_user.classroom != nil %>
 
-<table>
+<table class="table-striped">
   <tr><td>Practice Exercises</td><td># of Questions</td><td>Attempts</td><td>Correct Answers</td></tr>
 <% Classroom.find(current_user.classroom).practice_exercises.each do |pe| %>
   <tr>

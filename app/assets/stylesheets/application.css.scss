@@ -156,8 +156,9 @@ ul .dropdown-menu>li{
 #homepage>img{
 
   position: absolute;
-
+  height: 250px;
   left: 50%;
+  top: 55px;
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -169,12 +170,11 @@ ul .dropdown-menu>li{
 #sign_in_box{
   width: 30%;
   margin: 0 auto; 
-  background-color: white;
   border-radius: 5px;
 }
 
 #sign_in_box_container{
-  top: 220px;
+  top: 230px;
   position: relative;
   clear: both;
   width: 100%;

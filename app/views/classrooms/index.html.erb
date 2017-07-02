@@ -1,5 +1,7 @@
-<h2><%= User.find(current_user.teacher).first_name + " " + User.find(current_user.teacher).last_name + "'s"%> 
-Classrooms</h2>
+ <div class="title">
+ <%= User.find(current_user.teacher).first_name + " " + User.find(current_user.teacher).last_name + "'s"%> 
+Classrooms
+</div>
 
 
 <%-# __________________________________________________________________________ -%>
@@ -32,8 +34,12 @@ Classrooms</h2>
       <td>CLASSROOMS</td>
       <td>DAY</td>
       <td>TIME</td>
+      <% if current_user.role == "Teacher" %>
       <td>ESSAYS WAITING</td>
       <td colspan="2">EDIT/DELETE</td>
+      <% else %>
+      <td> JOIN CLASS </td>
+      <% end %>
     </tr>
   </thead>
 
@@ -52,12 +58,12 @@ Classrooms</h2>
 
         <% if clr.user_id == current_user.id %>
         <% i = 0 %>
-        <% clr.assignments.each do |ass| %>
-        <% i += ass.essays.where(essay_status: 1).count %>
-        <% end %>
+            <% clr.assignments.each do |ass| %>
+            <% i += ass.essays.where(essay_status: 1).count %>
+            <% end %>
         <td><%="#{i} essay(s) waiting for feedback"%></td>
-        <td><%= link_to 'Edit', edit_classroom_path(clr) %></td>
-        <td><%= link_to 'Destroy', classroom_path(clr), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="width:5%;"><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_classroom_path(clr) %></td>
+        <td style="width:5%"><%= link_to image_tag("/assets/Errata_symbol_delete.png"), classroom_path(clr), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
         <% if current_user.role == 'Student' && current_user.classroom != clr.id %>
         <td><%= link_to 'Join Class', classroom_add_student_to_classroom_path(clr), method: :patch %></td>
@@ -72,11 +78,13 @@ Classrooms</h2>
 
 
 </table>
+</div>
+
 <% if current_user.role == 'Teacher' %>
   <%= link_to 'New Classroom', new_classroom_path %>
 
 
-</div>
+
 </div>
 
 <%-# __________________________________________________________________________ -%>
@@ -85,25 +93,26 @@ Classrooms</h2>
 
 <div class="indextables container-fluid">
   
-<h2>Rubrics</h2>
 
 
 
-<table class="table-hover">
+
+<table class="table-striped" style="border: none;">
 
 
 <% Evaluation.where(user_id: current_user.id).each do |eval| %>
   <tr><td><%= link_to eval.name, evaluation_path(eval) %></td>
-  <td><%= link_to 'Destroy', evaluation_path(eval), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
+  <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), evaluation_path(eval), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
 <% end %>
 
 </table>
 
 </br></br>
-<%= link_to "New Rubric", new_evaluation_path %>
+
 
 
 </div>
+<%= link_to "New Rubric", new_evaluation_path %>
 </div>
 
 
@@ -114,25 +123,34 @@ Classrooms</h2>
 
 <div class="indextables container-fluid">
   
-<h2>My Comments</h2>
 
 
 
-<table class="table-hover">
+<table class="table-striped" style="border: none;">
+
+<thead>
+  <tr>
+    <td style="text-align: left;">Category</td>
+    <td style="text-align: left;">Comment</td>
+    <td colspan="2" width="6%">EDIT/DESTROY</td>
+  </tr>
+</thead>
+
 
 <% current_user.teacher_comments.each do |com| %>
   <tr><td><%= com.category %></td><td><%= com.content %></td>
-    <td><%= link_to 'Edit', edit_teacher_comment_path(com) %></td>
-  <td><%= link_to 'Destroy', teacher_comment_path(com), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
+    <td><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_teacher_comment_path(com) %></td>
+  <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), teacher_comment_path(com), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
 <% end %>
 
 </table>
 
 </br></br>
-<%= link_to "New Comment", new_teacher_comment_path %>
+
 
 
 </div>
+<%= link_to "New Comment", new_teacher_comment_path %>
 </div>
 
 <%-# __________________________________________________________________________ -%>
@@ -142,25 +160,25 @@ Classrooms</h2>
 
 <div class="indextables container-fluid">
   
-<h2>Practice Exercises</h2>
 
 
 
-<table class="table-hover">
+<table class="table-striped" style="border: none;" >
 <% current_user.practice_exercises.each do |pe| %>
   <tr><td><%= pe.name %></td><td><%= pe.description %></td>
     <td><%= link_to 'Show', practice_exercise_path(pe) %></td>
-    <td><%= link_to 'Edit', edit_practice_exercise_path(pe) %></td>
-  <td><%= link_to 'Destroy', practice_exercise_path(pe), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
+    <td><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_practice_exercise_path(pe) %></td>
+  <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), practice_exercise_path(pe), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
 <% end %>
 
 </table>
 
 </br></br>
-<%= link_to "New Practice Exercise", new_practice_exercise_path %>
+
 
 
 </div>
+<%= link_to "New Practice Exercise", new_practice_exercise_path %>
 </div>
 
 

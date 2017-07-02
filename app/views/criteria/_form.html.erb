@@ -1,3 +1,6 @@
+
+<div id="sign_up_box">
+
 <%= form_for([@evaluation, @criterium]) do |f| %>
   <% if @criterium.errors.any? %>
     <div id="error_explanation">
@@ -12,28 +15,45 @@
   <% end %>
 
   <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label :level %><br>
+    </div>
     <%= f.select :level, Criterium.levels.keys %>
   </div>
 
+  </br>
+
    <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    </div>
+    <%= f.text_field :name, :class => "sign_in_up" %>
   </div>
+
+   </br>
 
   <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label "Percentage of final grade" %><br>
-    <%= f.text_field :percentage %>
+    </div>
+    <%= f.text_field :percentage, :class => "sign_in_up" %>
   </div>
 
+   </br>
+
    <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label "Points" %><br>
-    <%= f.text_field :outof %>
+    </div>
+    <%= f.text_field :outof, :class => "sign_in_up" %>
   </div>
 
 
 </br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "CREATE CRITERIUM", :class=>"submit_class_button" %>
   </div>
 <% end %>
+
+
+</div>

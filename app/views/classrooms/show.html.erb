@@ -1,7 +1,7 @@
 
 
 <% if current_user.role == 'Student' %>
-	<% if current_user.classroom != nil %>
+	<% if current_user.classroom != nil && current_user.classroom == @classroom.id %>
 	<%= link_to 'Change Classrooms', classrooms_path(current_user.teacher) %>
 	<% else %>
 	<%= link_to 'Join This Class', classroom_add_student_to_classroom_path(@classroom), method: :patch %>
@@ -18,11 +18,13 @@
 
  </br> </br>
 
-<ul class="nav nav-pills nav-justified">
+<ul class="nav nav-tabs nav-justified">
   	<li><a href="#assignments" data-toggle="tab">ASSIGNMENTS</a></li>
 	<li><a href="#students" data-toggle="tab">STUDENTS</a></li>
 	<li><a href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
 </ul>
+
+</br></br>
 
 <div class="tab-content">
 

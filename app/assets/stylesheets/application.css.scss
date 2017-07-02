@@ -142,29 +142,42 @@ ul .dropdown-menu>li{
 
 
 #homepage {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 250px;
+  display: block;
+  overflow: hidden;
 }
+
+
 
 #homepage>img{
-  position: relative;
-  width: 100%;
-  height: 55%;
 
+  transform: translate(-50%, -50%);
+  position: absolute;
+  height: 50%;
+  top: 30%;
+  left: 50%;
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%); 
 }
-
 
 
 #sign_in_box{
-  position: relative;
-  height: 30%;  
+
   width: 30%;
   margin: 0 auto;
-  top: 2%;
   
+}
+
+#sign_in_box_container{
+  position: relative;
+  clear: both;
+  width: 100%;
 }
 
 #sign_in_form{
@@ -199,7 +212,7 @@ input.sign_in_up:-webkit-autofill {
 
 
 input.sign_in_up, textarea{
-  font-size: 95%;
+  font-size: 100%;
   width: 100%;
   border: 3px solid #E9E9E9;
   border-radius: 5px;

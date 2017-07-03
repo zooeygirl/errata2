@@ -25,6 +25,10 @@ class EssaysController < ApplicationController
     second_draft
   end
 
+def error_summary
+    @essay = Essay.find(params[:essay_id])
+end
+
 def second_draft
   if @essay.draftnum == 2
         @essay.paragraphs.order(:id).each do |para|

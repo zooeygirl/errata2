@@ -67,6 +67,7 @@ resources :words_in_mistakes
       patch :change_rubric
       patch :set_paragraphs_for_second_draft
       get :create_grade_template
+      get :error_summary
       resource :grade do
         resources :grade_elements
       end

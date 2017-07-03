@@ -119,12 +119,13 @@ p, #sentence_mistakes {
 
 .essay_and_second_draft {
     background-color: white;
-    width: 400px;
+    width: 90%;
+    max-width: 1000px;
     min-height: 500px;
     text-align: left;
     padding-left: 50px;
     padding-right: 25px;
     padding-top: 25px;
     padding-bottom: 25px;
-    border: solid 3px #FF0080;
+    border-top: solid 3px #FF0080;
 }

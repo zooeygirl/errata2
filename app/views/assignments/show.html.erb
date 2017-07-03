@@ -20,6 +20,8 @@
 
 <div class="tab-content">
 
+</br>
+
 
 <%-# __________________________________________________________________________ -%>
 
@@ -27,8 +29,9 @@
 
 
 <div class="container-fluid" id="waiting_feedback">
-			<h4> Waiting for Feedback </h4>
-			<table>
+			<div class="sign_in_title"> Waiting for Feedback </div>
+			</br>
+			<table class="table-striped">
 			
 				<% Essay.where(assignment_id: @assignment.id).each do |e| %>
 					<% if e.essay_status == 'Waiting for feedback' %>
@@ -36,7 +39,7 @@
 
 					
 					<% if current_user.id == @classroom.user_id %>
-					<td><%= link_to 'Correct essay', essay_create_grade_template_path(e) %></td>
+					<td class="table_button_dark" width="20%"><%= link_to 'Correct essay', essay_create_grade_template_path(e) %></td>
 					</tr><% end %>
 					<% end %>
 
@@ -48,9 +51,9 @@
 </div>
 
 <div class="container-fluid" id="feedback_given">
-			<h4> Feedback Given </h4>
+			<div class="sign_in_title"> Feedback Given </div>
 
-			<table>
+			<table class="table-striped">
 			<% if current_user.role == 'Teacher' %>
 				
 						<% Essay.where(assignment_id: @assignment.id).where(draftnum: 2).each do |e| %>
@@ -81,10 +84,14 @@
 
 <% if @assignment.evaluation != nil %>	
 
-<h3>Rubric: <%= Evaluation.find(@assignment.evaluation).name %></h3>
+<div class="sign_in_title"> <%= Evaluation.find(@assignment.evaluation).name %></div>
 
-<table>
+<table class="table-striped">
+
+<thead>
 <tr><td>Name</td><td>Level</td><td>Points</td><td>Percentage of total</td></tr>
+</thead>
+
 <% Evaluation.find(@assignment.evaluation).criteria.each do |crit| %>
 <tr><td><%= crit.name %></td>
 <td><%= crit.level %></td>
@@ -93,6 +100,8 @@
 <% end %>
 </table>
 </div>
+
+</br>
 
 
 <% crithash = [] %>
@@ -116,9 +125,19 @@
 <div id="menu1" class="tab-pane fade">
 
 <div class="indextables">
-<h3>Language Errors: </h3>
 
-<table>
+
+<table class="table-striped">
+
+<thead>
+	<tr>
+		<td>CATEGORY</td>
+		<td>NAME</td>
+		<td width= "5%"># OF ERRORS</td>
+		<td>SENTENCES</td>
+	</tr>
+</thead>
+
 <% Mistake.all.order(:category).each do |mis| %> 
 	<% if Sentence.includes(:mistakes).where(mistakes: { id: mis.id }).where(essay_id: Essay.where(assignment_id: @assignment.id)).count > 0  %>
 
@@ -156,14 +175,21 @@
 <div class="indextables">
 </br>
 <% if @assignment.classroom_average != nil %>
-<h3>Classroom Average:  <%= @assignment.classroom_average.round(2) %>%</h3>
+<div class="sign_in_title">Classroom Average:  <%= @assignment.classroom_average.round(2) %>%</div>
 <% end %>
 </br>
 
-<h4>Student Grades: </h4>
 
 
-<table class="table-bordered">
+<table class="table-striped">
+
+<thead>
+	<tr>
+		<td>STUDENT</td>
+		<td>GRADE</td>
+	</tr>
+</thead>
+
 	
 <% User.where(classroom: @classroom.id).each do |stu| %>
 	<tr>

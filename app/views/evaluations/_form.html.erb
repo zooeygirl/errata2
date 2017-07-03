@@ -1,4 +1,6 @@
 
+<div id="sign_up_box">
+
 <%= form_for(@evaluation) do |f| %>
   <% if @evaluation.errors.any? %>
     <div id="error_explanation">
@@ -17,17 +19,21 @@
  
 
 <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    </div>
+    <%= f.text_field :name, :class => "sign_in_up" %>
   </div>
 
 
 
-
+</br>
 
 
 
   <div class="actions">
-    <%= f.submit "Create Rubric" %>
+    <%= f.submit "Create/Update Rubric", :class=>"submit_class_button" %>
   </div>
 <% end %>
+
+</div>

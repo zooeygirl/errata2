@@ -1,4 +1,6 @@
 
+<div id="sign_up_box"
+
 <% if @practice_exercise == nil %>
 
 <% x = current_user.practice_exercises.build %>
@@ -13,24 +15,38 @@
 
 
   <div class="field">
+    <div class="sign_in_form_label">
     <%= t.label :name %><br>
-    <%= t.text_field :name %>
+    </div>
+    <%= t.text_field :name, :class=>"sign_in_up" %>
   </div>
+
+  </br>
 
    <div class="field">
+    <div class="sign_in_form_label">
     <%= t.label :description %><br>
-    <%= t.text_field :description, size: "70%" %>
+    </div>
+    <%= t.text_field :description, size: "70%", :class=>"sign_in_up" %>
   </div>
 
+  </br>
+
 <div class="field">
+  <div class="sign_in_form_label">
   <%= t.label :assignment %><br>
+  </div>
  <%= t.grouped_collection_select :assignment,
     current_user.classrooms.all, :assignments, :school,
     :id, :title %>
 </div>
 
+</br>
+
 <div class="field">
+  <div class="sign_in_form_label">
   <%= t.label :mistake_ids %><br>
+  </div>
 <%= t.collection_select :mistake_ids,
     Mistake.all,
     :id , :name, {include_blank: false}, {:multiple => true } %>
@@ -39,6 +55,9 @@
 
 </br>
   <div class="actions">
-    <%= t.submit %>
+    <%= t.submit "Create/Update", :class=>"submit_class_button" %>
   </div>
 <% end %>
+
+
+</div>

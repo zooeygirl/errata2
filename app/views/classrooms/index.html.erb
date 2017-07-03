@@ -3,6 +3,7 @@
 Classrooms
 </div>
 
+</br></br></br>
 
 <%-# __________________________________________________________________________ -%>
 
@@ -81,7 +82,9 @@ Classrooms
 </div>
 
 <% if current_user.role == 'Teacher' %>
+  <div class="new_object_link">
   <%= link_to 'New Classroom', new_classroom_path %>
+  </div>
 
 
 
@@ -98,10 +101,17 @@ Classrooms
 
 
 <table class="table-striped" style="border: none;">
-
+<thead>
+  <tr>
+    <td style="text-align:left;">RUBRIC</td>
+    <td colspan="2" width="6%">EDIT/DELETE</td>
+  </tr>
+</thead>
 
 <% Evaluation.where(user_id: current_user.id).each do |eval| %>
-  <tr><td><%= link_to eval.name, evaluation_path(eval) %></td>
+  <tr>
+  <td><%= link_to eval.name, evaluation_path(eval) %></td>
+  <td> <%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_evaluation_path(eval) %> </td>
   <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), evaluation_path(eval), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
 <% end %>
 
@@ -112,7 +122,9 @@ Classrooms
 
 
 </div>
+<div class="new_object_link">
 <%= link_to "New Rubric", new_evaluation_path %>
+</div>
 </div>
 
 
@@ -150,7 +162,9 @@ Classrooms
 
 
 </div>
+<div class="new_object_link">
 <%= link_to "New Comment", new_teacher_comment_path %>
+</div>
 </div>
 
 <%-# __________________________________________________________________________ -%>
@@ -164,6 +178,16 @@ Classrooms
 
 
 <table class="table-striped" style="border: none;" >
+<thead>
+  <tr>
+    <td style="text-align: left;">TITILE</td>
+    <td style="text-align: left;">DESCRIPTION</td>
+    <td style="text-align: left;">VIEW</td>
+    <td colspan="2" width="6%">EDIT/DESTROY</td>
+  </tr>
+</thead>
+
+
 <% current_user.practice_exercises.each do |pe| %>
   <tr><td><%= pe.name %></td><td><%= pe.description %></td>
     <td><%= link_to 'Show', practice_exercise_path(pe) %></td>
@@ -178,7 +202,9 @@ Classrooms
 
 
 </div>
+<div class="new_object_link">
 <%= link_to "New Practice Exercise", new_practice_exercise_path %>
+</div>
 </div>
 
 

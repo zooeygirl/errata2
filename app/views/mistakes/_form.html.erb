@@ -1,3 +1,5 @@
+<div class="sign_in_title">New/Edit Mistake</div>
+
 <%= form_for(@mistake) do |f| %>
   <% if @mistake.errors.any? %>
     <div id="error_explanation">
@@ -11,19 +13,31 @@
     </div>
   <% end %>
 
+  </br>
+
   <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label :category %><br>
+    </div>
     <%= f.select :category, Mistake.categories.keys %>
   </div>
 
+  </br>
+
    <div class="field">
+    <div class="sign_in_form_label">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    </div>
+    <%= f.text_field :name, :class => "sign_in_up" %>
   </div>
 
-
+</br>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create/Update Mistake", :class => "submit_class_button" %>
   </div>
 <% end %>
+
+</br>
+
+</div>

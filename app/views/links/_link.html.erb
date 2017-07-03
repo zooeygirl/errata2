@@ -11,8 +11,8 @@
 
 
 <% if current_user.role == 'Teacher' %>
-<td><%= link_to 'Edit', edit_mistake_link_path(@mistake, link) %></td>
-<td><%= link_to 'Delete', mistake_link_path(@mistake, link), method: :delete, data: { confirm: 'Are you sure?' },  remote: true %></td>
+<td><%= link_to  image_tag("/assets/Errata_symbol_edit.png"), edit_mistake_link_path(@mistake, link) %></td>
+<td><%= link_to  image_tag("/assets/Errata_symbol_delete.png"), mistake_link_path(@mistake, link), method: :delete, data: { confirm: 'Are you sure?' },  remote: true %></td>
 
 <% end %>
 

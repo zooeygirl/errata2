@@ -2,18 +2,20 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1>Mistakes</h1>
+<div class="title">Mistakes</div>
 
-<table>
+</br></br>
+
+<table class="table-striped">
   <thead>
     <tr>
-      <th>Category</th>
-      <th>Name</th>
-      <th>Links</th>
-      <th>Practice Exercises</th>
-      <th># of Errors</th>
-      <th># of Practice Exercises</th>
-      <th colspan="3"></th>
+      <th>CATEGORY</th>
+      <th>NAME</th>
+      <th>LINKS</th>
+      <th>PRACTICE EXERCISES</th>
+      <th># OF ERRORS</th>
+      <th># OF PRACTICE EXERCISES</th>
+      <th colspan="2" width="6%">EDIT/DESTROY</th>
     </tr>
   </thead>
 
@@ -28,8 +30,8 @@
         <td><%= mistake.trainings.count %></td>
         <% if current_user.id == 1 %>
         
-        <td><%= link_to 'Edit', edit_mistake_path(mistake) %></td>
-        <td><%= link_to 'Destroy', mistake, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
+        <td><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_mistake_path(mistake) %></td>
+        <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), mistake, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
       </tr>
     <% end %>
   </tbody>
@@ -38,7 +40,10 @@
 <br>
 
 <% if current_user.id == 1 %>
-<%= link_to 'New Mistake', new_mistake_path %></br>
+<div class="new_object_link">
+<%= link_to 'New Mistake', new_mistake_path %>
+</div>
+</br>
 <% end %>
 
 Download:

@@ -44,7 +44,7 @@
 </div></tr>
 </table>
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs nav-justified">
   <li class="active"><a data-toggle="tab" href="#essays">Essay</a></li>
   <li><a data-toggle="tab" href="#rubric">Grade Breakdown</a></li>
   <li><a data-toggle="tab" href="#errors">Language Errors</a></li>
@@ -52,17 +52,19 @@
 
 <div class="tab-content">
 
+</br>
+
 <div id="essays" class="tab-pane fade in active">
          
-    <table>
+    <table style="width:100%;">
         <tr>      
-          <td>Original Essay</td><td>Second Draft</td></tr>
+          <td><div class="pinktext">Original Essay</div></td>
+          <td><div class="pinktext">Second Draft</div></td></tr>
           <tr><td><div class="essay_and_second_draft">
 
               <% @first_draft = Essay.find(@essay.trackernum) %>
 
                   <p>
-                    <strong>Title:</strong>
                     <%= @first_draft.title %>
                   </p>
 
@@ -218,9 +220,8 @@ Warning: You will lose all the current grades for this student if you reset the 
 </div> 
 <%= link_to 'Send essay back to student without feedback', essay_unsubmit_essay_path(@essay), method: :patch%>
 
-  <div class="graph">
-    <%= bar_chart @essay.mistakes.group(:name).count %>
-  </div>
+</br>
+<%= link_to "Error Summary", essay_error_summary_path(@essay) %>
 <% end %>
 
  <% end %>

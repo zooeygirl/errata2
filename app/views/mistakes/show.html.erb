@@ -1,21 +1,23 @@
 
 
-<p>
-  <strong>Category:</strong>
-  <%= @mistake.category %>
-</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @mistake.name %>
-</p>
+  <div class="pre_title">Category:</div>
+  <div class="title" style="font-size:18px;"> <%= @mistake.category %> </div>
 
 
-<table id = "existing_links">
+
+  <div class="pre_title">Name:</div>
+  <div class="title"><%= @mistake.name %></div>
+
+</br></br>
+
+
+<table id = "existing_links" class="table-striped">
 <tr>
-<td>Description</td>
-<td>Language</td>
-<td>Media</td>      
+<td>DESCRIPTION</td>
+<td>LANGUAGE</td>
+<td>MEDIA</td> 
+<td colspan="2" width="6%">EDIT/DELETE</td>     
 </tr>
 
 
@@ -26,7 +28,7 @@
 
 
 <% if current_user.role == 'Teacher' %>
-<%= link_to 'Add link', new_mistake_link_path(@mistake), id: "new_weblink", remote: true %>
+<div class="new_object_link"><%= link_to 'Add link', new_mistake_link_path(@mistake), id: "new_weblink", remote: true %></div>
 
 </br></br>
 

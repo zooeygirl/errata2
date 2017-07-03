@@ -1,11 +1,12 @@
 <% if current_user.role == 'Teacher' %>
 
+<div id="sign_in_box">
 
-<h1>New Mistake</h1>
+
 
 <%= render 'form' %>
 
-<%= link_to 'Back', mistakes_path %>
 
+</div>
 
 <% end %>

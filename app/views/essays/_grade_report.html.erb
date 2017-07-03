@@ -6,11 +6,11 @@
 <% essay_for_grade_breakdown = @essay %>
 <% end %> 
 
+</br>
 
-<h3>Grade breakdown</h3>
 
 <% if essay_for_grade_breakdown.grade_elements.where(level: 'Introduction').count > 0 %>
-<table>
+<table class="table-striped">
 <th>Introduction</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Introduction').each do |q| %>
   <tr><td><%= q.name %></td>
@@ -28,7 +28,7 @@
 
 
 <% if essay_for_grade_breakdown.grade_elements.where(level: 'Body Paragraphs').count > 0 %>
-<table>
+<table class="table-striped">
 <th>Body Paragraphs</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Body Paragraphs').each do |q| %>
   <tr><td><%= q.name %></td>
@@ -45,7 +45,7 @@
 <% end %>
 
 <% if essay_for_grade_breakdown.grade_elements.where(level: 'Conclusion').count > 0 %>
-<table>
+<table class="table-striped">
 <th>Conclusion</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Conclusion').each do |q| %>
   <tr><td><%= q.name %></td>
@@ -62,7 +62,7 @@
 <% end %>
 
 <% if essay_for_grade_breakdown.grade_elements.where(level: 'All Paragraphs').count > 0 %>
-<table>
+<table class="table-striped">
 <th>All Paragraphs</th>
 
 <% essay_for_grade_breakdown.grade_elements.where(level: 'All Paragraphs').each do |q| %>
@@ -80,7 +80,7 @@
 <% end %>
 
 <% if essay_for_grade_breakdown.grade_elements.where(level: 'Essay').count > 0 %>
-<table>
+<table class="table-striped">
 <th>Essay</th>
 <% essay_for_grade_breakdown.grade_elements.where(level: 'Essay').each do |q| %>
   <tr><td><%= q.name %></td>

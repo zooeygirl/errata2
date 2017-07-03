@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 
 
-Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
+<td><% DateTime.now.to_date.to_formatted_s(:long) %></td>
 
 <ul class="nav nav-tabs nav-justified">
     <li><a href="#essays" data-toggle="tab">ESSAYS</a></li>
@@ -100,11 +100,14 @@ Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
         <% else %>
         <td></td>
         <% end %>
-        <td style="width: 40%;"><%= essay.title %></td>
-        <td><%= essay.essay_status %></td>
+       
         <% if essay.essay_status == 'Feedback' %>
+         <td style="width: 40%;"><%= link_to essay.title, essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></td>
+        <td><%= essay.essay_status %></td>
         <td class="table_button_dark"><%= link_to "Edit", essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></td>
         <% else %>
+        <td style="width: 40%;"><%= link_to essay.title, essay %></td>
+        <td><%= essay.essay_status %></td>
          <td class="table_button_dark"><%= link_to "View", essay %></td>
         <% end %>
         <% if essay.training_sets.count > 0 %>
@@ -157,10 +160,18 @@ To get started, find your classroom:
 
 
 <% if current_user.classroom != nil %>
+
+</br>
+<div style="column-count:5;">
+<table class="table-striped">
 <% Mistake.categories.each do |cat| %>
-  <%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
-      </br> 
+  <tr style="break-inside: avoid-column;"><td class="table_button_dark"><%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
+      </td></tr>
 <% end %>
+
+</table>
+</div>
+
 <% end %>
 
 

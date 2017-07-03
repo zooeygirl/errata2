@@ -1,5 +1,5 @@
 <% @student = User.find(@user) %>
-<h1>Student Progress: <%= @user.first_name%>  <%= @user.last_name%></h1> 
+<div class="sign_in_title">Student Progress: <%= @user.first_name%>  <%= @user.last_name%></div> 
 
 <% afg = "" %>
 <% myarray =[] %>
@@ -40,11 +40,20 @@
 
 </br>
 
+</br>
+
+<div style="column-count:4; width: 100%;">
+<table class="table-striped">
+
 <% Mistake.categories.each do |cat| %>
-	<%= link_to cat.first, classroom_user_miscategories_path(@classroom, @user, cat: cat.last)%>
-		</br>	
+	<tr style="break-inside: avoid-column;"><td class="table_button_dark" style="break-inside: avoid-column;"><%= link_to cat.first, classroom_user_miscategories_path(@classroom, @user, cat: cat.last)%>
+	</td>
+	</tr>
+			
 <% end %>
 
+</table>
+</div>
 
 
 

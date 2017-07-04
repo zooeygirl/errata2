@@ -15,6 +15,9 @@
       <%= original_essay.paragraphs.order(:id)[paragraphnum].content %>
       </div>
 
+
+    
+
       <div class="rectangle-tc">
       <div class="arrow-right">
       <img src="/assets/errata_arrow_right.png" class="img-swap">
@@ -31,7 +34,10 @@
           </tr>
           </table>
 
+    
 
+
+ 
   
             <% if original_essay.grade_elements.where(paragraph_id: original_paragraph.id).count >0 %>
                   <table>
@@ -48,6 +54,7 @@
                   </table>
             <% end %>
             </div>
+
 
 
 <%= render @paragraph.sentences.order(:id) %>

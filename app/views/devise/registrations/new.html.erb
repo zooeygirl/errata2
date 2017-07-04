@@ -55,11 +55,11 @@
 
   <div class="field">
      <div class="sign_in_form_label">
-    <%= f.label :password %>
+    <%= f.label :password %></div>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    </div>
+    
     <%= f.password_field :password, autocomplete: "off", :class => "sign_in_up" %>
   </div>
 

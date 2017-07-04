@@ -37,22 +37,29 @@
           <div class="essay_view">  
             <%= original_sentence.content %></div>
 
-            <div class="rectangle-tc">
-            <div class="arrow-right"><img src="/assets/errata_arrow_right.png" alt="arrow-right">
-            <img src="/assets/errata_arrow_down.png"  class="img-swap" style="display:none">
-            </div>
-            <div class="tc-text">TEACHER COMMENTS</div>
-            </div>
+                      
+                     
+              
 
-            <div class="tcomments">
-                <% if original_sentence.teacher_comments.count > 0 || original_sentence.comment != "" %>
-                    <%= original_sentence.comment %></br>
-                    <% original_sentence.teacher_comments.each do |tc| %>
-                    <%= tc.content %></br>
-                    <% end %>
-                <% end %>
-            </div>
+                      <div class="rectangle-tc">
+                      <div class="arrow-right"><img src="/assets/errata_arrow_right.png" alt="arrow-right">
+                      <img src="/assets/errata_arrow_down.png"  class="img-swap" style="display:none">
+                      </div>
+                      <div class="tc-text">TEACHER COMMENTS</div>
+                      </div>
 
+            
+
+                      <div class="tcomments">
+                               
+                              <%= original_sentence.comment %></br>
+                              <% original_sentence.teacher_comments.each do |tc| %>
+                              <%= tc.content %></br>
+                              <% end %>
+                             
+                      </div>
+
+            
           
           <% if original_sentence.mistakes.count > 0 %>
          <%= render partial: "sentences/mistakes_table", locals: {original_sentence: original_sentence} %>

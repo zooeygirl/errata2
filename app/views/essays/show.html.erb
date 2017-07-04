@@ -76,7 +76,8 @@
 
           <td><div class="essay_and_second_draft">
 
-            <% if @first_draft.body == @essay.body %>
+            
+            <% if @first_draft.body.gsub(/\s+/, "") == @essay.body.gsub(/\s+/, "") %>
                 <%= link_to "Start working on your second draft.", essay_paragraph_path(@essay, @essay.paragraphs.order(:id).first) %>
             <% else %>
             <p><%= @essay.title %></p>

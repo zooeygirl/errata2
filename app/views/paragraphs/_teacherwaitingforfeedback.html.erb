@@ -36,46 +36,47 @@
                
                
                 <div class = "comments">
-                Recurrent Comments: </br>
+                <div class="sign_in_form_label">Recurrent Comments:</div>
 
 
                 <%= p.hidden_field :id, class: "paranum" %>
 
 
-                <% TeacherComment.where(user_id: current_user.id).group_by(&:category).each do |cat| %>
-                  <div class="mistake_categories">
-                 <%= cat.first %>
-                
-                <div class="mistake_names">
-                 <%= p.collection_check_boxes :teacher_comment_ids, TeacherComment.where(category: cat.first), :id, :content do |b| %>
-                
-                     </br>
-                      <%= b.check_box(class: "check_box")%>
-                      <%= b.label %>
+                    <% TeacherComment.where(user_id: current_user.id).group_by(&:category).each do |cat| %>
+                      <div class="mistake_categories">
+                     <%= cat.first %>
+                    
+                    <div class="mistake_names">
+                     <%= p.collection_check_boxes :teacher_comment_ids, TeacherComment.where(category: cat.first), :id, :content do |b| %>
+                    
+                         </br>
+                          <%= b.check_box(class: "check_box")%>
+                          <%= b.label %>
 
 
-                 <% end %>
-                    <% i+=1 %>
+                     <% end %>
+                        <% i+=1 %>
 
-                    </div>
-                    </div>
-                 <% end %>
+                        </div>
+                        </div>
+                     <% end %>
+
               
+                          <div style="padding-top: 10px; clear: left;">
 
-                <div class="field">
-                </br></br>
-                  <h4><%= p.label "Specific Comment:" %></h4>
-                  <%= p.text_field :comment, size: "100%" %>
+                                    <div class="field">
+                                      <div class="sign_in_form_label"><%= p.label "Specific Comment:" %></div>
+                                      <%= p.text_field :comment, rows: "3", :class=>"sign_in_up" %>
+                                    </div>
+
+                        </div>
+
                 </div>
-
-                </div>
-
-
-
 
  
 
       <% end %>
+
         <div class="star_eval">
         <% @essay.grade_elements.order(:id).each do |ge| %>
 
@@ -139,7 +140,7 @@
 
                <div class="tcomments">
 
-                     Recurrent Comments: </br>
+                     <div class="sign_in_form_label">Recurrent Comments:</div>
                 <% s.collection_select :teacher_comment_ids, current_user.teacher_comments.order(:category), :id, :content, {include_blank: true}, {multiple: true}  %>
 
 
@@ -163,11 +164,12 @@
                  <% end %>
 
               
-              
+              <div style="padding-top: 10px; clear: left;"
                <div class="field">
-                  </br></br></br>
-                  <%= s.label "Specific Comment:" %><br>
-                  <%= s.text_field :comment, size: "70%" %>
+                  
+                  <div class="sign_in_form_label">
+                  <%= s.label "Specific Comment:" %></div>
+                  <%= s.text_field :comment, size: "100%", :class => "sign_in_up" %>
                 </div>
 
              </br>

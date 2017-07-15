@@ -223,7 +223,7 @@
                   <%= f.fields_for :words_in_mistakes, wim do |w| %>
                   
                  
-                  <tr id="wim_<%= wim.id %>" class="wim"><td class= wim.> <%= wim.id %><%= Mistake.find(wim.mistake_id).name %></td>
+                  <tr id="wim_<%= wim.id %>" class="wim"><td class= wim.><%= Mistake.find(wim.mistake_id).name %></td>
 
                   
 

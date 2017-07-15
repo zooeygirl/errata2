@@ -1,12 +1,11 @@
- <table>
+ <table style="width:100%;">
         <tr>      
-          <td>Original Essay</td><td>Second Draft</td></tr>
+          <td><div class="pinktext">Original Essay</div></td><td><div class="pinktext">Second Draft</div></td></tr>
           <tr><td><div class="essay_and_second_draft">
 
               <% @first_draft = Essay.find(@essay.trackernum) %>
 
                   <p>
-                    <strong>Title:</strong>
                     <%= @first_draft.title %>
                   </p>
 

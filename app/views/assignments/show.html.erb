@@ -39,6 +39,7 @@
 
 					
 					<% if current_user.id == @classroom.user_id %>
+					<td class="table_button_dark" width="20%"> <%= link_to 'Give Feedback', essay_give_feedback_path(e), method: :patch %></td>
 					<td class="table_button_dark" width="20%"><%= link_to 'Correct essay', essay_create_grade_template_path(e) %></td>
 					</tr><% end %>
 					<% end %>

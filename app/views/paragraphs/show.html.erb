@@ -42,6 +42,8 @@
 <% end %>
 
 
+
+<% if current_user.role == "Teacher" && @essay.essay_status == "Waiting for feedback" %>
 <div id="recurrent">
 <%= check_box_tag "new_comment" %>New Recurrent Comment</br>
 
@@ -49,3 +51,5 @@
 <%= render 'teacher_comments/form' %>
   </div>
 </div>
+
+<% end %>

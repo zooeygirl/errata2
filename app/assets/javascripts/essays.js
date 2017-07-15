@@ -38,13 +38,14 @@ $('#paragraph_view').on('change', function() {
         } else {
         $("input[type=checkbox][value=" + x + " ][class=sentence_mistakes]").prop('checked', true);
         }
-        $(event.target).closest('form').submit();
         $(event.target).closest('tr').next($("input[type=checkbox][type=hidden][class=wimdelete]")).remove();
-        $(event.target).closest('tr').remove();
+        $(event.target).closest('tr').remove(); 
+        $("input[type=checkbox][value=" + x + " ][class=sentence_mistakes]").closest('form').submit();  
     }
     else {
-    $(event.target).closest('form').submit();
+        $(event.target).closest('form').submit();
     }
+
 });
 
 $('#paragraph_view').children($("input[type=text]")).on('input', function() {

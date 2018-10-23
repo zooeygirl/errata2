@@ -46,7 +46,7 @@ $('body').on('click', '.correction_radio_buttons', function() {
 	}); 	
 	
 	
-
+"""
 
 	var showWim = $(".sentence_mistakes").mouseleave(function() {
 
@@ -57,7 +57,7 @@ $('body').on('click', '.correction_radio_buttons', function() {
 		});
 
 	
-
+"""
 
 
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 .panel, .flip {
@@ -127,4 +128,136 @@ p, #sentence_mistakes {
     padding-top: 25px;
     padding-bottom: 25px;
     border: solid 3px #FF0080;
+=======
+
+
+.panel, .flip {
+    padding: 5px;
+    text-align: left;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 50%;
+    float: left;
+}
+
+.panel {
+    padding: 50px;
+    display: none;
+    width: 100%;
+    length: auto;
+    position: relative;
+}
+
+
+.panel, .flip, #teacher_view {
+    padding: 5px;
+    text-align: center;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 100%;
+    float: left;
+}
+
+
+.mistake_options, .sentence_mistake_options {
+    padding: 5px;
+    text-align: left;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 100%;
+    float: left;
+}
+
+.mistake_options {
+    padding: 5px;
+    display: none;
+    width: 100%;
+}
+
+
+.essay_view {
+    background-color: white;
+    text-align: left;
+    padding-left: 25px;
+    padding-right: 35px;
+    padding-top: 22px;
+    padding-bottom: 26px;
+    border-top: solid 3px #FF0080;
+    clear: left;
+}
+
+
+p, #sentence_mistakes {
+	
+	clear: left;
+}
+
+
+.paragraphs_with_sentences {
+    clear: left;
+    margin-top: 40px;
+
+    padding: 5px;
+    text-align: left;
+    background-color: #FF0080;
+    border: solid 1px #c3c3c3;
+    width: 100%;
+    float: left;
+}
+
+.submit_btn {
+    width: 250px;
+    text-align: center;
+    border: solid 1px black;
+    padding: 10px;
+}
+
+
+.grade_report {
+    position: absolute;
+    right: 30px;
+    background-color: white;
+    border: solid 3px #FF0080;
+    padding: 5px;
+    margin-top: 8px;
+    width: 30%;
+}
+
+
+.assignment_title{
+    display: inline;
+}
+
+
+.status_color{
+    color: #FF0080;
+}
+
+.stars {
+    margin-top: 9px;
+    position: relative;
+    float: left;
+}
+
+.star_eval{
+    width: 50%;
+}
+
+#reset_rubric {
+    padding-top: 20px;
+    clear: left;
+}
+
+.essay_and_second_draft {
+    background-color: white;
+    width: 90%;
+    max-width: 1000px;
+    min-height: 500px;
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top: solid 3px #FF0080;
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
 }

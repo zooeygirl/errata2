@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .mistake_categories, .mistake_names {
 	float: left;
 	border-style: solid;
@@ -64,3 +65,150 @@ border-spacing: 5px;
 	clear: both;
 }
 
+=======
+.mistake_categories, .mistake_names {
+	float: left;
+	border-style: solid;
+	border-width: 1px;
+	position: relative;
+	background-color: white;
+
+}
+
+.mistake_names {
+	position: absolute;
+	display: none;
+	min-width: 500px;	
+	padding: 2px;
+	padding-left: 10px;
+	z-index: 1;
+	color: black;
+	margin-left: -10px;
+}
+
+.mistake_categories {
+	margin: 2px;
+	padding: 6px;
+}
+
+.lang_errors {
+	right: 30px;
+	position: absolute;
+	color: #FF0080;
+}
+
+.lang_errors_panel {
+	border-style: solid;
+	border-width: 1px;
+	border-color: gray;
+	background-color: white;
+	padding: 5px;
+	color: gray;
+	min-height: 100px;
+}
+
+
+
+
+.btn-lg {
+	position: fixed;
+	bottom: 70px;
+	right: 20px;
+	background-color: #FF0080;
+}
+
+#recurrent {
+	clear: both;
+}
+
+#active_paragraph > a{
+	color: white;
+}
+
+.unsaved_wim_tables {
+	clear: both;
+}
+
+
+#paragraph_view{
+	width: 100%; 
+}
+
+.table-rectangle {
+	background: #FFFFFF;
+}
+
+.table-striped{
+border-collapse:separate;
+border-spacing: 5px;
+width: 100%;
+border: 1px solid #D5D5D5;
+background-color: white;
+}
+
+.table-striped > thead{
+	height: 13px;
+	width: 86px;
+	color: #9B9B9B;
+	font-family: Roboto;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 14px;
+	text-align: center;
+}
+
+.table-striped > tbody{
+	height: 18px;
+	width: 281px;
+	color: #9B9B9B;
+	font-family: Roboto;
+	font-size: 15px;
+	line-height: 21px;
+}
+
+
+
+td.pinkbox{
+	background-color: #FF0080;
+	width: 8px;
+	height: 100%;
+}
+
+td.table_button_dark{
+	background-color: #FF0080;
+	border-radius: 5px;
+}
+
+td.table_button_dark > a{
+	color: white;
+	text-align: center;
+}
+
+td.table_button_light{
+	border: 1px solid #FF0080;
+	border-radius: 5px;
+	width: 30px;
+}
+
+td.table_button_light > a {
+	color: #FF0080;
+	text-align: center;
+}
+
+
+
+
+.tcomments{
+	display: none;
+	background: #E9E9E9;
+	padding: 5px;
+}
+
+.tc-text{
+	display: inline-block;
+}
+
+.arrow-right{
+	display: inline-block;
+}
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

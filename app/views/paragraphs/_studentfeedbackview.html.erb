@@ -1,0 +1,60 @@
+
+<div class="title-block">
+   <div class="line"></div>
+   <div class="titles">Paragraph <%=@essay.paragraphs.order(:id).index(@paragraph) + 1%></div>
+</div>
+
+<% original_essay = Essay.find(@essay.trackernum) %>
+<% paragraphnum = @essay.paragraphs.order(:id).index(@paragraph) %>
+<% original_paragraph = Paragraph.find(original_essay.paragraphs.order(:id)[paragraphnum]) %>
+
+
+<div class="rectangle"><div class="originalbox">ORIGINAL PARAGRAPH</div></div>
+
+      <div class="essay_view">
+      <%= original_essay.paragraphs.order(:id)[paragraphnum].content %>
+      </div>
+
+
+    
+
+      <div class="rectangle-tc">
+      <div class="arrow-right">
+      <img src="/assets/errata_arrow_right.png" class="img-swap">
+      <img src="/assets/errata_arrow_down.png"  class="img-swap" style="display:none">
+      </div>
+      <div class="tc-text">TEACHER COMMENTS</div></div>
+
+          <div class="tcomments">
+          <table>
+          <tr><%= original_essay.paragraphs.order(:id)[paragraphnum].comment %></br>
+          <% original_essay.paragraphs.order(:id)[paragraphnum].teacher_comments.each do |tc| %>
+          <%= tc.content %></br>
+          <% end %>
+          </tr>
+          </table>
+
+    
+
+
+ 
+  
+            <% if original_essay.grade_elements.where(paragraph_id: original_paragraph.id).count >0 %>
+                  <table>
+                   <tr> <th>Grades:</th></tr></tr><td></td></tr>
+                  <tr><th>Criteria</th><th>Grade</th></tr>
+                  <% original_essay.grade_elements.where(paragraph_id: original_paragraph.id).each do |ge| %>
+                  <tr>     
+                    
+                    <td><%= ge.name %></td>
+                    <td><%= ge.teachereval %>/<%= ge.outof %></td>
+                  
+                  </tr>
+                  <% end %></br>
+                  </table>
+            <% end %>
+            </div>
+
+
+
+<%= render @paragraph.sentences.order(:id) %>

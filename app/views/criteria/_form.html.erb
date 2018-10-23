@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%= form_for([@evaluation, @criterium]) do |f| %>
   <% if @criterium.errors.any? %>
     <div id="error_explanation">
@@ -37,3 +38,64 @@
     <%= f.submit %>
   </div>
 <% end %>
+=======
+
+<div id="sign_up_box">
+
+<%= form_for([@evaluation, @criterium]) do |f| %>
+  <% if @criterium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@criterium.errors.count, "error") %> prohibited this criterion from being saved:</h2>
+
+      <ul>
+      <% @criterium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label :level %><br>
+    </div>
+    <%= f.select :level, Criterium.levels.keys %>
+  </div>
+
+  </br>
+
+   <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label "Criterium" %><br>
+    </div>
+    <%= f.text_field :name, :class => "sign_in_up" %>
+  </div>
+
+   </br>
+
+  <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label "Percentage of final grade" %><br>
+    </div>
+    <%= f.text_field :percentage, :class => "sign_in_up" %>
+  </div>
+
+   </br>
+
+   <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label "Points" %><br>
+    </div>
+    <%= f.text_field :outof, :class => "sign_in_up" %>
+  </div>
+
+
+</br>
+  <div class="actions">
+    <%= f.submit "CREATE CRITERIUM", :class=>"submit_class_button" %>
+  </div>
+<% end %>
+
+
+</div>
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

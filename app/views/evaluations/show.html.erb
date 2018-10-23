@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h2><%= @evaluation.name %></h2>
 
 
@@ -37,3 +38,47 @@
 	<% end %>
 <% end %>
 
+=======
+<div class="title"><%= @evaluation.name %></div>
+
+
+</br></br>
+
+<table class="table-striped">
+<thead>
+<tr> 
+<td>Criterion</td>
+<td>Evaluating</td>
+<td>Out of</td>
+<td>Percentage of Total</td>
+<td colspan="2" width=6%>EDIT/DELETE</td>
+</tr>
+</thead>
+<%= render @evaluation.criteria %>
+</table>
+
+<%= link_to "Add Criterion", new_evaluation_criterium_path(@evaluation) %>
+
+
+<% crithash = [] %>
+<% @evaluation.criteria.each do |crit| %>
+<% crithash += [[crit.name, crit.percentage]] %>
+<% end %>
+
+</br>
+
+
+<% if @evaluation.hundred == 100 %>
+<%= "This rubric adds up to 100%" %>
+<div class="graph">
+<%= pie_chart crithash %></div>
+<% else %>
+<%= "This rubric does not add up to 100%." %>
+	<% if @evaluation.hundred > 100 %>
+	<%= "Subtract #{@evaluation.hundred.round - 100}%" %>
+	<% else %>
+	<%= "Add #{100-@evaluation.hundred}%" %>
+	<% end %>
+<% end %>
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

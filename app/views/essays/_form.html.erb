@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *** Leave a space between paragraphs.
 </br></br>
 
@@ -30,3 +31,49 @@
     <%= f.submit %>
   </div>
 <% end %>
+=======
+*** Leave a space between paragraphs.
+</br></br>
+
+<%= form_for(@essay) do |f| %>
+  <% if @essay.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@essay.errors.count, "error") %> prohibited this essay from being saved:</h2>
+
+      <ul>
+      <% @essay.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :assignment_id %>
+
+  <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label :title %><br>
+    </div> 
+    <%= f.text_field :title, :class => "form_field" %>
+  </div>
+
+  </br>
+
+
+  <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label :body %><br>
+    </div>
+    <%= f.text_area :body, rows: 20, cols: 90 %>
+  </div>
+
+
+  </br>
+
+  <div class="actions">
+    <%= f.submit "Create/Update", :class => "submit_class_button" %>
+  </div>
+<% end %>
+
+</br>
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

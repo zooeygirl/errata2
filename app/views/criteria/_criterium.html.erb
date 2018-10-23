@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -17,3 +18,27 @@
 <% end %>
 
 </tr>
+=======
+
+
+
+<tr>
+<td><%= criterium.name %></td>
+<td><%= criterium.level %></td>
+<td>/<%= criterium.outof.round(0) %></td>
+<td><%= criterium.percentage %>%</td>
+
+
+
+<% if @evaluation.user_id == current_user.id %>
+
+<td><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_evaluation_criterium_path(@evaluation, criterium) %></td>
+
+<td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), evaluation_criterium_path(@evaluation, criterium), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+
+</tr>
+
+
+   
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

@@ -1,0 +1,40 @@
+  
+<div class="rectangle"> <div class="originalbox">ORIGINAL PARAGRAPH </div></div>
+  
+
+
+    <div class="essay_view">
+      <%= @paragraph.content %>
+    </div>
+
+    <div class="rectangle-tc">
+    <div class="arrow-right">
+    <img src="/assets/errata_arrow_right.png" alt="arrow-right">
+    <img src="/assets/errata_arrow_down.png"  class="img-swap" style="display:none">
+    </div>
+    <div class="tc-text"> TEACHER COMMENTS </div>
+  </div>
+
+  <div class="tcomments">
+     
+
+    <% @essay.grade_elements.each do |ge| %>
+
+
+            <% if ge.paragraph_id == @paragraph.id %>
+
+            <%= ge.name %>
+            <%= ge.teachereval %>/<%=ge.outof %>
+
+            </br>
+            <% end %>
+         
+    <% end %>
+
+    </div>
+
+
+  
+<%= render @paragraph.sentences.order(:id) %>
+
+

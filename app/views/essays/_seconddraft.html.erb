@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  <table>
         <tr>      
           <td>Original Essay</td><td>Second Draft</td></tr>
@@ -28,4 +29,35 @@
         </tr>
   </table>   
 
+=======
+ <table style="width:100%;">
+        <tr>      
+          <td><div class="pinktext">Original Essay</div></td><td><div class="pinktext">Second Draft</div></td></tr>
+          <tr><td><div class="essay_and_second_draft">
+
+              <% @first_draft = Essay.find(@essay.trackernum) %>
+
+                  <p>
+                    <%= @first_draft.title %>
+                  </p>
+
+                  <p>
+                    <%= simple_format(@first_draft.body) %>
+                  </p>
+          </div></td>
+
+
+          <td><div class="essay_and_second_draft">
+
+            <% if @first_draft.body == @essay.body && current_user.role == 'Student'%>
+                <%= link_to "Start working on your second draft.", essay_paragraph_path(@essay, @essay.paragraphs.order(:id).first) %>
+            <% else %>
+            <p><%= @essay.title %></p>
+            <%= simple_format(@essay.body) %>
+            <% end %>
+          </div></td>
+        </tr>
+  </table>   
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
   

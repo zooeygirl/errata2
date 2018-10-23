@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -160,3 +161,366 @@ ul .dropdown-menu>li{
 
 
 
+=======
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require_essay
+ *= require_sidenav
+
+ */
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #111;
+
+
+
+body {
+
+  font: 150% $font-stack;
+  color: $primary-color;
+  padding: 30px;
+  background-color: #DEDEDD;
+  background-repeat: repeat-y repeat-x;
+  margin-bottom: 1000px;
+}
+
+
+
+ul, .nav navbar-nav navbar-right{
+  padding-right: 25px;
+}
+
+
+.container-fluid{
+ 
+  border-top: solid 2px #F2236A;
+  border-bottom: solid 2px #F2236A;
+  margin-top: 1px;
+  padding-bottom: 20px;
+}
+
+
+
+
+td {
+	padding: 10px;
+}
+
+ .mistake {
+  color: #FF0080;
+  }
+
+
+
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: #FF0080;
+  }
+
+  #logo{
+    font-size: 40px;
+    color: #FF0080;
+  }
+
+.yield {
+  margin: 50px 0px 150px 0px;
+}
+
+
+.graph {
+  background-color: white;
+  padding: 10px;
+}
+
+.indextables {
+    background: white;
+    padding: 5px;
+    margin: 4px;
+}
+
+.title {
+  background-color: white;
+  font-family: 'Roboto', sans-serif; font-weight: 100;
+  font-size: 50px;
+  color: #939393;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pre_title {
+  color: #FF0080;
+  font-size: 18px;
+}
+
+
+
+
+.nav-justified {
+   border-collapse:separate;
+   border-spacing:30px 1px;
+   border-bottom: 2px solid #E9E9E9 ;
+}
+
+p>.notice {
+ height: 200px; 
+ color: blue;
+}
+
+p>.alert {
+ height: 200px;
+ color: blue;
+}
+
+ul .dropdown-menu>li{
+  text-align: center;
+  padding: 5px;
+}
+
+
+.teval {
+  width: 750px;
+}
+
+
+
+#homepage {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 320px;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+}
+
+
+
+#homepage>img{
+
+  position: absolute;
+  height: 300px;
+  left: 50%;
+  top: 55px;
+  -o-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  -moz-transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, 0%);
+   transform: translate(-50%, 0%); 
+}
+
+
+#sign_in_box{
+  width: 30%;
+  margin: 0 auto; 
+  border-radius: 5px;
+}
+
+#sign_in_box_container{
+  top: 250px;
+  position: relative;
+  clear: both;
+  width: 100%;
+}
+
+#sign_in_form{
+  height: 100%
+}
+
+.sign_in_title{
+ 
+  color: #797064;
+  font-family: Roboto;
+  font-size: 37px;
+  font-weight: 300;
+  line-height: 43px;
+}
+
+.sign_in_form_label{
+  font-size: 80%;
+  height: 14px;
+  width: 184px;
+  color: #F2236A;
+  font-family: Roboto;
+  font-weight: bold;
+  line-height: 14px;
+  text-transform: uppercase;
+
+}
+
+
+input.sign_in_up:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+
+input.sign_in_up, textarea{
+  font-size: 100%;
+  width: 100%;
+  border: 3px solid #E9E9E9;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  box-shadow: inset 0 1px 9px 4px rgba(0,0,0,0.07);
+
+}
+
+input.form_field {
+  border: 3px solid #E9E9E9;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  box-shadow: inset 0 1px 9px 4px rgba(0,0,0,0.07);
+}
+
+
+
+.submit_class_button{
+  background: #F2236A;
+  color: white;
+  text-align: center;
+  font-family: Roboto;
+  border: none;
+}
+
+.center_box{
+  margin-left: 38%;
+}
+
+
+.line{
+  height: 3.05px; 
+  width: 100%;
+  background-color: #E9E9E9;
+  position: absolute;
+  top: 40%;
+  z-index: -1;
+}
+
+
+#sign_up_box{
+  height: 100%;
+  width: 500px;
+  margin: 0 auto;
+}
+
+
+
+.titles{
+  height: 42px; 
+  width: 253px; 
+  color: #F2236A; 
+  font-family: Roboto;  
+  font-size: 36px;  
+  font-weight: 500; 
+  line-height: 42px;  
+  text-align: center;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+}
+
+.sentitle{
+  font-weight: 300;
+}
+
+.title-block { 
+height: 52px; 
+width: 100%;
+position: relative;
+z-index: 1;
+}
+
+.rectangle {
+  height: 36px;
+  width: 170px;
+  border-radius: 5px 0 0 0;
+  background-color: #F2236A;
+  
+}
+
+.originalbox {
+  height: 16px;
+  width: 170px;
+  color: #FFFFFF;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  text-align: center;
+  padding: 10px 3px 10px;
+}
+
+.rectangle-tc {
+  height: auto;
+  width: auto;
+  border: 15px solid #E9E9E9;
+  background-color: #E9E9E9;
+}
+
+.pinktext {
+  height: 16px;
+  width: 184px;
+  color: #F2236A;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+}
+
+.edit {
+  padding-bottom: 25px;
+}
+
+.errors{
+  height: 16px;
+  width: 184px;
+  color: #F2236A;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.new_object_link{
+  margin: 10px auto;
+  width: 200px;
+  border-radius: 5px; 
+  background-color: #F2236A;
+  height: 36px;
+}
+
+.new_object_link > a {
+  
+  height: 21px;
+  width: 200px;
+  color: #FFFFFF;
+  font-family: Roboto;
+  font-size: 18px;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 21px;
+  padding: 8px;
+}
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

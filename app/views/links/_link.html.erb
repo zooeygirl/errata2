@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -21,3 +22,28 @@
 
 
 
+=======
+
+
+
+<tr id= "link_<%=link.id%>">
+
+
+<td><%= link_to link.description, link.url, :target => '_blank' %></td>
+<td><%= link.language %></td> 
+  
+<td><%= Link.media_categories.keys.at(link.media) %></td>
+
+
+<% if current_user.role == 'Teacher' %>
+<td><%= link_to  image_tag("/assets/Errata_symbol_edit.png"), edit_mistake_link_path(@mistake, link) %></td>
+<td><%= link_to  image_tag("/assets/Errata_symbol_delete.png"), mistake_link_path(@mistake, link), method: :delete, data: { confirm: 'Are you sure?' },  remote: true %></td>
+
+<% end %>
+
+</tr>
+
+
+
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

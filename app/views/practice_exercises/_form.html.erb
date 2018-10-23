@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <% if @practice_exercise == nil %>
 
@@ -42,3 +43,68 @@
     <%= t.submit %>
   </div>
 <% end %>
+=======
+
+<div id="sign_up_box"
+
+<% if @practice_exercise == nil %>
+
+<% x = current_user.practice_exercises.build %>
+
+<% else %>
+
+<% x = @practice_exercise %>
+
+<% end %>
+
+<%= form_for(x) do |t| %>
+
+
+  <div class="field">
+    <div class="sign_in_form_label">
+    <%= t.label :name %><br>
+    </div>
+    <%= t.text_field :name, :class=>"sign_in_up" %>
+  </div>
+
+  </br>
+
+   <div class="field">
+    <div class="sign_in_form_label">
+    <%= t.label :description %><br>
+    </div>
+    <%= t.text_field :description, size: "70%", :class=>"sign_in_up" %>
+  </div>
+
+  </br>
+
+<div class="field">
+  <div class="sign_in_form_label">
+  <%= t.label :assignment %><br>
+  </div>
+ <%= t.grouped_collection_select :assignment,
+    current_user.classrooms.all, :assignments, :school,
+    :id, :title %>
+</div>
+
+</br>
+
+<div class="field">
+  <div class="sign_in_form_label">
+  <%= t.label :mistake_ids %><br>
+  </div>
+<%= t.collection_select :mistake_ids,
+    Mistake.all,
+    :id , :name, {include_blank: false}, {:multiple => true } %>
+  </div>
+
+
+</br>
+  <div class="actions">
+    <%= t.submit "Create/Update", :class=>"submit_class_button" %>
+  </div>
+<% end %>
+
+
+</div>
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <% @student = User.find(@user) %>
 <h1>Student Progress: <%= @user.first_name%>  <%= @user.last_name%></h1> 
 
@@ -63,3 +64,79 @@
 
 
 
+=======
+<% @student = User.find(@user) %>
+<div class="sign_in_title">Student Progress: <%= @user.first_name%>  <%= @user.last_name%></div> 
+
+<% afg = "" %>
+<% myarray =[] %>
+<% i=0 %>
+
+
+<% Mistake.categories.each do |cat| %>
+		  <% afg += "{name: \"#{cat.first}\", data: {" %>
+		  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
+
+		  <% if cat.last == 0 %>
+		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
+		  <% else %>
+		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count - ess.mistakes.where(category: 0).count}" %>
+		  <% end %>
+				  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
+				  <% afg += ", " %>
+				  <% end %>
+		<% end %>
+		<% afg += "}}" %>
+		<% myarray[i] = eval(afg) %>
+		<% i += 1 %>
+		<% afg ="" %>
+		
+<% end %>
+
+
+<div class="graph">
+
+<%= line_chart myarray %>
+</div>
+
+
+
+
+
+
+
+</br>
+
+</br>
+
+<div style="column-count:4; width: 100%;">
+<table class="table-striped">
+
+<% Mistake.categories.each do |cat| %>
+	<tr style="break-inside: avoid-column;"><td class="table_button_dark" style="break-inside: avoid-column;"><%= link_to cat.first, classroom_user_miscategories_path(@classroom, @user, cat: cat.last)%>
+	</td>
+	</tr>
+			
+<% end %>
+
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h2><%= User.find(current_user.teacher).first_name + " " + User.find(current_user.teacher).last_name + "'s"%> 
 Classrooms</h2>
 
@@ -166,3 +167,220 @@ Classrooms</h2>
 
 <br>
 
+=======
+ <div class="title">
+ <%= User.find(current_user.teacher).first_name + " " + User.find(current_user.teacher).last_name + "'s"%> 
+Classrooms
+</div>
+
+</br></br></br>
+
+<%-# __________________________________________________________________________ -%>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#classrooms">Classrooms</a></li>
+  <% if current_user.role == 'Teacher' %>
+  <li><a data-toggle="tab" href="#rubric">Rubrics</a></li>
+  <li><a data-toggle="tab" href="#comment">Comments</a></li>
+  <li><a data-toggle="tab" href="#pe">Practice Exercises</a></li>
+    <% end %>
+</ul>
+
+
+
+<div class="tab-content">
+
+
+<%-# __________________________________________________________________________ -%>
+
+<div id="classrooms" class="tab-pane fade in active">
+
+
+
+<div class="indextables container-fluid">
+
+<table class="table-striped" style="border: none;">
+  <thead>
+    <tr>
+      <td>CLASSROOMS</td>
+      <td>DAY</td>
+      <td>TIME</td>
+      <% if current_user.role == "Teacher" %>
+      <td>ESSAYS WAITING</td>
+      <td colspan="2">EDIT/DELETE</td>
+      <% else %>
+      <td> JOIN CLASS </td>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+
+
+    <% @classrooms.each do |clr| %>
+      <tr>
+        <td><%= link_to clr.school, classroom_path(clr) %></td>
+        <td><%= Date::DAYNAMES[clr.day.to_i] %></td>
+        <% if clr.start_time != nil %>
+        <td><%= clr.start_time.strftime("%H:%M") %></td>
+        <% else %>
+         <td></td>
+        <% end %>
+
+        <% if clr.user_id == current_user.id %>
+        <% i = 0 %>
+            <% clr.assignments.each do |ass| %>
+            <% i += ass.essays.where(essay_status: 1).count %>
+            <% end %>
+        <td><%="#{i} essay(s) waiting for feedback"%></td>
+        <td style="width:5%;"><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_classroom_path(clr) %></td>
+        <td style="width:5%"><%= link_to image_tag("/assets/Errata_symbol_delete.png"), classroom_path(clr), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <% if current_user.role == 'Student' && current_user.classroom != clr.id %>
+        <td><%= link_to 'Join Class', classroom_add_student_to_classroom_path(clr), method: :patch %></td>
+        <% elsif current_user.role == 'Student'%>
+        <td>My Class</td>
+        <% end %>
+      </tr>
+  
+    <% end %>
+   
+  </tbody>
+
+
+</table>
+</div>
+
+<% if current_user.role == 'Teacher' %>
+  <div class="new_object_link">
+  <%= link_to 'New Classroom', new_classroom_path %>
+  </div>
+
+
+
+</div>
+
+<%-# __________________________________________________________________________ -%>
+
+    <div id="rubric" class="tab-pane fade">
+
+<div class="indextables container-fluid">
+  
+
+
+
+
+<table class="table-striped" style="border: none;">
+<thead>
+  <tr>
+    <td style="text-align:left;">RUBRIC</td>
+    <td colspan="2" width="6%">EDIT/DELETE</td>
+  </tr>
+</thead>
+
+<% Evaluation.where(user_id: current_user.id).each do |eval| %>
+  <tr>
+  <td><%= link_to eval.name, evaluation_path(eval) %></td>
+  <td> <%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_evaluation_path(eval) %> </td>
+  <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), evaluation_path(eval), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
+<% end %>
+
+</table>
+
+</br></br>
+
+
+
+</div>
+<div class="new_object_link">
+<%= link_to "New Rubric", new_evaluation_path %>
+</div>
+</div>
+
+
+<%-# __________________________________________________________________________ -%>
+
+    <div id="comment" class="tab-pane fade">
+
+
+<div class="indextables container-fluid">
+  
+
+
+
+<table class="table-striped" style="border: none;">
+
+<thead>
+  <tr>
+    <td style="text-align: left;">Category</td>
+    <td style="text-align: left;">Comment</td>
+    <td colspan="2" width="6%">EDIT/DESTROY</td>
+  </tr>
+</thead>
+
+
+<% current_user.teacher_comments.each do |com| %>
+  <tr><td><%= com.category %></td><td><%= com.content %></td>
+    <td><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_teacher_comment_path(com) %></td>
+  <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), teacher_comment_path(com), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
+<% end %>
+
+</table>
+
+</br></br>
+
+
+
+</div>
+<div class="new_object_link">
+<%= link_to "New Comment", new_teacher_comment_path %>
+</div>
+</div>
+
+<%-# __________________________________________________________________________ -%>
+
+    <div id="pe" class="tab-pane fade">
+
+
+<div class="indextables container-fluid">
+  
+
+
+
+<table class="table-striped" style="border: none;" >
+<thead>
+  <tr>
+    <td style="text-align: left;">TITILE</td>
+    <td style="text-align: left;">DESCRIPTION</td>
+    <td style="text-align: left;">VIEW</td>
+    <td colspan="2" width="6%">EDIT/DESTROY</td>
+  </tr>
+</thead>
+
+
+<% current_user.practice_exercises.each do |pe| %>
+  <tr><td><%= pe.name %></td><td><%= pe.description %></td>
+    <td><%= link_to 'Show', practice_exercise_path(pe) %></td>
+    <td><%= link_to image_tag("/assets/Errata_symbol_edit.png"), edit_practice_exercise_path(pe) %></td>
+  <td><%= link_to image_tag("/assets/Errata_symbol_delete.png"), practice_exercise_path(pe), method: :delete, data: { confirm: 'Are you sure?' } %></td> </tr>
+<% end %>
+
+</table>
+
+</br></br>
+
+
+
+</div>
+<div class="new_object_link">
+<%= link_to "New Practice Exercise", new_practice_exercise_path %>
+</div>
+</div>
+
+
+
+<% end %>
+
+<br>
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

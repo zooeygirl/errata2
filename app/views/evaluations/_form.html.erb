@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <%= form_for(@evaluation) do |f| %>
   <% if @evaluation.errors.any? %>
@@ -31,3 +32,44 @@
     <%= f.submit "Create Rubric" %>
   </div>
 <% end %>
+=======
+
+<div id="sign_up_box">
+
+<%= form_for(@evaluation) do |f| %>
+  <% if @evaluation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this essay from being saved:</h2>
+
+      <ul>
+      <% @evaluation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :assignment_id %>
+
+ 
+
+<div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label "Name of Rubric" %><br>
+    </div>
+    <%= f.text_field :name, :class => "sign_in_up" %>
+  </div>
+
+
+
+</br>
+
+
+
+  <div class="actions">
+    <%= f.submit "Create/Update Rubric", :class=>"submit_class_button" %>
+  </div>
+<% end %>
+
+</div>
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 <p>
@@ -49,3 +50,58 @@ Number of Sentences with this type of mistake: <%= Sentence.includes(:mistakes).
 <%= link_to "Edit sentence mistakes", edit_sentence_path(sen.id) %></br>
 <% end %>
 <% end %>
+=======
+
+
+
+  <div class="pre_title">Category:</div>
+  <div class="title" style="font-size:18px;"> <%= @mistake.category %> </div>
+
+
+
+  <div class="pre_title">Name:</div>
+  <div class="title"><%= @mistake.name %></div>
+
+</br></br>
+
+
+<table id = "existing_links" class="table-striped">
+<tr>
+<td>DESCRIPTION</td>
+<td>LANGUAGE</td>
+<td>MEDIA</td> 
+<td colspan="2" width="6%">EDIT/DELETE</td>     
+</tr>
+
+
+<%= render @mistake.links %>
+
+</table>
+
+
+
+<% if current_user.role == 'Teacher' %>
+<div class="new_object_link"><%= link_to 'Add link', new_mistake_link_path(@mistake), id: "new_weblink", remote: true %></div>
+
+</br></br>
+
+
+<%= link_to 'Mistake Index', mistakes_path %>
+
+<% end %>
+
+</br>
+------------------------------------------------------------------------------------------------
+</br>
+<% if current_user.role == "Teacher" %>
+
+Number of Sentences with this type of mistake: <%= Sentence.includes(:mistakes).where(mistakes: {id:@mistake.id}).count %></br></br>
+<% @sen = Sentence.includes(:mistakes).where(mistakes: {id:@mistake.id}).each do |sen| %>
+
+
+<%= sen.content %></br>
+<%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: @mistake.id).first} %>
+<%= link_to "Edit sentence mistakes", edit_sentence_path(sen.id) %></br>
+<% end %>
+<% end %>
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

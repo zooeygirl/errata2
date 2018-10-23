@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%= form_for(@mistake) do |f| %>
   <% if @mistake.errors.any? %>
     <div id="error_explanation">
@@ -27,3 +28,48 @@
     <%= f.submit %>
   </div>
 <% end %>
+=======
+<div class="sign_in_title">New/Edit Mistake</div>
+
+<%= form_for(@mistake) do |f| %>
+  <% if @mistake.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mistake.errors.count, "error") %> prohibited this mistake from being saved:</h2>
+
+      <ul>
+      <% @mistake.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  </br>
+
+  <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label :category %><br>
+    </div>
+    <%= f.select :category, Mistake.categories.keys %>
+  </div>
+
+  </br>
+
+   <div class="field">
+    <div class="sign_in_form_label">
+    <%= f.label :name %><br>
+    </div>
+    <%= f.text_field :name, :class => "sign_in_up" %>
+  </div>
+
+</br>
+
+  <div class="actions">
+    <%= f.submit "Create/Update Mistake", :class => "submit_class_button" %>
+  </div>
+<% end %>
+
+</br>
+
+</div>
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

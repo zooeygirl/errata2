@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ______________________________________________________________________________________
 
 <p id="sentence_mistakes">
@@ -139,3 +140,174 @@ ________________________________________________________________________________
  <% end %>
 
 
+=======
+
+
+<p id="sentence_mistakes">
+
+
+
+<% if current_user.role == 'Student' && @essay.essay_status == 'In progress' %>
+
+<div class="sentences" id='sentence_<%=sentence.id %>'>
+  <%= sentence.content %>
+
+</div>
+<% end %>
+
+
+<%-# __________________________________________________________________________ -%>
+
+
+<% if @essay.essay_status == 'Feedback' %>
+
+<div class="title-block">
+   <div class="line"></div>
+   <div class="titles sentitle">Sentence <%=@paragraph.sentences.order(:id).index(sentence) + 1%></div>
+</div>
+
+          <div id='sentence_<%=sentence.id %>'><p>
+    
+          <% sentenceindex = @paragraph.sentences.order(:id).index(sentence) %>
+          <% paraindex = @essay.paragraphs.order(:id).index(@paragraph) %>
+          <% originalessay = Essay.find(@essay.trackernum) %>
+          <% original_sentence = originalessay.paragraphs.order(:id)[paraindex].sentences.order(:id)[sentenceindex] %>
+
+
+          <% if original_sentence != nil %>
+
+          <div class="rectangle"><div class="originalbox">ORIGINAL SENTENCE</div></div>
+          <div class="essay_view">  
+            <%= original_sentence.content %></div>
+
+                      
+                     
+              
+
+                      <div class="rectangle-tc">
+                      <div class="arrow-right"><img src="/assets/errata_arrow_right.png" alt="arrow-right">
+                      <img src="/assets/errata_arrow_down.png"  class="img-swap" style="display:none">
+                      </div>
+                      <div class="tc-text">TEACHER COMMENTS</div>
+                      </div>
+
+            
+
+                      <div class="tcomments">
+                        
+                              <%= original_sentence.comment %></br>
+                              <% original_sentence.teacher_comments.each do |tc| %>
+                              <%= tc.content %></br>
+                              <% end %>
+                             
+                      </div>
+
+            
+          
+          <% if original_sentence.mistakes.count > 0 %>
+         <%= render partial: "sentences/mistakes_table", locals: {original_sentence: original_sentence} %>
+
+         <% if current_user.role == "Teacher" %>
+         Edited Sentence: <%= sentence.content %>
+         <% end %>
+
+         <% if sentence.words_in_mistakes.count > 0 && @essay.draftnum == 2 %>
+        <%= render partial: "sentences/new_wims", locals: {sentence: sentence} %>
+        <% end %>
+
+        <% else %>
+        </br>
+        No language problems.
+        </br>
+        <% end %>
+
+        </br>
+          
+        <% end %>
+
+ <% if current_user.role == 'Student' %>       
+          		
+          		<%= form_for [@essay, @paragraph, sentence], remote: true, width: "100%" do |f| %>
+
+                  <div class="pinktext edit">EDIT THIS SENTENCE</div>
+                  
+              		<div class="field editsen">
+                  		<%= f.text_area :content, :class => "editbox" %>
+                		</div>
+                    
+
+
+              		<div class="actions">
+                      <% f.submit "Edit Sentence"%>
+                 		</div>
+               
+                    </div>
+     		         <% end %>
+
+              <% end %>
+
+</p>
+<% end %>
+
+<%-# __________________________________________________________________________ -%>
+
+<% if current_user.role == 'Teacher' && @essay.essay_status == 'Waiting for feedback'%>
+
+
+<div class="sentence_mistake_options" id='sentence_<%=sentence.id %>'>
+<%= sentence.content %>
+</div>
+    <div class="mistake_options">
+
+      <%= form_for ([@essay, @paragraph, sentence]) do |f| %>
+
+                 <% i = 0 %>
+                
+                
+                 <% Mistake.categories.each do |cat| %>
+                  <div class="mistake_categories">
+                 <%= cat.first %>
+                
+                <div class="mistake_names">
+                 <%= f.collection_check_boxes :mistake_ids, Mistake.where(category: i), :id, :name do |b| %>
+                
+                     </br>
+                      <%= b.check_box(class: "check_box")%>
+                      <%= b.label %>
+
+
+                 <% end %>
+                    <% i+=1 %>
+
+                    </div>
+                    </div>
+                 <% end %>
+
+      
+
+            <div class="comment">
+             Comment
+              <div class="comment_field">
+                    <div class="field">
+                    <%= f.text_area :comment, size: "50%" %>
+                    </div>
+              </div>
+            </div>
+        
+          <div class="actions">
+                    <%= f.submit "Give feedback"%>
+          </div>
+
+          <% end %>
+          
+          <%= render sentence.words_in_mistakes %>
+            
+ 
+    
+      </div>
+
+
+ <% end %>
+
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

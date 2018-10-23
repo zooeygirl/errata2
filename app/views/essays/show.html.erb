@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <% if user_signed_in? %>
 
 
@@ -226,3 +227,242 @@ Warning: You will lose all the current grades for this student if you reset the 
 
 
 
+=======
+<% if user_signed_in? %>
+
+
+<% if current_user.role == 'Student' %>
+  <% if @essay.essay_status == 'In progress' || @essay.essay_status == 'Waiting for feedback'%>
+
+<table>
+<tr><td>Essay Status: <div class="status_color"><%= @essay.essay_status %></td>
+</div></tr>
+</table>
+
+      <div class="essay_view">
+        <p>
+          <strong>Title:</strong>
+          <%= @essay.title %>
+        </p>
+
+        <p>
+          <%= simple_format(@essay.body) %>
+        </p>
+      </div>
+
+       <% if @essay.essay_status == 'In progress' %>
+     </br>
+       <%= link_to 'Edit', edit_essay_path(@essay) %></br>
+       <div class="submit_btn">
+      <td><%= link_to 'Submit Essay to your teacher', essay_submit_essay_path(@essay), method: :patch%></td>
+      </div>
+      <% end %>
+
+<% end %>
+
+<% end %>
+
+
+<%-# __________________________________________________________________________ -%>
+
+<% if current_user.role == 'Student' %>
+
+  <% if @essay.essay_status == 'Feedback' %>
+
+  <table>
+<tr><td>Essay Status: <div class="status_color"><%= @essay.essay_status %></td>
+</div></tr>
+</table>
+
+<ul class="nav nav-tabs nav-justified">
+  <li class="active"><a data-toggle="tab" href="#essays">Essay</a></li>
+  <li><a data-toggle="tab" href="#rubric">Grade Breakdown</a></li>
+  <li><a data-toggle="tab" href="#errors">Language Errors</a></li>
+</ul>
+
+<div class="tab-content">
+
+</br>
+
+<div id="essays" class="tab-pane fade in active">
+         
+    <table style="width:100%;">
+        <tr>      
+          <td><div class="pinktext">Original Essay</div></td>
+          <td><div class="pinktext">Second Draft</div></td></tr>
+          <tr><td><div class="essay_and_second_draft">
+
+              <% @first_draft = Essay.find(@essay.trackernum) %>
+
+                  <p>
+                    <%= @first_draft.title %>
+                  </p>
+
+                  <p>
+                    <%= simple_format(@first_draft.body) %>
+                  </p>
+          </div></td>
+
+
+          <td><div class="essay_and_second_draft">
+
+            
+            <% if @first_draft.body.gsub(/\s+/, "") == @essay.body.gsub(/\s+/, "") %>
+                <%= link_to "Start working on your second draft.", essay_paragraph_path(@essay, @essay.paragraphs.order(:id).first) %>
+            <% else %>
+            <p><%= @essay.title %></p>
+            <%= simple_format(@essay.body) %>
+            <% end %>
+          </div></td>
+        </tr>
+      </table>    
+
+</div>
+
+ <div id="rubric" class="tab-pane fade">
+    
+    <%= render "grade_report" %>
+
+</div>
+
+ <div id="errors" class="tab-pane fade">
+</br>
+    <table class="table-striped">
+    <tr><th>Paragraph</th><th>Content</th><th>Errors</th><th>Second Draft</th></tr>
+    <%= render @essay.paragraphs.order(:id) %>
+    <tr><td></td><td></td><td>Total Number of Language Problems:  <%= @num_mistakes %></td></tr>
+  </table>
+
+
+</br><br>
+<div class="graph">
+<%= bar_chart @first_draft.mistakes.group(:name).count %>
+</div>
+
+</div>
+
+</div>
+
+<% end %>
+
+<% end %>
+
+
+<%-# __________________________________________________________________________ -%>
+
+<% if current_user.role == 'Teacher'  &&  @essay.draftnum == 2 %>
+
+
+<%= render "seconddraft" %>
+
+
+<%-# __________________________________________________________________________ -%>
+
+  <% elsif current_user.role == 'Teacher' %>
+
+<table>
+
+<td>Essay Status: <div class="status_color"><%= @essay.essay_status %></td>
+</div>
+
+<% assign = Assignment.find(@essay.assignment_id) %>
+ <td>Assignment:<%= link_to assign.title, classroom_assignment_path(assign.classroom_id, assign) %></td>
+
+ <% if Assignment.find(@essay.assignment_id).evaluation != nil %>
+ <td>Rubric: <%= link_to Evaluation.find(Assignment.find(@essay.assignment_id).evaluation).name, evaluation_path(Evaluation.find(Assignment.find(@essay.assignment_id).evaluation)) %></td>
+ <% else %>
+ <%= link_to "Choose a Rubric for this assignment", edit_classroom_assignment_path(Classroom.find(User.find(@essay.user_id).classroom), Assignment.find(@essay.assignment_id)) %>
+ <%= link_to "Create a Rubric for this assignment", new_evaluation_path %>
+ <% end %>
+
+</table>
+ 
+
+ 
+          <div class="essay_view">
+         
+
+                  <p>
+                    <strong>Title:</strong>
+                    <%= @essay.title %>
+                  </p>
+
+                  <p>
+                    <%= simple_format(@essay.body) %>
+                  </p>
+        
+          </div>
+
+<div class="grade_report">
+<%= render "grade_report" %>
+</div>
+
+
+<% if @essay.essay_status == 'Waiting for feedback' %>
+
+
+<%= form_for @essay do |f| %>
+  
+
+<%= f.hidden_field :id %>
+<div class="star_eval">
+
+    <% @essay.grade_elements.order(:id).each do |ge| %>
+        <div class="stars">
+
+          <% if ge.level == 'Essay' %>
+
+          <%= ge.name %>
+
+                  <%= f.fields_for :grade_elements, ge do |v| %>
+                      <div class="rateYo"></div>
+                      <%= v.text_field :teachereval %>
+                      <%= v.hidden_field :outof %></br>
+                  <% end %>
+          </div>
+
+          <% end %>
+       
+    <% end %>
+
+   
+
+       <% if @essay.grade_elements.where(level: 'Essay').count > 0 %>
+            <div class= "btn-lg">
+            <div class="actions">
+          <%= f.submit "Save Grades" %>
+        </div></div>
+      <% end %>
+    </div>
+
+
+<% end %>
+
+
+
+<% end %>
+
+
+
+<% if @essay.essay_status == 'Waiting for feedback' && current_user.role == 'Teacher' %>
+<div id="reset_rubric">
+ <%= link_to 'Reset rubric', essay_change_rubric_path(@essay), method: :patch %>
+Warning: You will lose all the current grades for this student if you reset the rubric.
+</div> 
+<%= link_to 'Send essay back to student without feedback', essay_unsubmit_essay_path(@essay), method: :patch%>
+
+</br>
+<%= link_to "Error Summary", essay_error_summary_path(@essay) %>
+<% end %>
+
+ <% end %>
+
+
+
+
+<% end %>
+
+
+
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

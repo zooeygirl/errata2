@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  <table class="table-striped">
           <tr><th>Category</th>
             <th>Mistake</th>
@@ -48,3 +49,61 @@
           <% end %>
 
         </table>
+=======
+ <div class="table-rectangle">
+
+<div class="errors">  ERRORS  </div>
+
+ <table class="table-striped">
+          <tr><th>Category</th>
+            <th>Mistake</th>
+            <th>Problem Words</th>
+            <th>Problem Corrected?</th></tr>
+          
+          <tr>
+
+          <% original_sentence.mistake_ids.each do |mis| %>
+              <td><%= Mistake.find(mis).category %></td> 
+              <td><div class="mistake">
+              <%= link_to Mistake.find(mis).name, Mistake.find(mis), :target=> '_blank' %></div></td>
+              <% if original_sentence.words_in_mistakes.where(mistake_id: mis).count > 0 %>
+                <% original_sentence.words_in_mistakes.where(mistake_id: mis).each do |wim| %>
+
+                 <% if wim.mistake_words != nil %>
+                    
+                    <% i = 0 %>
+                     <td><% original_sentence.word_list.each do |w| %>
+                        <% if wim.mistake_words.include?("#{i}") %>
+                          <div class="highlight"><%= w.last %></div>
+                          <% else %>
+                          <%= w.last %>
+                        <% end %>
+                        <% i += 1 %>
+                     <% end %></td>
+                     <td>
+                     <% if current_user.role == "Student" %>
+                             <% if wim.correction_status == nil %>
+                             <img src="/assets/errata_symbol_question_mark.png" alt="question">
+                             <% elsif wim.correction_status == 0 %>
+                             <img src="/assets/errata_symbol_tick.png" alt="tick">
+                             <% elsif wim.correction_status == 1 %>
+                             <img src="/assets/errata_symbol_cross.png" alt="cross">
+                              <% end %>
+                      <% elsif current_user.role == "Teacher" %>
+                        <%= render partial: "words_in_mistakes/correction_status_form", locals: { wim: wim} %>
+                      <% end %>
+
+                    </td></tr>
+                  <% else %>
+                  <td>No Problem Words Specified</td></tr>
+  
+                  <% end %></br>
+
+
+                <% end %>
+              <% end %>
+          <% end %>
+
+        </table>
+  </div>
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

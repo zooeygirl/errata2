@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <% if user_signed_in? %>
 
 Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
@@ -166,3 +167,224 @@ To get started, find your classroom:
 <h2>Please sign in.</h2>
 <% end %>
 
+=======
+<% if user_signed_in? %>
+
+
+<td><% DateTime.now.to_date.to_formatted_s(:long) %></td>
+
+<ul class="nav nav-tabs nav-justified">
+    <li><a href="#essays" data-toggle="tab">ESSAYS</a></li>
+    <li><a href="#progress" data-toggle="tab">PROGRESS</a></li>
+    <li><a href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
+</ul>
+
+</br></br>
+
+<div class="tab-content">
+
+<div id="essays" class="tab-pane fade in active">
+
+
+<% if current_user.classroom != nil %>
+
+</br>
+<div class="title-block">
+   <div class="line"></div>
+   <div class="titles sentitle">Due</div>
+</div>
+
+
+<table class="table-striped">
+        <thead>
+        <tr>
+        <td></td>
+        <td style="text-align: left;">TITLE</td>
+        <td>WORD RANGE</td>
+        <td>WORD COUNT</td>
+        <td>DUE DATE</td>
+        <td>DAYS LEFT</td>
+        <td>ACTION</td>
+        </tr>
+        </thead>
+    <% Classroom.find(current_user.classroom).assignments.each do |assign| %>
+        <% if current_user.essays.where(assignment_id: assign.id).count == 0 %>
+          <tr>
+          <td class="pinkbox"></td>
+          <td style="width: 40%;"><%= assign.title %></td>
+          <td><%= "#{assign.wordcountmin}-#{assign.wordcountmax}" %></td>
+          <td>-</td>
+          <td><%= assign.duedate.to_formatted_s(:long) %></td>
+          <td><%= (assign.duedate.to_date - DateTime.now.to_date).to_i %></td>
+          <td class="table_button_dark"><%= link_to 'Start', new_essay_path(:essay => { title: assign.title, assignment_id: assign.id }) %></td>
+        </tr>
+        <% end %>
+        <% end %>
+
+          <% current_user.essays.where(draftnum: 1).where(essay_status: "In progress").each do |ess| %>
+          <% assign = Assignment.find(ess.assignment_id) %>
+        <tr>
+          <td></td>
+          <td style="width: 40%;"><%= ess.title %></td>
+          <td><%= "#{assign.wordcountmin}-#{assign.wordcountmax}" %></td>
+          <td><%= ess.body.scan(/\w+/).size %></td>
+          <td><%= assign.duedate.to_formatted_s(:long) %></td>
+          <td><%= (assign.duedate.to_date - DateTime.now.to_date).to_i %></td>
+          <td class="table_button_dark"> <%= link_to "Edit", edit_essay_path(ess) %></br><%= link_to 'Submit', essay_submit_essay_path(ess), method: :patch%></td>
+          
+        </tr>
+        <% end %>
+    
+</table>
+
+
+</br></br>
+
+<div class="title-block">
+   <div class="line"></div>
+   <div class="titles sentitle">Submitted</div>
+</div>
+
+
+
+
+<table class="table-striped">
+  <thead>
+    <tr>
+      <td></td>
+      <td style="text-align: left;">TITLE</td>
+      <td>ESSAY STATUS</td>
+      <td>ACTION</td>
+      <td style="color: #F2236A;">Practice Exercises</td>
+    </tr>
+  </thead>
+
+<% if user_signed_in? %>
+  
+  <tbody>
+   
+    <% current_user.essays.where(draftnum: 1).where("essay_status = 1 or essay_status = 2").each do |essay| %>
+      <tr>
+        <% if essay.essay_status == "Feedback" %>
+        <td class="pinkbox"></td>
+        <% else %>
+        <td></td>
+        <% end %>
+       
+        <% if essay.essay_status == 'Feedback' %>
+         <td style="width: 40%;"><%= link_to essay.title, essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></td>
+        <td><%= essay.essay_status %></td>
+        <td class="table_button_dark"><%= link_to "Edit", essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></td>
+        <% else %>
+        <td style="width: 40%;"><%= link_to essay.title, essay %></td>
+        <td><%= essay.essay_status %></td>
+         <td class="table_button_dark"><%= link_to "View", essay %></td>
+        <% end %>
+        <% if essay.training_sets.count > 0 %>
+        <td class="table_button_light"><%= link_to "Start", essay_training_set_path(essay, essay.training_sets.first) %></td><% end %>    
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+
+</table>
+
+
+
+<% else %>
+</br></br>
+To get started, find your classroom:
+<%= link_to "Join Classroom", classrooms_path(current_user.teacher) %>
+
+<% end %>
+
+
+
+</div>
+
+<div id="progress" class="tab-pane fade">
+
+<% afg = "" %>
+<% myarray =[] %>
+<% i=0 %>
+
+<% Mistake.categories.each do |cat| %>
+      <% afg += "{name: \"#{cat.first}\", data: {" %>
+      <% @essays.where(draftnum: 1, user_id: current_user.id).order(:id).each do |ess| %>
+      <% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
+          <% if ess != @essays.where(draftnum: 1).last %>
+          <% afg += ", " %>
+          <% end %>
+      <% end %>
+  <% afg += "}}" %>
+  <% myarray[i] = eval(afg) %>
+  <% afg ="" %>
+  <% i += 1 %>
+<% end %>
+
+
+<div class="graph">
+
+<%= line_chart myarray %>
+</div>
+
+
+<% if current_user.classroom != nil %>
+
+</br>
+<div style="column-count:4; width: 100%;">
+<table class="table-striped">
+<% Mistake.categories.each do |cat| %>
+  <tr style="break-inside: avoid-column;"><td class="table_button_dark" style="break-inside: avoid-column;"><%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
+      </td></tr>
+<% end %>
+
+</table>
+</div>
+
+<% end %>
+
+
+
+</div>
+
+
+
+<div id="practice" class="tab-pane fade">
+
+
+<% if current_user.classroom != nil %>
+
+<table class="table-striped">
+  <tr><td>Practice Exercises</td><td># of Questions</td><td>Attempts</td><td>Correct Answers</td></tr>
+<% Classroom.find(current_user.classroom).practice_exercises.each do |pe| %>
+  <tr>
+    <td><%= link_to pe.name, practice_exercise_path(pe) %></td>
+    <td><%= pe.pe_questions.count %></td>
+    <td><%= pe.pe_answers.where(user_id: current_user.id).count %></td>
+    <td><%= pe.pe_answers.where(user_id: current_user.id, correct: 2).count %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<% else %>
+
+To get started, find your classroom:
+<%= link_to "Join Classroom", classrooms_path(current_user.teacher) %>
+
+<% end %>
+
+
+</div>
+
+</div>
+
+</div>
+
+<% else %>
+
+<h2>Please sign in.</h2>
+<% end %>
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

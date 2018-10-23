@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <% @mistake.trainings.each do |train| %>
 
@@ -9,4 +10,19 @@
 <%= link_to 'New Exercise', new_mistake_training_path %>
 
 
+=======
+
+<% @mistake.trainings.each do |train| %>
+
+<%= train.question %>
+<%= train.answer %>
+<%= train.explanation %>
+<%= link_to "Delete", mistake_training_path(@mistake, train), method: :delete, data: { confirm: 'Are you sure?' } %>
+</br>
+
+<% end %>
+<%= link_to 'New Exercise', new_mistake_training_path %>
+
+
+>>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
 <%= link_to 'Mistake Index', mistakes_path %>

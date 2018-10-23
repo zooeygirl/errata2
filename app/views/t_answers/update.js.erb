@@ -1,0 +1,19 @@
+
+
+if ('<%= @t_answer.answer %>' == '<%= Training.find(@t_answer.training_id).answer%>'){
+
+$('#t_answer_<%= @t_answer.id %>').empty().append('<%= "Correct! Good job!" %>');
+$('#t_answer_<%= @t_answer.id %>').addClass('correct');
+x = $('.correct').size();
+$('#correct_answers').empty().append(x);
+
+} else {
+
+$('#t_answer_<%= @t_answer.id %>').empty().append('<%= "Sorry, try again." %>');
+$('#t_answer_<%= @t_answer.id %>').removeClass('correct');
+x = $('.correct').size();
+$('#correct_answers').empty().append(x);
+
+};
+
+

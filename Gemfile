@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 source 'https://rubygems.org'
 
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.3'
@@ -44,7 +44,7 @@ end
 
 
 
-=======
+
 source 'https://rubygems.org'
 
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.6'
@@ -95,4 +95,5 @@ end
 
 
 
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
+
+

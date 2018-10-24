@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -46,7 +46,7 @@ Rails.application.configure do
 
 
 end
-=======
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -102,4 +102,3 @@ Rails.application.configure do
 
 
 end
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94

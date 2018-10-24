@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 Rails.application.routes.draw do
   
 
@@ -287,4 +287,4 @@ resources :words_in_mistakes
   #     resources :products
   #   end
 end
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
+

@@ -19,6 +19,7 @@ gem 'puma'
 gem 'pg', '~> 0.20'
 gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'tzinfo-data'
+gem 'coffee-script-source', '1.8.0'
 
 
 

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -187,5 +187,5 @@ function openNav() {
 /* Set the width of the side navigation to 0 */
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
+
 } 

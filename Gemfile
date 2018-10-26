@@ -23,9 +23,6 @@ gem 'tzinfo-data'
 
 
 
-
-
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -33,6 +30,7 @@ group :development, :test do
   gem 'foreman'
   gem 'execjs'
   gem 'rails-dev-tweaks', '~> 1.2'
+  gem 'pg'
  
 end
 
@@ -46,6 +44,7 @@ end
 group :production do
 
 	gem 'rails_12factor'
+  gem 'pg'
 
 end
 

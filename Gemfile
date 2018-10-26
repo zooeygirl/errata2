@@ -16,7 +16,7 @@ gem 'devise', '~> 3.5', '>= 3.5.6'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'chartkick', '~> 2.0', '>= 2.0.1'
 gem 'puma'
-gem 'pg'
+gem 'pg', '~> 0.20'
 gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'tzinfo-data'
 
@@ -30,7 +30,6 @@ group :development, :test do
   gem 'foreman'
   gem 'execjs'
   gem 'rails-dev-tweaks', '~> 1.2'
-  gem 'pg'
  
 end
 
@@ -44,7 +43,7 @@ end
 group :production do
 
 	gem 'rails_12factor'
-  gem 'pg'
+
 
 end
 

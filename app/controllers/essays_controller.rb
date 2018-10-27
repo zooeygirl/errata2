@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 class EssaysController < ApplicationController
   before_action :set_essay, only: [:show, :edit, :update, :destroy, :second_draft, :count_mistakes, :set_paragraphs, :set_sentences]
   before_action :authenticate_user!, except: [:index, :show]
@@ -768,4 +768,4 @@ end
     end
 
 end
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
+

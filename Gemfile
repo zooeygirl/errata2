@@ -22,6 +22,7 @@ gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'tzinfo-data'
 gem 'coffee-script-source', '1.8.0'
 gem 'rake'
+gem 'foreman'
 
 
 
@@ -29,7 +30,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'spring'
-  gem 'foreman'
   gem 'execjs'
   gem 'rails-dev-tweaks', '~> 1.2'
  

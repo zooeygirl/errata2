@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%= form_for wim, remote: true do |m| %>
 
  
@@ -21,7 +21,8 @@
 <% end %>
 
 
-=======
+
+
 <%= form_for wim, remote: true do |m| %>
 
  
@@ -44,4 +45,4 @@
 <% end %>
 
 
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
+

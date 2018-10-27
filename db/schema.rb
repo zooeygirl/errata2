@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20170506192337) do
-=======
 ActiveRecord::Schema.define(version: 20170610205517) do
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,11 +79,7 @@ ActiveRecord::Schema.define(version: 20170610205517) do
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-<<<<<<< HEAD
-    t.float    "hundred"
-=======
     t.integer  "hundred"
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
   end
 
   create_table "grade_elements", force: :cascade do |t|
@@ -252,10 +243,9 @@ ActiveRecord::Schema.define(version: 20170610205517) do
     t.integer  "role"
     t.integer  "teacher"
     t.integer  "classroom"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "words_in_mistakes", force: :cascade do |t|
     t.datetime "created_at",        null: false

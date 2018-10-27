@@ -24,7 +24,7 @@ gem 'tzinfo-data'
 gem 'coffee-script-source'
 gem 'rake'
 gem 'foreman'
-gem 'figaro'
+
 
 
 

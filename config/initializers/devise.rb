@@ -2,7 +2,8 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
-  config.secret_key = '8f0104a8a25b07ab566c80849acd3bc89ad96c24df87f3785b8cce7e3dd18ab8ec28c1899b458b7ffed2adb4621b06136ba1c6696ab0b9256a88411ab9a1d00d' if Rails.env == 'production'
+  #config.secret_key = '8f0104a8a25b07ab566c80849acd3bc89ad96c24df87f3785b8cce7e3dd18ab8ec28c1899b458b7ffed2adb4621b06136ba1c6696ab0b9256a88411ab9a1d00d' if Rails.env == 'production'
+  config.secret_key = 'b797bf29f56f798debca0c0032d6fda3b14729cb5fe20741a51bc1915e99edb51a929beeac0c8cc44393477db472ea82e76dec97cb6a954ec1fc6a312aa9d38d' if Rails.env == 'production'
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

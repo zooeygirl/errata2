@@ -194,7 +194,7 @@ DEPENDENCIES
   groupdate
   jbuilder
   jquery-rails
-  pg (~> 0.20)
+  pg
   puma
   rails (= 5.0.1)
   rails-dev-tweaks (~> 1.2)

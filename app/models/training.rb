@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 
 class Training < ActiveRecord::Base

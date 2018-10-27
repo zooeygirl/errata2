@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-module HomepageHelper
-end
-=======
+
+
 module HomepageHelper
 
 
@@ -21,4 +19,4 @@ end
 
 	
 end
->>>>>>> fc43d6ed5e3286748e0fc862c39bcb2746308c94
+

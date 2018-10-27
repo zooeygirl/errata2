@@ -16,6 +16,7 @@
 = require bootstrap-sprockets
 = require Chart.bundle
 = require chartkick
+= require sinatra
 = require_tree .
 
 

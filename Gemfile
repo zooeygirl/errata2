@@ -15,7 +15,7 @@ gem 'jbuilder'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'scalpel'
 gem 'devise'
-gem 'bootstrap-sass'
+gem 'bootstrap'
 gem 'chartkick'
 gem 'puma'
 gem 'pg', '0.21.0'
@@ -24,6 +24,7 @@ gem 'tzinfo-data'
 gem 'coffee-script-source'
 gem 'rake'
 gem 'foreman'
+
 
 
 

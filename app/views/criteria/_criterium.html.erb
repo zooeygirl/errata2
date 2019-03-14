@@ -1,27 +1,6 @@
 
 
 
-
-<tr>
-<td><%= criterium.name %></td>
-<td><%= criterium.level %></td>
-<td>/<%= criterium.outof.round(0) %></td>
-<td><%= criterium.percentage %>%</td>
-
-
-
-<% if @evaluation.user_id == current_user.id %>
-
-<td><%= link_to 'Edit', edit_evaluation_criterium_path(@evaluation, criterium) %></td>
-
-<td><%= link_to 'Destroy', evaluation_criterium_path(@evaluation, criterium), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-
-</tr>
-
-
-
-
 <tr>
 <td><%= criterium.name %></td>
 <td><%= criterium.level %></td>

@@ -4,19 +4,6 @@
 
 <%= train.question %>
 <%= train.answer %>
-<%= train.explanation %></br>
-
-<% end %>
-<%= link_to 'New Exercise', new_mistake_training_path %>
-
-
-
-
-
-<% @mistake.trainings.each do |train| %>
-
-<%= train.question %>
-<%= train.answer %>
 <%= train.explanation %>
 <%= link_to "Delete", mistake_training_path(@mistake, train), method: :delete, data: { confirm: 'Are you sure?' } %>
 </br>

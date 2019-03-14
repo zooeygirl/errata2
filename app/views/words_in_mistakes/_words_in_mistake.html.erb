@@ -7,46 +7,6 @@
 
 <%= form_for (words_in_mistake), remote: true do |w| %>
 
-<table class="table-striped unsaved_wim_table">
-
-<tr class=<%= "sen#{sentence.id}"%>>
-
-
-
-<td><%= Mistake.find(words_in_mistake.mistake_id).name %></td>
-
-
- 
- <td> <%= w.collection_check_boxes :mistake_words, sentence.word_list, :first.to_s, :last do |b| %>
-  			 <div class="word_choice">
-                <div class="check_box">
-	                <div class="hide_check"><%= b.check_box %></div>
-	                <div class="check_words"><%= b.label %></div>
-                </div>
-             </div>
- <% end %></td>
-
- <td><div class="actions">
-
- 		
-        <% w.submit "Select Words", :name => "select_words", :class => "wim_button" %>
- </div>
-
- <%= link_to 'Delete', essay_paragraph_sentence_words_in_mistake_path(@essay, @paragraph, sentence, words_in_mistake), method: :delete, remote: true %></td> 
- 
-
-</tr>
-</table>
-
-
-
-<% @essay = Essay.find(words_in_mistake.essay_id)  %>
-<% @paragraph = Paragraph.find(words_in_mistake.paragraph_id)  %>
-<% sentence = Sentence.find(words_in_mistake.sentence_id) %>
-
-
-<%= form_for (words_in_mistake), remote: true do |w| %>
-
 
 <table class="table-striped unsaved_wim_table">
 
@@ -78,6 +38,8 @@
 
 </tr>
 </table>
+
+
 
 
 <% end %>

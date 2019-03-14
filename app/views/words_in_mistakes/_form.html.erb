@@ -1,0 +1,40 @@
+
+
+
+<%= form_for @words_in_mistake, remote: true do |z| %>
+
+
+
+<div class="field">
+    <%= z.text_field :mistake_id %>
+</div>
+
+<div class="field">
+    <%= z.text_field :essay_id, class: "wimessay" %>
+</div>
+
+<div class="field">
+    <%= z.text_field :paragraph_id, class: "wimpara"  %>
+</div>
+
+<div class="field">
+    <%= z.text_field :sentence_id, class: "wimsen" %>
+</div>
+
+
+
+
+
+  <div class="actions">
+    <%= z.submit "New Wim" %>
+  </div>
+
+
+
+
+<% end %>
+
+
+
+
+

@@ -1,9 +1,11 @@
 
-  <ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a data-toggle="tab" href="#home">Paragraph Evaluation</a></li>
+ 
+
+ <ul class="nav nav-tabs" role="tablist" id="myTab">
+  <li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#home">Paragraph Evaluation</a></li>
   <% i = 1 %>
   <% @paragraph.sentences.order(:id).each do |sen| %>
-  <li class=<%="sen#{sen.id}"%> ><a data-toggle="tab" href=<%="#sen#{sen.id}"%>><%= "Sentence #{i}" %></a></li>
+  <li class="nav-item <%="sen#{sen.id}"%>"><a data-toggle="tab" class="nav-link" href=<%="#sen#{sen.id}"%>><%= "Sentence #{i}" %></a></li>
   <% i += 1 %>
   <% end %>
 </ul>
@@ -16,7 +18,8 @@
 
 <div class="tab-content">
 
-  <div id="home" class="tab-pane fade in active">
+  <div id="home" class="tab-pane fade show active">
+   
 
     <div class="essay_view">
       <%= @paragraph.content %>
@@ -194,17 +197,20 @@
 
                     </div>
                     </div>
+
+
                  <% end %>
+
+
                </br></br></br>
 
-               <div class="unsaved_wim_tables">
+              
                 <table class="table-striped"id="unsaved_wim_table_<%= sen.id %>">
-
+                 
                 </table> 
-              </div>
 
 
-               
+          
 
 
               
@@ -216,7 +222,10 @@
           
 
            
-            <table class="table-striped" id="wim_table">
+            <table class="table-striped" id="wim_table_<%= sen.id %>">
+
+              
+        
               <% sen.words_in_mistakes.each do |wim| %>
 
                   
@@ -273,7 +282,11 @@
 
 <table class="table-striped" id="unsaved_wim_table_2">
 
+  
+
 </table>
+
+<div id="Zooey"></div>
 
 </br></br>
 

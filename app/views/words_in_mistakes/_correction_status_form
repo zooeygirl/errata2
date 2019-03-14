@@ -1,27 +1,4 @@
 
-<%= form_for wim, remote: true do |m| %>
-
- 
-
-
- <div class="field">
- <div class="correction_radio_buttons">
-<%= m.radio_button :correction_status, 0 %>
-<%= label_tag(:correction_status, "Good job!") %></br>
-<%= m.radio_button :correction_status, 1 %>
-<%= label_tag(:correction_status, "Try again!") %>
-  </div>
-  </div>
-
-
-    <div class="actions">
-    <% m.submit "Save changes" %>
-  </div>
-
-<% end %>
-
-
-
 
 <%= form_for wim, remote: true do |m| %>
 

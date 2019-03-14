@@ -1,155 +1,5 @@
 
 <% if current_user.role == 'Student' %>
-	<%= link_to 'Change Classrooms', classrooms_path(current_user.teacher) %>
-<% end %>
-
-
-
-
-  <div class="pre_title">Class</div>
-  <div class="title"><%= @classroom.school %></div>
-
- </br> </br>
-
-<ul class="nav nav-pills nav-justified">
-  	<li><a href="#assignments" data-toggle="tab">ASSIGNMENTS</a></li>
-	<li><a href="#students" data-toggle="tab">STUDENTS</a></li>
-	<li><a href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
-</ul>
-
-<div class="tab-content">
-
-<div id="assignments" class="tab-pane fade in active">
-
- <% if current_user.role == 'Teacher' %>
-
-<div class="assignment_flip" id="create_new"><div class="create_new_text"><%= link_to "Create New Assignment", new_classroom_assignment_path(@classroom) %></div></div>
-
-
-<% end %>
-
-
-
-<% @classroom.assignments.each do |assign|%>
-		<div class="assignment_flip" id="assignment_<%= assign.id %>">
-		<div class="assignment_name"><%= assign.title %></div>
-		<div class="assignment_links">
-			<div class="assignment_summary"><%= link_to " Summary", classroom_assignment_calculate_class_average_on_assignment_path(@classroom, assign), method: :patch %></div>
-			 <% if current_user.id == @classroom.user_id %>
-			<div class="assignment_edit"><%= link_to " Edit", edit_classroom_assignment_path(@classroom, assign) %></div>
-			<% end %>
-			<div class="assignment_waiting"> Waiting For Feedback (<%= Essay.where(assignment_id: assign.id, essay_status: 1).count %>)</div>
-			<div class="assignment_feedback"> Feedback Given (<%= Essay.where(assignment_id: assign.id, essay_status: 2, draftnum: 1).count %>)</div>
-		</div>
-			
-		
-
-</div>
-
-<% end %>
- </div>
-
-<div id="students" class="tab-pane fade">
-
-<h4>Class List</h4>
-
-<table class="table-striped">
-
-
-  <% @class_list.each do |s| %>
-		<tr>
-		<td><%= s.first_name + " " + s.last_name %></td>
-		</tr>
-	<% end %>
-</table>
-
-</br>
-<%= "Number of Students: #{@class_list.count}" %>
-
-		<% if current_user.role == "Teacher" %>
-
-		</br></br>
-		<%= render "student_recap" %>
-
-		<% end %>
-
-</div>
-
-<%-# __________________________________________________ -%>
-
-<div id="practice" class="tab-pane fade">
-
-Class's Practice Exercises:</br></br>
-
-	<% @classroom.practice_exercises.each do |pe| %>
-		<%= link_to pe.name, practice_exercise_path(pe) %></br>
-	<% end %>
-
-</br>
-
-<% if current_user.id == @classroom.user_id %>
-
-<div id="add_pe_btn">
-Assign Practice Exercises to this Classroom
-</div>
-
-<div id="add_practice_exercises">
-<%= form_for @classroom do |f| %>
-
-<h4>My Practice Exercises</h4>
-
-
-		 <%= f.collection_check_boxes :practice_exercise_ids, PracticeExercise.where(user_id: current_user.id), :id, :name do |b| %>
-		                
-		                     </br>
-		                      <%= b.check_box(class: "check_box")%>
-		                      <%= b.label %>
-
-
-		  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Save Changes"%>
-  </div>
-
-<% end %>
-
-</br></br>
-<%= form_for @classroom do |g| %>
-
-<h4>All Practice Exercises</h4>
-
-
-		 <%= g.collection_check_boxes :practice_exercise_ids, PracticeExercise.all, :id, :name do |b| %>
-		                
-		                     </br>
-		                      <%= b.check_box(class: "check_box")%>
-		                      <%= b.label %>
-
-
-		  <% end %>
-
-  <div class="actions">
-    <%= g.submit "Save Changes"%>
-  </div>
-
-<% end %>
-
-
-
-
-
-<% end %>
-</div>
-
-
-</div>
-</div>
-	
-=======
-
-
-<% if current_user.role == 'Student' %>
 	<% if current_user.classroom != nil && current_user.classroom == @classroom.id %>
 	<%= link_to 'Change Classrooms', classrooms_path(current_user.teacher) %>
 	<% else %>
@@ -167,17 +17,17 @@ Assign Practice Exercises to this Classroom
 
  </br> </br>
 
-<ul class="nav nav-tabs nav-justified">
-  	<li><a href="#assignments" data-toggle="tab">ASSIGNMENTS</a></li>
-	<li><a href="#students" data-toggle="tab">STUDENTS</a></li>
-	<li><a href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
+<ul class="nav nav-tabs" role="tablist">
+  	<li class="nav-item"><a href="#assignments" class="nav-link active" data-toggle="tab">ASSIGNMENTS</a></li>
+	<li class="nav-item"><a class="nav-link" href="#students" data-toggle="tab">STUDENTS</a></li>
+	<li class="nav-item"><a class="nav-link" href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
 </ul>
 
 </br></br>
 
 <div class="tab-content">
 
-<div id="assignments" class="tab-pane fade in active">
+<div id="assignments" class="tab-pane fade show active">
 
  <% if current_user.role == 'Teacher' %>
 
@@ -207,7 +57,7 @@ Assign Practice Exercises to this Classroom
 <% end %>
  </div>
 
-<div id="students" class="tab-pane fade">
+<div id="students" class="tab-pane fade" role="tabpanel">
 
 <div class="pinktext">Class List:</div>
 
@@ -235,7 +85,8 @@ Assign Practice Exercises to this Classroom
 
 <%-# __________________________________________________ -%>
 
-<div id="practice" class="tab-pane fade">
+<div id="practice" class="tab-pane fade" role="tabpanel">
+
 
 Class's Practice Exercises:</br></br>
 

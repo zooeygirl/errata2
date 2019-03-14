@@ -1,0 +1,16 @@
+
+
+<% if wim != nil && wim.mistake_words != nil %>
+                    
+          <% i = 0 %>
+          	<% Sentence.find(wim.sentence_id).word_list.each do |w| %>
+                <% if wim.mistake_words.include?("#{i}") %>
+                    <div class="highlight">
+                    <%= w.last %>
+                    </div>
+                <% else %>
+                     <%= w.last %>
+                <% end %>
+                <% i += 1 %>
+			<% end %>
+<% end %>

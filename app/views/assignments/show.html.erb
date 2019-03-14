@@ -1,190 +1,5 @@
 
-<% if @assignment.user_id == current_user.id %>
-<h2><%= @assignment.title %></h2><%= link_to "Edit Assignment", edit_classroom_assignment_path(@classroom, @assignment) %>
 
-<% end %>
-
-
-<%-# __________________________________________________________________________ -%>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#essays">Student Essays</a></li>
-  <li><a data-toggle="tab" href="#rubric">Rubric</a></li>
-  <li><a data-toggle="tab" href="#menu1">Language Errors</a></li>
-  <% if current_user.role == 'Teacher' %>
-  <li><a data-toggle="tab" href="#studentgrades">Student Grades</a></li>
-  <% end %>
-</ul>
-
-
-
-<div class="tab-content">
-
-
-<%-# __________________________________________________________________________ -%>
-
-<div id="essays" class="tab-pane fade in active">
-
-
-<div class="container-fluid" id="waiting_feedback">
-			<h4> Waiting for Feedback </h4>
-			<table>
-			
-				<% Essay.where(assignment_id: @assignment.id).each do |e| %>
-					<% if e.essay_status == 'Waiting for feedback' %>
-					<tr><td><%= User.find(e.user_id).first_name %> <%= User.find(e.user_id).last_name %></td>
-
-					
-					<% if current_user.id == @classroom.user_id %>
-					<td><%= link_to 'Correct essay', essay_create_grade_template_path(e) %></td>
-					</tr><% end %>
-					<% end %>
-
-				<% end %>
-			
-			</table>
-
-
-</div>
-
-<div class="container-fluid" id="feedback_given">
-			<h4> Feedback Given </h4>
-
-			<table>
-			<% if current_user.role == 'Teacher' %>
-				
-						<% Essay.where(assignment_id: @assignment.id).where(draftnum: 2).each do |e| %>
-						<% if e.essay_status == 'Feedback' %>
-						<tr>
-						<td><%= link_to "#{User.find(e.user_id).first_name} #{User.find(e.user_id).last_name}", essay_path(e) %></td></tr>
-						<% end %>
-					<% end %>	
-				
-			<% elsif current_user.essays.where(assignment_id: @assignment.id, draftnum: 2).count != 0 %>
-				<%= link_to "#{current_user.first_name} #{current_user.last_name}", current_user.essays.where(assignment_id: @assignment.id).where(draftnum: 2).first %>
-			<% end %>
-			</table>
-</div>
-
-
-
-
-</div>
-
-
-<%-# __________________________________________________________________________ -%>
-
- <div id="rubric" class="tab-pane fade">
-
-<div class="indextables">
-
-
-<% if @assignment.evaluation != nil %>	
-
-<h3>Rubric: <%= Evaluation.find(@assignment.evaluation).name %></h3>
-
-<table>
-<tr><td>Name</td><td>Level</td><td>Points</td><td>Percentage of total</td></tr>
-<% Evaluation.find(@assignment.evaluation).criteria.each do |crit| %>
-<tr><td><%= crit.name %></td>
-<td><%= crit.level %></td>
-<td><%= crit.outof %></td>
-<td><%= crit.percentage %></td></tr>
-<% end %>
-</table>
-</div>
-
-
-<% crithash = [] %>
-<% Evaluation.find(@assignment.evaluation).criteria.each do |crit| %>
-<% crithash += [[crit.name, crit.percentage]] %>
-<% end %>
-
-<div class="graph">
-<%= pie_chart crithash %></div>
-
-<% else %>
-
-<%= link_to "Create a rubric", new_evaluation_path %>
-
-<%= link_to "Choose an existing rubric", edit_classroom_assignment_path(@classroom, @assignment) %>
-<% end %>
-
-</div>
-
-<%-# __________________________________________________________________________ -%>
-<div id="menu1" class="tab-pane fade">
-
-<div class="indextables">
-<h3>Language Errors: </h3>
-
-<table>
-<% Mistake.all.order(:category).each do |mis| %> 
-	<% if Sentence.includes(:mistakes).where(mistakes: { id: mis.id }).where(essay_id: Essay.where(assignment_id: @assignment.id)).count > 0  %>
-
-	<tr><td><%= mis.category %></td>
-	<td><%= mis.name %></td>
-	<td><%= Sentence.includes(:mistakes).where(mistakes: { id: mis.id }).where(essay_id: Essay.where(assignment_id: @assignment.id)).count %></td>
-	<td><% Sentence.includes(:mistakes).where(mistakes: { id: mis.id }).where(essay_id: Essay.where(assignment_id: @assignment.id)).each do |sen| %>
-	<%= sen.content %></br>
-	<%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: mis.id).first} %></br>
-	<% end %>
-	<% end %></td></tr>
-	
-<% end %>
-
-</table>
-</div>
-
-
-
-
-
-<%= link_to "Check Corrections", classroom_assignment_check_corrections_path(@classroom, @assignment) %>
-
-
-
-
-</div>
-
-
-
-<%-# __________________________________________________________________________ -%>
-
-<div id="studentgrades" class="tab-pane fade">
-
-<div class="indextables">
-</br>
-<% if @assignment.classroom_average != nil %>
-<h3>Classroom Average:  <%= @assignment.classroom_average.round(2) %>%</h3>
-<% end %>
-</br>
-
-<h4>Student Grades: </h4>
-
-
-<table class="table-bordered">
-	
-<% User.where(classroom: @classroom.id).each do |stu| %>
-	<tr>
-
-	<td><%= stu.first_name + " " + stu.last_name %></td>
-			<% if Essay.where(user_id: stu.id, assignment_id: @assignment.id).first != nil  && Essay.where(user_id: stu.id, assignment_id: @assignment.id).first.studentgrade != nil %>
-			<td><%= Essay.where(user_id: stu.id, assignment_id: @assignment.id).first.studentgrade.round(2) %></td>
-			<% else %>
-			<td>-----</td>
-			<% end %>
-		</tr>
-
-<% end %>
-
-</table>
-
-</div>
-
-</div>
-
-</div>
 
 
 <% if @assignment.user_id == current_user.id %>
@@ -195,12 +10,14 @@
 
 <%-# __________________________________________________________________________ -%>
 
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#essays">Student Essays</a></li>
-  <li><a data-toggle="tab" href="#rubric">Rubric</a></li>
-  <li><a data-toggle="tab" href="#menu1">Language Errors</a></li>
+
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#essays">Student Essays</a></li>
+  <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#rubric">Rubric</a></li>
+  <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#menu1">Language Errors</a></li>
   <% if current_user.role == 'Teacher' %>
-  <li><a data-toggle="tab" href="#studentgrades">Student Grades</a></li>
+  <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#studentgrades">Student Grades</a></li>
   <% end %>
 </ul>
 
@@ -213,7 +30,8 @@
 
 <%-# __________________________________________________________________________ -%>
 
-<div id="essays" class="tab-pane fade in active">
+<div id="essays" class="tab-pane fade show active">
+
 
 
 <div class="container-fluid" id="waiting_feedback">
@@ -266,7 +84,7 @@
 
 <%-# __________________________________________________________________________ -%>
 
- <div id="rubric" class="tab-pane fade">
+ <div id="rubric" class="tab-pane fade" role="tabpanel">
 
 <div class="indextables">
 
@@ -311,7 +129,7 @@
 </div>
 
 <%-# __________________________________________________________________________ -%>
-<div id="menu1" class="tab-pane fade">
+<div id="menu1" class="tab-pane fade" role="tabpanel">
 
 <div class="indextables">
 
@@ -359,7 +177,7 @@
 
 <%-# __________________________________________________________________________ -%>
 
-<div id="studentgrades" class="tab-pane fade">
+<div id="studentgrades" class="tab-pane fade" role="tabpanel">
 
 <div class="indextables">
 </br>

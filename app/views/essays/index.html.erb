@@ -1,189 +1,16 @@
-
 <% if user_signed_in? %>
 
 Today's date:  <td><%= DateTime.now.to_date.to_formatted_s(:long) %></td>
 
-<ul class="nav nav-pills nav-justified">
-    <li><a href="#essays" data-toggle="tab">ESSAYS</a></li>
-    <li><a href="#progress" data-toggle="tab">PROGRESS</a></li>
-    <li><a href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a href="#essays" class="nav-link active" data-toggle="tab">ESSAYS</a></li>
+    <li class="nav-item"><a href="#progress" class="nav-link" data-toggle="tab">PROGRESS</a></li>
+    <li class="nav-item"><a href="#practice" class="nav-link" data-toggle="tab">PRACTICE EXERCISES</a></li>
 </ul>
 
 <div class="tab-content">
 
-<div id="essays" class="tab-pane fade in active">
-
-
-<% if current_user.classroom != nil %>
-
-<h1>New Assignments</h1>
-
-<table>
-    <tr><td>Title</td><td>Due Date</td><td>Days Left</td><td>Word Range</td></tr>
-    <% Classroom.find(current_user.classroom).assignments.each do |assign| %>
-        <% if current_user.essays.where(assignment_id: assign.id).count == 0 %>
-          <tr><td><%= assign.title %></td>
-          <td><%= assign.duedate.to_formatted_s(:long) %></td>
-          <td><%= (assign.duedate.to_date - DateTime.now.to_date).to_i %></td>
-          <td><%= "#{assign.wordcountmin}-#{assign.wordcountmax}" %></td>
-          <td><%= link_to 'Start Assignment', new_essay_path(:essay => { title: assign.title, assignment_id: assign.id }) %></td>
-        </tr>
-        <% end %>
-
-    <% end %>
-</table>
-
-
-
-<h1>My Essays</h1>
-
-<table>
-  <thead>
-    <tr>
-      <td>Title</td>
-      <td>Word Range</td>
-      <td>Word Count</td>
-      <td>Essay Status</td>
-      <td>Due Date</td>
-      <td>Practice Exercises</td>
-    </tr>
-  </thead>
-
-<% if user_signed_in? %>
-  <tbody>
-    <% current_user.essays.where(draftnum: 1).each do |essay| %>
-      <tr>
-        <% if essay.essay_status == 'Feedback' %>
-        <td><a><%= link_to essay.title, essay_set_paragraphs_for_second_draft_path(Essay.where(draftnum: 2, trackernum: essay.id).first), method: :patch %></a></td>
-        <% else %>
-         <td><a><%= link_to essay.title, essay %></a></td>
-        <% end %>
-        <% if essay.body != nil %>
-         <td><%="#{Assignment.find(essay.assignment_id).wordcountmin}-#{Assignment.find(essay.assignment_id).wordcountmax}"%></td>
-        <td><%= essay.body.scan(/\w+/).size %></td>
-        <% end %>
-        <td><%= essay.essay_status %></td>
-        <td><%= Assignment.find(essay.assignment_id).duedate.to_formatted_s(:long)  %></td>
-        <% if essay.training_sets.count > 0 %>
-        <td><%= link_to "Practice", essay_training_set_path(essay, essay.training_sets.first) %></td><% end %>
-    
-        <% if essay.essay_status == 'In progress' %>
-        <td><%= link_to 'Destroy', essay, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Edit', edit_essay_path(essay) %></td>
-        <td><%= link_to 'Submit Essay to your teacher', essay_submit_essay_path(essay), method: :patch%></td>
-        <% end %>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-
-<% else %>
-</br></br>
-To get started, find your classroom:
-<%= link_to "Join Classroom", classrooms_path(current_user.teacher) %>
-
-<% end %>
-
-
-
-</div>
-
-<div id="progress" class="tab-pane fade">
-
-<% afg = "" %>
-<% myarray =[] %>
-<% i=0 %>
-
-<% Mistake.categories.each do |cat| %>
-      <% afg += "{name: \"#{cat.first}\", data: {" %>
-      <% @essays.where(draftnum: 1, user_id: current_user.id).order(:id).each do |ess| %>
-      <% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
-          <% if ess != @essays.where(draftnum: 1).last %>
-          <% afg += ", " %>
-          <% end %>
-      <% end %>
-  <% afg += "}}" %>
-  <% myarray[i] = eval(afg) %>
-  <% afg ="" %>
-  <% i += 1 %>
-<% end %>
-
-
-<div class="graph">
-
-<%= line_chart myarray %>
-</div>
-
-
-
-<% Mistake.categories.each do |cat| %>
-  <%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
-      </br> 
-<% end %>
-
-
-
-
-</div>
-
-
-
-<div id="practice" class="tab-pane fade">
-
-
-<% if current_user.classroom != nil %>
-
-<table>
-  <tr><td>Practice Exercises</td><td># of Questions</td><td>Attempts</td><td>Correct Answers</td></tr>
-<% Classroom.find(current_user.classroom).practice_exercises.each do |pe| %>
-  <tr>
-    <td><%= link_to pe.name, practice_exercise_path(pe) %></td>
-    <td><%= pe.pe_questions.count %></td>
-    <td><%= pe.pe_answers.where(user_id: current_user.id).count %></td>
-    <td><%= pe.pe_answers.where(user_id: current_user.id, correct: 2).count %></td>
-  </tr>
-<% end %>
-</table>
-
-
-<% else %>
-
-To get started, find your classroom:
-<%= link_to "Join Classroom", classrooms_path(current_user.teacher) %>
-
-<% end %>
-
-
-</div>
-
-</div>
-
-</div>
-
-<% else %>
-
-<h2>Please sign in.</h2>
-<% end %>
-
-
-<% if user_signed_in? %>
-
-
-<td><% DateTime.now.to_date.to_formatted_s(:long) %></td>
-
-<ul class="nav nav-tabs nav-justified">
-    <li><a href="#essays" data-toggle="tab">ESSAYS</a></li>
-    <li><a href="#progress" data-toggle="tab">PROGRESS</a></li>
-    <li><a href="#practice" data-toggle="tab">PRACTICE EXERCISES</a></li>
-</ul>
-
-</br></br>
-
-<div class="tab-content">
-
-<div id="essays" class="tab-pane fade in active">
+<div id="essays" class="tab-pane fade show active">
 
 
 <% if current_user.classroom != nil %>
@@ -302,7 +129,7 @@ To get started, find your classroom:
 
 </div>
 
-<div id="progress" class="tab-pane fade">
+<div id="progress" class="tab-pane fade" role="tabpanel">
 
 <% afg = "" %>
 <% myarray =[] %>
@@ -329,20 +156,12 @@ To get started, find your classroom:
 </div>
 
 
-<% if current_user.classroom != nil %>
 
-</br>
-<div style="column-count:4; width: 100%;">
-<table class="table-striped">
 <% Mistake.categories.each do |cat| %>
-  <tr style="break-inside: avoid-column;"><td class="table_button_dark" style="break-inside: avoid-column;"><%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
-      </td></tr>
+  <%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
+      </br> 
 <% end %>
 
-</table>
-</div>
-
-<% end %>
 
 
 
@@ -350,7 +169,7 @@ To get started, find your classroom:
 
 
 
-<div id="practice" class="tab-pane fade">
+<div id="practice" class="tab-pane fade" role="tabpanel">
 
 
 <% if current_user.classroom != nil %>
@@ -386,5 +205,4 @@ To get started, find your classroom:
 
 <h2>Please sign in.</h2>
 <% end %>
-
 

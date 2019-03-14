@@ -12,14 +12,10 @@ end
 
 def create
   @words_in_mistake = WordsInMistake.create(words_in_mistake_params) 
- 
     
-      if @words_in_mistake.save
       respond_to do |format|
-      format.html {redirect_to essay_paragraph_path(Essay.find(@words_in_mistake.essay_id), Paragraph.find(@words_in_mistake.paragraph.id))}
-      format.js
-      end
-     
+        format.html {redirect_to essay_paragraph_path(Essay.find(@words_in_mistake.essay_id), Paragraph.find(@words_in_mistake.paragraph.id))}
+        format.js 
       end
     
 end

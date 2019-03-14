@@ -18,39 +18,6 @@
 <%= f.hidden_field :assignment_id %>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body, rows: 10, cols: 90 %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-*** Leave a space between paragraphs.
-</br></br>
-
-<%= form_for(@essay) do |f| %>
-  <% if @essay.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@essay.errors.count, "error") %> prohibited this essay from being saved:</h2>
-
-      <ul>
-      <% @essay.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<%= f.hidden_field :assignment_id %>
-
-  <div class="field">
     <div class="sign_in_form_label">
     <%= f.label :title %><br>
     </div> 

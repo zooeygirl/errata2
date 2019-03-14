@@ -1,6 +1,6 @@
 
 
-              <% WordsInMistake.where(sentence_id: 781).each do |wim| %>
+              <% WordsInMistake.where(sentence_id: sentence.id).each do |wim| %>
 
                   <tr id="wim_<%= wim.id %>">
                   <%= form_for [@words_in_mistake, wim], method: :put do |w| %>

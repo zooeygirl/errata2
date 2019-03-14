@@ -1,29 +1,6 @@
 
 
 
-<h2><%= Mistake.categories.first(@cat.to_i+1).last.first %></h2>
-
-
-<% problem_sentences = Sentence.where(user_id: @user).includes(:mistakes).where(mistakes:{category: @cat}).group('mistakes.name').group_by_month('sentences.created_at').count %>
-
-
-
-<%= line_chart problem_sentences %>
-
-
-<% Mistake.where(category: @cat).each do |mis| %>
-
-<h3><%= mis.name %></h3>
-
-
-<% Essay.where(user_id: @user).each do |e| %>
-<% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
-<%= sen.content  %>
-<%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: mis.id).first} %>
-<% end %>
-<% end %></br>
-
-
 
 
 <div class="title"><%= Mistake.categories.first(@cat.to_i+1).last.first %></div>
@@ -42,15 +19,18 @@
 
 </br>
 
-<div class="sign_in_title"><%= mis.name %></div>
+<div class="sign_in_title">
+	<%= mis.name %>
+</div>
 
 
 <% Essay.where(user_id: @user).each do |e| %>
-<% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
-<%= sen.content  %></br>
-<%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: mis.id).first} %>
+		<% e.sentences.includes(:mistakes).where(mistakes: { id: mis.id }).each do |sen| %></br>
+				<%= sen.content  %></br>
+				<%= render partial: "words_in_mistakes/highlight_wims", locals: {wim: sen.words_in_mistakes.where(mistake_id: mis.id).first} %>
+		<% end %>
 <% end %>
-<% end %></br>
+</br>
 
 
 <% end %>

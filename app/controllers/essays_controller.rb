@@ -158,7 +158,7 @@ end
       if @essay.update(essay_params)
         if @essay.essay_status == 'In progress'
         set_paragraphs
-        turn_word_list_into_an_array
+        turn_word_list_into_an_array 
         end
         
         calculate_student_grade

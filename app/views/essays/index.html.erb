@@ -156,10 +156,11 @@ To get started, find your classroom:
 </div>
 
 
-
+<% if current_user.classroom != nil %>
 <% Mistake.categories.each do |cat| %>
   <%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
       </br> 
+<% end %>
 <% end %>
 
 

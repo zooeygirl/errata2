@@ -4,7 +4,7 @@ class Sentence < ActiveRecord::Base
 	belongs_to :essay
 	belongs_to :user
 	has_and_belongs_to_many :mistakes, -> { uniq }
-	has_and_belongs_to_many :teacher_comments
+	has_and_belongs_to_many :teacher_comments, -> { uniq }
 	has_many :words_in_mistakes, dependent: :destroy
 
 	serialize :word_list

@@ -47,7 +47,8 @@
 
 </table>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
 
 <ul class="nav nav-tabs" role="tablist">
   <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#essays">Essay</a></li>
@@ -59,7 +60,8 @@
 
 </br>
 
-<div id="essays" class="tab-pane fade" role="tabpanel">
+<div id="essays" class="tab-pane fade show active">
+
          
     <table style="width:100%;">
         <tr>      
@@ -94,6 +96,7 @@
 
 </div>
 
+
  <div id="grade" class="tab-pane fade" role="tabpanel">
     
     <%= render "grade_report" %>
@@ -103,7 +106,7 @@
  <div id="errors" class="tab-pane fade" role="tabpanel">
 </br>
 
-<%= original_essay = Essay.find(@essay.trackernum) %>
+
     <table class="table-striped">
     <tr><th>Paragraph</th><th>Content</th><th>Errors</th><th>Second Draft</th></tr>
 
@@ -112,7 +115,7 @@
   </table>
 
 </div>
-</nav>
+
 
 
 </br><br>

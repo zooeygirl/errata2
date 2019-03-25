@@ -4,7 +4,7 @@ belongs_to :user
 belongs_to :assignment
 has_many :sentences, :through => :paragraphs
 accepts_nested_attributes_for :sentences
-has_many :mistakes, :through => :sentences, :uniq => true
+has_many :mistakes, :through => :sentences
 
 has_many :paragraphs, dependent: :destroy
 accepts_nested_attributes_for :paragraphs

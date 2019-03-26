@@ -150,9 +150,9 @@ end
 def matchMistakes(essay)
   emis = []
   essay.sentences.each do |s|
-    emis.append(s.mistakes)
+    emis = emis.concat(s.mistake_ids)
   end
-  essay.mistakes = emis
+  essay.update_attribute(:mistake_ids, emis)
 end
 
 

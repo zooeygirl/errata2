@@ -147,13 +147,28 @@ end
   end
 
 
+def find_duplicates(elements)
+    encountered = {}
+
+    # Examine all elements in the array.
+    elements.each do |e|
+        # If the element is in the hash, it is a duplicate.
+        if encountered[e]
+            e.destroy
+        else
+            # Record that the element was encountered.
+            encountered[e] = 1
+        end
+    end
+end
 
 
   # PATCH/PUT /essays/1
   # PATCH/PUT /essays/1.json
   def update
     session[:return_to] ||= request.referer
-    essay.mistakes << mistake unless essay.mistakes.include?(mistake)
+
+    find_duplicates(@essay.mistakes)
 
     respond_to do |format|
       if @essay.update(essay_params)

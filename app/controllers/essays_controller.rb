@@ -167,11 +167,10 @@ end
         if @essay.essay_status == 'In progress'
         set_paragraphs
         turn_word_list_into_an_array 
-        matchMistakes(@essay)
         end
         
         calculate_student_grade
-
+        matchMistakes(@essay)
         
         format.html { redirect_to session.delete(:return_to), notice: 'Essay was successfully updated.' }
         format.json { render :show, status: :ok, location: @essay }

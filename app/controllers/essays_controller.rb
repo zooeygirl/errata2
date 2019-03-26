@@ -149,7 +149,7 @@ end
 
   def dedupe(elements)
     # find all models and group them on keys which should be common
-    grouped = elements.group_by{|model| [model.name,model.year,model.trim,model.make_id] }
+    grouped = elements.group_by{|model| [model.mistake_id ,model.created_at] }
     grouped.values.each do |duplicates|
       # the first one we want to keep right?
       first_one = duplicates.shift # or pop for last one
@@ -165,7 +165,7 @@ end
   def update
     session[:return_to] ||= request.referer
 
-    
+    dedupe(@essay.mistakes)
 
     respond_to do |format|
       if @essay.update(essay_params)

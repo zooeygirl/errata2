@@ -147,20 +147,17 @@ end
   end
 
 
-def find_duplicates(elements)
-    encountered = {}
-
-    # Examine all elements in the array.
-    elements.each do |e|
-        # If the element is in the hash, it is a duplicate.
-        if encountered[e]
-            e.destroy
-        else
-            # Record that the element was encountered.
-            encountered[e] = 1
-        end
+  def dedupe(elements)
+    # find all models and group them on keys which should be common
+    grouped = elements.group_by{|model| [model.name,model.year,model.trim,model.make_id] }
+    grouped.values.each do |duplicates|
+      # the first one we want to keep right?
+      first_one = duplicates.shift # or pop for last one
+      # if there are any more left, they are duplicates
+      # so delete all of them
+      duplicates.each{|double| double.destroy} # duplicates can now be destroyed
     end
-end
+  end
 
 
   # PATCH/PUT /essays/1
@@ -168,7 +165,7 @@ end
   def update
     session[:return_to] ||= request.referer
 
-    find_duplicates(@essay.mistakes)
+    
 
     respond_to do |format|
       if @essay.update(essay_params)

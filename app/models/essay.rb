@@ -6,6 +6,8 @@ has_many :sentences, :through => :paragraphs
 accepts_nested_attributes_for :sentences
 has_many :mistakes, :through => :sentences
 
+essay.mistakes << mistake unless essay.mistakes.include?(mistake)
+
 has_many :paragraphs, dependent: :destroy
 accepts_nested_attributes_for :paragraphs
 

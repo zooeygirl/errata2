@@ -153,6 +153,7 @@ end
   # PATCH/PUT /essays/1.json
   def update
     session[:return_to] ||= request.referer
+    essay.mistakes << mistake unless essay.mistakes.include?(mistake)
 
     respond_to do |format|
       if @essay.update(essay_params)

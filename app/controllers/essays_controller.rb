@@ -171,7 +171,12 @@ end
         end
         
         calculate_student_grade
-        matchMistakes(@essay)
+        emis = []
+        @essay.sentences.each do |s|
+          emis = emis.concat(s.mistake_ids)
+        end
+        @essay.update_attribute(:mistake_ids, emis)
+        @essay.save
         
         format.html { redirect_to session.delete(:return_to), notice: 'Essay was successfully updated.' }
         format.json { render :show, status: :ok, location: @essay }

@@ -153,6 +153,7 @@ def matchMistakes(essay)
     emis = emis.concat(s.mistake_ids)
   end
   essay.update_attribute(:mistake_ids, emis)
+  essay.save
 end
 
 

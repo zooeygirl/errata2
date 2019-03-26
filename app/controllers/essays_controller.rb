@@ -147,6 +147,13 @@ end
   end
 
 
+def matchMistakes(essay)
+  emis = []
+  essay.sentences.each do |s|
+    emis.append(s.mistakes)
+  end
+  essay.mistakes = emis
+end
 
 
   # PATCH/PUT /essays/1
@@ -160,6 +167,7 @@ end
         if @essay.essay_status == 'In progress'
         set_paragraphs
         turn_word_list_into_an_array 
+        matchMistakes(@essay.mistakes)
         end
         
         calculate_student_grade

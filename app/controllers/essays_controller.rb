@@ -147,17 +147,6 @@ end
   end
 
 
-  def dedupe(elements)
-    # find all models and group them on keys which should be common
-    grouped = elements.group_by{|model| [model.mistake_id ,model.created_at] }
-    grouped.values.each do |duplicates|
-      # the first one we want to keep right?
-      first_one = duplicates.shift # or pop for last one
-      # if there are any more left, they are duplicates
-      # so delete all of them
-      duplicates.each{|double| double.destroy} # duplicates can now be destroyed
-    end
-  end
 
 
   # PATCH/PUT /essays/1
@@ -165,7 +154,6 @@ end
   def update
     session[:return_to] ||= request.referer
 
-    dedupe(@essay.mistakes)
 
     respond_to do |format|
       if @essay.update(essay_params)

@@ -167,7 +167,7 @@ end
         if @essay.essay_status == 'In progress'
         set_paragraphs
         turn_word_list_into_an_array 
-        matchMistakes(@essay.mistakes)
+        matchMistakes(@essay)
         end
         
         calculate_student_grade

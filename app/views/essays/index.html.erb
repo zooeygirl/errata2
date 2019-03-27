@@ -158,11 +158,20 @@ To get started, find your classroom:
 
 
 <% if current_user.classroom != nil %>
+
+
+<div style="column-count:4; width: 100%;">
+<table class="table-striped">
+
 <% Mistake.categories.each do |cat| %>
-  <%= link_to cat.first, classroom_user_miscategories_path(current_user.classroom, current_user, cat: cat.last)%>
-      </br> 
+  <tr style="break-inside: avoid-column;"><td class="table_button_dark" style="break-inside: avoid-column;"><%= link_to cat.first, classroom_user_miscategories_path(@classroom, @user, cat: cat.last)%>
+  </td>
+  </tr>
+      
 <% end %>
-<% end %>
+
+</table>
+</div>
 
 
 

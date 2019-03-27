@@ -11,14 +11,16 @@
 <% i=0 %>
 
 
+
+
 <% Mistake.categories.each do |cat| %>
 		  <% afg += "{name: \"#{cat.first}\", data: {" %>
 		  <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
 
 		  <% if cat.last == 0 %>
-		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count}" %>
+		  	<% afg += "\"#{ess.created_at}\":#{ess.words_in_mistakes.where({mistake_id: Mistake.where(category: cat).map(&:id)}).count}" %>
 		  <% else %>
-		  	<% afg += "\"#{ess.created_at}\":#{ess.mistakes.where(category: cat).count - ess.mistakes.where(category: 0).count}" %>
+		  	<% afg += "\"#{ess.created_at}\":#{ess.words_in_mistakes.where({mistake_id: Mistake.where(category: cat).map(&:id)}).count}" %>
 		  <% end %>
 				  <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
 				  <% afg += ", " %>

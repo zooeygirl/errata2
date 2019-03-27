@@ -120,6 +120,37 @@
 
 </br><br>
 <div class="graph">
+
+
+<% afg = "" %>
+<% myarray =[] %>
+<% i=0 %>
+
+<% Mistake.categories.each do |cat| %>
+      <% afg += "{name: \"#{cat.first}\", data: {" %>
+      <% @student.essays.where(draftnum: 1).order(:id).each do |ess| %>
+
+      <% if cat.last == 0 %>
+        <% afg += "\"#{ess.created_at}\":#{ess.words_in_mistakes.where({mistake_id: Mistake.where(category: cat).map(&:id)}).count}" %>
+      <% else %>
+        <% afg += "\"#{ess.created_at}\":#{ess.words_in_mistakes.where({mistake_id: Mistake.where(category: cat).map(&:id)}).count}" %>
+      <% end %>
+          <% if ess != @student.essays.order(:id).where(draftnum: 1).last %>
+          <% afg += ", " %>
+          <% end %>
+    <% end %>
+    <% afg += "}}" %>
+    <% myarray[i] = eval(afg) %>
+    <% i += 1 %>
+    <% afg ="" %>
+    
+<% end %>
+
+
+
+
+<%= bar_chart myarray %>
+
 <%= bar_chart @first_draft.mistakes.group(:name).count %>
 </div>
 

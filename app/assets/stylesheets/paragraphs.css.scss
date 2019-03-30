@@ -213,7 +213,7 @@ td.table_button_light > a {
 }
 
 
-.rectangle-tc + .tcomments:not(:empty) {
+.rectangle-tc + .tcomments:not(:blank) {
     display: inline-block;
     background: blue;
 }

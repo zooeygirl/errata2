@@ -199,7 +199,7 @@ td.table_button_light > a {
 
 
 .tcomments{
-	display: inline-block;
+	display: none;
 	background: #E9E9E9;
 	padding: 5px;
 }
@@ -213,6 +213,6 @@ td.table_button_light > a {
 }
 
 
-.tcomments:empty {
-    display: none;
+.rectangle-tc + .tcomments:not(:empty) {
+    display: inline-block;
 }

@@ -27,9 +27,9 @@
 
           <div class="tcomments">
           <table>
-          <tr><span><%= original_essay.paragraphs.order(:id)[paragraphnum].comment %></span>
+          <tr><%= original_essay.paragraphs.order(:id)[paragraphnum].comment %></br>
           <% original_essay.paragraphs.order(:id)[paragraphnum].teacher_comments.each do |tc| %>
-          <span><%= tc.content %></span>
+          <%= tc.content %></br>
           <% end %>
           </tr>
           </table>

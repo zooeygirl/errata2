@@ -213,7 +213,7 @@ td.table_button_light > a {
 }
 
 
-.rectangle-tc + .tcomments:has("Too") {
+.rectangle-tc + .tcomments:contains("Too") {
     display: inline-block;
     background: blue;
 }
